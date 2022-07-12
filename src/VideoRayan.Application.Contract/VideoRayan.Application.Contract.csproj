@@ -8,9 +8,13 @@
 
   <ItemGroup>
     <None Remove="UserAgg\" />
+    <None Remove="MeetingAgg\" />
+    <None Remove="MeetingAgg\Contracts\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UserAgg\" />
+    <Folder Include="MeetingAgg\" />
+    <Folder Include="MeetingAgg\Contracts\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework\Framework.csproj" />

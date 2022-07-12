@@ -18,6 +18,8 @@ namespace VideoRayan.Domain.MeetingAgg
         {
             Title = title;
             Description = description;
+
+            LastUpdateDate = DateTime.Now;
         }
     }
 }
