@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\VideoRayan.Application.Contract\VideoRayan.Application.Contract.csproj" />
+    <ProjectReference Include="..\VideoRayan.Domain\VideoRayan.Domain.csproj" />
+  </ItemGroup>
 </Project>
