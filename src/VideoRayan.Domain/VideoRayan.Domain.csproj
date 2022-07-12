@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="UserAgg\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UserAgg\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework\Framework.csproj" />
+  </ItemGroup>
 </Project>

@@ -5,7 +5,7 @@ namespace Framework.Domain
     public abstract class EntityBase
     {
         [Key]
-        public long Id { get; private set; }
+        public Guid Id { get; private set; }
         public bool IsDelete { get; private set; }
         public DateTime CreationDate { get; private set; }
         public DateTime LastUpdateDate { get; set; }
