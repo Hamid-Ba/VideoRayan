@@ -19,6 +19,21 @@ namespace VideoRayan.Application
             _userRepository = userRepository;
         }
 
+        public async Task<OperationResult> Edit(EditUserDto command)
+        {
+            OperationResult result = new();
+
+            var user = await _userRepository.GetEntityByIdAsync(command.Id);
+            if (user is null) return result.Failed(ApplicationMessage.UserNotExist);
+
+            user.Edit(command.FirstName!, command.LastName!, command.Mobile!, command.Email!);
+            await _userRepository.SaveChangesAsync();
+
+            return result.Succeeded();
+        }
+
+        public async Task<EditUserDto> GetDetailForEditBy(Guid id) => await _userRepository.GetDetailForEditBy(id);
+
         public async Task<OperationResult> LoginFirstStep(LoginUserDto command)
         {
             OperationResult result = new();

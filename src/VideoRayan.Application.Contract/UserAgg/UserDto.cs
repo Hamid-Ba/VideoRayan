@@ -16,6 +16,15 @@ namespace VideoRayan.Application.Contract.UserAgg
         public DateTime LoginExpireDate { get;  set; }
     }
 
+    public class EditUserDto
+    {
+        public Guid Id { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public string? Mobile { get; set; }
+        public string? Email { get; set; }
+    }
+
     public class RegisterUserDto
     {
         [Display(Name = "شماره موبایل")]
@@ -26,10 +35,7 @@ namespace VideoRayan.Application.Contract.UserAgg
         public string? Phone { get; set; }
     }
 
-    public class LoginUserDto : RegisterUserDto
-    {
-
-    }
+    public class LoginUserDto : RegisterUserDto { }
 
     public class AccessTokenDto : RegisterUserDto
     {
