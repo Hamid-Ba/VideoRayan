@@ -1,9 +1,8 @@
-﻿using System;
-using Framework.Domain;
+﻿using Framework.Domain;
 
 namespace VideoRayan.Domain.UserAgg
 {
-	public class User : EntityBase
+    public class User : EntityBase
 	{
         public string? FirstName { get; private set; }
         public string? LastName { get; private set; }
@@ -22,7 +21,7 @@ namespace VideoRayan.Domain.UserAgg
             FirstName = firstName;
             LastName = lastName;
             Email = email;
-            IsActive = false;
+            IsActive = true;
         }
 
         public static User Register(string phone, string phoneCode) => new(phone, phoneCode,"", "", "");

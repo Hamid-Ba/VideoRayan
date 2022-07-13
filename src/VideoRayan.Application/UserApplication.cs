@@ -1,7 +1,5 @@
-﻿using System;
-using Framework.Api.Jwt;
+﻿using Framework.Api.Jwt;
 using Framework.Application;
-using Framework.Application.Hashing;
 using Framework.Application.Sms;
 using VideoRayan.Application.Contract.UserAgg;
 using VideoRayan.Domain.UserAgg;
@@ -62,13 +60,13 @@ namespace VideoRayan.Application
             return result.Succeeded();
         }
 
-        public async Task<(OperationResult, string)> LoginSecondStep(AccessTokenDto command)
+        public async Task<(OperationResult, string)> VerifyLoginRegister(AccessTokenDto command)
         {
             OperationResult result = new();
 
             var user = await _userRepository.GetBy(command.Phone!);
 
-            if (user.LoginExpireDate <= DateTime.Now) return (result.Failed("کد وارد شده نامعتبر می باشد"), "");
+            if (user.LoginExpireDate <= DateTime.Now) return (result.Failed("کد وارد شده نامعتبر می باشد، مجدداً لاگین کنید"), "");
             if (user.PhoneCode != command.Token) return (result.Failed(ApplicationMessage.InvalidAccessToken), "");
 
             var loginDto = new JwtDto
@@ -85,18 +83,18 @@ namespace VideoRayan.Application
             return (result.Succeeded(), token);
         }
 
-        public async Task<(OperationResult, string)> VerifyRegister(AccessTokenDto command)
-        {
-            OperationResult result = new();
+        //public async Task<(OperationResult, string)> VerifyRegister(AccessTokenDto command)
+        //{
+        //    OperationResult result = new();
 
-            var user = await _userRepository.GetBy(command.Phone!);
-            if (user.PhoneCode != command.Token) return (result.Failed(ApplicationMessage.InvalidAccessToken), "");
+        //    var user = await _userRepository.GetBy(command.Phone!);
+        //    if (user.PhoneCode != command.Token) return (result.Failed(ApplicationMessage.InvalidAccessToken), "");
 
-            user.ControlActivation(isActive: true);
-            user.SetAccessToLoginDate(DateTime.Now.AddMinutes(5));
-            await _userRepository.SaveChangesAsync();
+        //    user.ControlActivation(isActive: true);
+        //    user.SetAccessToLoginDate(DateTime.Now.AddMinutes(5));
+        //    await _userRepository.SaveChangesAsync();
 
-            return await LoginSecondStep(command);
-        }
+        //    return await LoginSecondStep(command);
+        //}
     }
 }
