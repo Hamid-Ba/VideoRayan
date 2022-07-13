@@ -2,6 +2,7 @@
 using Framework.Application;
 using Framework.Application.Sms;
 using VideoRayan.Application.Contract.UserAgg;
+using VideoRayan.Application.Contract.UserAgg.Contracts;
 using VideoRayan.Domain.UserAgg;
 using VideoRayan.Domain.UserAgg.Contracts;
 

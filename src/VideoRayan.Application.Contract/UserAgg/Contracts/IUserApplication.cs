@@ -1,6 +1,6 @@
 ﻿using Framework.Application;
 
-namespace VideoRayan.Application.Contract.UserAgg
+namespace VideoRayan.Application.Contract.UserAgg.Contracts
 {
     public interface IUserApplication
 	{
