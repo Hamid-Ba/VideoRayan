@@ -10,11 +10,13 @@
     <None Remove="UserAgg\" />
     <None Remove="MeetingAgg\" />
     <None Remove="MeetingAgg\Repositories \" />
+    <None Remove="UserAgg\Contracts\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UserAgg\" />
     <Folder Include="MeetingAgg\" />
     <Folder Include="MeetingAgg\Repositories \" />
+    <Folder Include="UserAgg\Contracts\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework\Framework.csproj" />
