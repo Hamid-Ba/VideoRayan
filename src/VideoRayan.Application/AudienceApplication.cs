@@ -1,7 +1,7 @@
-﻿using System;
-using Framework.Application;
+﻿using Framework.Application;
 using VideoRayan.Application.Contract.UserAgg;
 using VideoRayan.Application.Contract.UserAgg.Contracts;
+using VideoRayan.Domain.UserAgg;
 using VideoRayan.Domain.UserAgg.Contracts;
 
 namespace VideoRayan.Application
@@ -16,13 +16,29 @@ namespace VideoRayan.Application
         {
             OperationResult result = new();
 
-            //if(_audienceRepository.Exists(a => a.ph))
+            if (_audienceRepository.Exists(a => a.Mobile == command.Mobile && a.UserId == command.UserId))
+                return result.Failed(ApplicationMessage.DuplicatedMobile);
+
+            var audience = new Audience(command.UserId, command.CategoryId, command.FullName, command.Mobile, command.Position);
+            await _audienceRepository.AddEntityAsync(audience);
+            await _audienceRepository.SaveChangesAsync();
+
             return result.Succeeded();
         }
 
-        public Task<OperationResult> Edit(EditAudienceDto command)
+        public async Task<OperationResult> Edit(EditAudienceDto command)
         {
-            throw new NotImplementedException();
+            OperationResult result = new();
+
+            var audience = await _audienceRepository.GetEntityByIdAsync(command.Id);
+
+            if (_audienceRepository.Exists(a => a.Mobile == command.Mobile && a.UserId == command.UserId && command.Id != a.Id))
+                return result.Failed(ApplicationMessage.DuplicatedMobile);
+
+            audience.Edit(command.CategoryId, command.FullName, command.Mobile, command.Position);
+            await _audienceRepository.SaveChangesAsync();
+
+            return result.Succeeded();
         }
 
         public async Task<IEnumerable<AudienceDto>> GetAll(string categoryName) => await _audienceRepository.GetAll(categoryName);
