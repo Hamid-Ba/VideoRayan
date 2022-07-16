@@ -17,6 +17,7 @@
         public const string SlugIsExist = "محصولی با این اسلاگ وجود دارد";
 
         public const string InvalidAccessToken = "کد تایید نامعتبر هست";
+        public const string DuplicatedMeetingTime = "شما در این تاریخ و زمان جلسه دیگه ای دارید";
 
     }
 }

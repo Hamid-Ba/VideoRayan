@@ -101,6 +101,15 @@ namespace Framework.Application
             return new DateTime(year, month, day, new PersianCalendar());
         }
 
+        public static DateTime GetCompliteDate(this string persianDate, int hour, int minute)
+        {
+            var compliteDate = persianDate.ToGeorgianDateTime();
+            compliteDate.AddHours(hour);
+            compliteDate.AddMinutes(minute);
+
+            return compliteDate;
+        }
+
         public static string ToMoney(this double myMoney)
         {
             return myMoney.ToString("N0", CultureInfo.CreateSpecificCulture("fa-ir"));
