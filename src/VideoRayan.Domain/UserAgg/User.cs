@@ -1,4 +1,5 @@
 ﻿using Framework.Domain;
+using VideoRayan.Domain.MeetingAgg;
 
 namespace VideoRayan.Domain.UserAgg
 {
@@ -11,6 +12,9 @@ namespace VideoRayan.Domain.UserAgg
         public string? Email { get; private set; }
         public bool IsActive { get;private set; }
         public DateTime LoginExpireDate { get; private set; }
+
+        public List<Meeting>? Meetings { get; set; }
+        public List<Audience>? Audiences { get; private set; }
 
         public User(string phone, string phoneCode, string firstName,string lastName, string email)
         {

@@ -1,9 +1,8 @@
-﻿using System;
-using Framework.Domain;
+﻿using Framework.Domain;
 
 namespace VideoRayan.Domain.MeetingAgg
 {
-	public class Category : EntityBase
+    public class Category : EntityBase
 	{
         public string Title { get;private set; }
         public string Description { get; private set; }
