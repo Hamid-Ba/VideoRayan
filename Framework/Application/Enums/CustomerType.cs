@@ -2,7 +2,7 @@
 {
     public enum CustomerType
 	{
-		Free = 0,
-		Organization = 1
+		FREE = 0,
+		ORGANIZATION = 1
 	}
 }

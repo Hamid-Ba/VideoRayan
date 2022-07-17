@@ -23,7 +23,8 @@ namespace VideoRayan.Application
             if (_meetingRepository.Exists(m => m.StartDateTime == compliteDate))
                 return result.Failed(ApplicationMessage.DuplicatedMeetingTime);
 
-            var meeting = new Meeting(command.UserId, command.Title!, compliteDate);
+            var meeting = new Meeting(command.UserId, command.Title!,command.IsLive,command.IsMute,command.IsRecord,
+                command.CanTalk,command.IsInteractiveBoard,command.Type, compliteDate);
 
             await _meetingRepository.AddEntityAsync(meeting);
             await _meetingRepository.SaveChangesAsync();
@@ -46,7 +47,8 @@ namespace VideoRayan.Application
             if (_meetingRepository.Exists(m => m.StartDateTime == compliteDate && m.UserId == command.UserId && m.Id != command.Id))
                 return result.Failed(ApplicationMessage.DuplicatedMeetingTime);
 
-            meeting.Edit(command.Title!, compliteDate);
+            meeting.Edit(command.Title!,command.IsLive,command.IsMute,command.IsRecord,command.CanTalk,command.IsInteractiveBoard,
+                command.Type, compliteDate);
             await _meetingRepository.SaveChangesAsync();
 
             return result.Succeeded();
