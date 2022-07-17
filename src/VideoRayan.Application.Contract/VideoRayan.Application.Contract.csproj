@@ -12,6 +12,7 @@
     <None Remove="MeetingAgg\Contracts\" />
     <None Remove="UserAgg\Contracts\" />
     <None Remove="AccountAgg\" />
+    <None Remove="AccountAgg\Contracts\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CustomerAgg\" />
@@ -19,6 +20,7 @@
     <Folder Include="MeetingAgg\Contracts\" />
     <Folder Include="CustomerAgg\Contracts\" />
     <Folder Include="AccountAgg\" />
+    <Folder Include="AccountAgg\Contracts\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework\Framework.csproj" />
