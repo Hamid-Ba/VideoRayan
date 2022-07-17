@@ -1,8 +1,8 @@
 ﻿using System;
 using Framework.Domain;
-using VideoRayan.Application.Contract.UserAgg;
+using VideoRayan.Application.Contract.CustomerAgg;
 
-namespace VideoRayan.Domain.UserAgg.Contracts
+namespace VideoRayan.Domain.CustomerAgg.Contracts
 {
     public interface IAudienceRepository : IRepository<Audience>
     {

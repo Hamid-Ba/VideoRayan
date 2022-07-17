@@ -1,10 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Framework.Application;
+using Framework.Application.Enums;
 
-namespace VideoRayan.Application.Contract.UserAgg
+namespace VideoRayan.Application.Contract.CustomerAgg
 {
-	public class UserDto : DtoBase
+	public class CustomerDto : DtoBase
 	{
         public string? FirstName { get;  set; }
         public string? LastName { get; set; }
@@ -13,19 +14,21 @@ namespace VideoRayan.Application.Contract.UserAgg
         public string? PhoneCode { get; set; }
         public string? Email { get; set; }
         public string? Password { get; set; }
+        public CustomerType Type { get; set; }
         public DateTime LoginExpireDate { get;  set; }
     }
 
-    public class EditUserDto
+    public class EditCustomerDto
     {
         public Guid Id { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Mobile { get; set; }
         public string? Email { get; set; }
+        public CustomerType Type { get; set; }
     }
 
-    public class RegisterUserDto
+    public class RegisterCustomerDto
     {
         [Display(Name = "شماره موبایل")]
         [Required(ErrorMessage = ValidationMessage.IsRequired)]
@@ -35,9 +38,9 @@ namespace VideoRayan.Application.Contract.UserAgg
         public string? Phone { get; set; }
     }
 
-    public class LoginUserDto : RegisterUserDto { }
+    public class LoginCustomerDto : RegisterCustomerDto { }
 
-    public class AccessTokenDto : RegisterUserDto
+    public class AccessTokenDto : RegisterCustomerDto
     {
         [Display(Name = "کد فعال سازی")]
         [MaxLength(6)]

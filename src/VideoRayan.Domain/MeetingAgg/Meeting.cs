@@ -1,5 +1,5 @@
 ﻿using Framework.Domain;
-using VideoRayan.Domain.UserAgg;
+using VideoRayan.Domain.CustomerAgg;
 
 namespace VideoRayan.Domain.MeetingAgg
 {
@@ -9,7 +9,7 @@ namespace VideoRayan.Domain.MeetingAgg
         public string Title { get; private set; }
         public DateTime StartDateTime { get; private set; }
 
-        public User? User { get; private set; }
+        public Customer? User { get; private set; }
         public List<AudienceMeeting>? Audiences { get;private set; }
 
         public Meeting(Guid userId,string title, DateTime startDateTime)

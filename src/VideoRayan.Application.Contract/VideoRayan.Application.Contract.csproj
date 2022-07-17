@@ -14,10 +14,10 @@
     <None Remove="AccountAgg\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="UserAgg\" />
+    <Folder Include="CustomerAgg\" />
     <Folder Include="MeetingAgg\" />
     <Folder Include="MeetingAgg\Contracts\" />
-    <Folder Include="UserAgg\Contracts\" />
+    <Folder Include="CustomerAgg\Contracts\" />
     <Folder Include="AccountAgg\" />
   </ItemGroup>
   <ItemGroup>

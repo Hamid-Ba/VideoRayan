@@ -1,9 +1,10 @@
-﻿using Framework.Domain;
+﻿using Framework.Application.Enums;
+using Framework.Domain;
 using VideoRayan.Domain.MeetingAgg;
 
-namespace VideoRayan.Domain.UserAgg
+namespace VideoRayan.Domain.CustomerAgg
 {
-    public class User : EntityBase
+    public class Customer : EntityBase
 	{
         public string? FirstName { get; private set; }
         public string? LastName { get; private set; }
@@ -11,12 +12,13 @@ namespace VideoRayan.Domain.UserAgg
         public string? PhoneCode { get; private set; }
         public string? Email { get; private set; }
         public bool IsActive { get;private set; }
+        public CustomerType Type { get;private set; }
         public DateTime LoginExpireDate { get; private set; }
 
         public List<Meeting>? Meetings { get; set; }
         public List<Audience>? Audiences { get; private set; }
 
-        public User(string phone, string phoneCode, string firstName,string lastName, string email)
+        public Customer(string phone, string phoneCode, string firstName,string lastName, string email,CustomerType type = 0)
         {
             Guard(phone);
 
@@ -26,9 +28,10 @@ namespace VideoRayan.Domain.UserAgg
             LastName = lastName;
             Email = email;
             IsActive = true;
+            Type = type;
         }
 
-        public static User Register(string phone, string phoneCode) => new(phone, phoneCode,"", "", "");
+        public static Customer Register(string phone, string phoneCode) => new(phone, phoneCode,"", "", "");
 
         public void Edit(string firstName,string lastName,string mobile, string email)
         {

@@ -1,5 +1,5 @@
-﻿using VideoRayan.Domain.MeetingAgg;
-using VideoRayan.Domain.UserAgg;
+﻿using VideoRayan.Domain.CustomerAgg;
+using VideoRayan.Domain.MeetingAgg;
 
 namespace VideoRayan.Domain
 {

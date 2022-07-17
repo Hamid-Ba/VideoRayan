@@ -1,7 +1,7 @@
 ﻿using System;
 using Framework.Application;
 
-namespace VideoRayan.Application.Contract.UserAgg.Contracts
+namespace VideoRayan.Application.Contract.CustomerAgg.Contracts
 {
 	public interface IAudienceApplication
 	{

@@ -1,6 +1,6 @@
 ﻿using Framework.Application.Enums;
 
-namespace VideoRayan.Application.Contract.UserAgg
+namespace VideoRayan.Application.Contract.CustomerAgg
 {
     public class AudienceDto : DtoBase
     {
@@ -9,7 +9,6 @@ namespace VideoRayan.Application.Contract.UserAgg
         public string? FullName { get; set; }
         public string? Mobile { get; set; }
         public string? Position { get; set; }
-        public AudienceType Type { get; set; }
     }
 
     public class CreateAudienceDto
@@ -19,7 +18,6 @@ namespace VideoRayan.Application.Contract.UserAgg
         public string? FullName { get; set; }
         public string? Mobile { get; set; }
         public string? Position { get; set; }
-        public AudienceType Type { get; set; }
     }
 
     public class EditAudienceDto : CreateAudienceDto

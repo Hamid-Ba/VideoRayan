@@ -1,27 +1,27 @@
 ﻿using Framework.Api.Jwt;
 using Framework.Application;
 using Framework.Application.Sms;
-using VideoRayan.Application.Contract.UserAgg;
-using VideoRayan.Application.Contract.UserAgg.Contracts;
-using VideoRayan.Domain.UserAgg;
-using VideoRayan.Domain.UserAgg.Contracts;
+using VideoRayan.Application.Contract.CustomerAgg;
+using VideoRayan.Application.Contract.CustomerAgg.Contracts;
+using VideoRayan.Domain.CustomerAgg;
+using VideoRayan.Domain.CustomerAgg.Contracts;
 
 namespace VideoRayan.Application
 {
-    public class UserApplication : IUserApplication
+    public class CustomerApplication : ICustomerApplication
     {
         private readonly IJwtHelper _jwtHelper;
         private readonly ISmsService _smsService;
-        private readonly IUserRepository _userRepository;
+        private readonly ICustomerRepository _userRepository;
 
-        public UserApplication(IJwtHelper jwtHelper, ISmsService smsService, IUserRepository userRepository)
+        public CustomerApplication(IJwtHelper jwtHelper, ISmsService smsService, ICustomerRepository userRepository)
         {
             _jwtHelper = jwtHelper;
             _smsService = smsService;
             _userRepository = userRepository;
         }
 
-        public async Task<OperationResult> Edit(EditUserDto command)
+        public async Task<OperationResult> Edit(EditCustomerDto command)
         {
             OperationResult result = new();
 
@@ -34,14 +34,14 @@ namespace VideoRayan.Application
             return result.Succeeded();
         }
 
-        public async Task<EditUserDto> GetDetailForEditBy(Guid id) => await _userRepository.GetDetailForEditBy(id);
+        public async Task<EditCustomerDto> GetDetailForEditBy(Guid id) => await _userRepository.GetDetailForEditBy(id);
 
-        public async Task<OperationResult> LoginFirstStep(LoginUserDto command)
+        public async Task<OperationResult> LoginFirstStep(LoginCustomerDto command)
         {
             OperationResult result = new();
 
             var user = await _userRepository.GetBy(command.Phone!);
-            if (user is null) return await Register(new RegisterUserDto { Phone = command.Phone });
+            if (user is null) return await Register(new RegisterCustomerDto { Phone = command.Phone });
             if (!user.IsActive) return result.Failed(ApplicationMessage.UserNotActive);
 
             user.SetAccessToLoginDate(DateTime.Now.AddMinutes(5));
@@ -58,14 +58,14 @@ namespace VideoRayan.Application
             return result.Succeeded();
         }
 
-        public async Task<OperationResult> Register(RegisterUserDto command)
+        public async Task<OperationResult> Register(RegisterCustomerDto command)
         {
             OperationResult result = new();
 
             if (_userRepository.Exists(u => u.Mobile == command.Phone)) return result.Failed(ApplicationMessage.DuplicatedMobile);
 
             var phoneCode = Guid.NewGuid().ToString().Substring(0, 6);
-            var user = User.Register(command.Phone!, phoneCode);
+            var user = Customer.Register(command.Phone!, phoneCode);
 
             //ToDo : Send Phone Code
             var smsMessage = $"کاربر گرامی با شماره موبایل {command.Phone},\nکد تایید شما : {phoneCode} می باشد";
