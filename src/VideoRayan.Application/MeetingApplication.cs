@@ -32,6 +32,19 @@ namespace VideoRayan.Application
             return result.Succeeded();
         }
 
+        public async Task<OperationResult> Delete(Guid id)
+        {
+            OperationResult result = new();
+
+            var meeting = await _meetingRepository.GetEntityByIdAsync(id);
+            if (meeting is null) return result.Failed(ApplicationMessage.NotExist);
+
+            meeting.Delete();
+            await _meetingRepository.SaveChangesAsync();
+
+            return result.Succeeded();
+        }
+
         public async Task<OperationResult> Edit(EditMeetingDto command)
         {
             OperationResult result = new();
