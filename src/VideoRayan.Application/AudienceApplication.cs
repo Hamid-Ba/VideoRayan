@@ -19,7 +19,7 @@ namespace VideoRayan.Application
             if (_audienceRepository.Exists(a => a.Mobile == command.Mobile && a.UserId == command.UserId))
                 return result.Failed(ApplicationMessage.DuplicatedMobile);
 
-            var audience = new Audience(command.UserId, command.CategoryId, command.FullName, command.Mobile, command.Position);
+            var audience = new Audience(command.UserId, command.CategoryId, command.FullName, command.Mobile, command.Position,command.Type);
             await _audienceRepository.AddEntityAsync(audience);
             await _audienceRepository.SaveChangesAsync();
 
@@ -35,7 +35,7 @@ namespace VideoRayan.Application
             if (_audienceRepository.Exists(a => a.Mobile == command.Mobile && a.UserId == command.UserId && command.Id != a.Id))
                 return result.Failed(ApplicationMessage.DuplicatedMobile);
 
-            audience.Edit(command.CategoryId, command.FullName, command.Mobile, command.Position);
+            audience.Edit(command.CategoryId, command.FullName, command.Mobile, command.Position,command.Type);
             await _audienceRepository.SaveChangesAsync();
 
             return result.Succeeded();

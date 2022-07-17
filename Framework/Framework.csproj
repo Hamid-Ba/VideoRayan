@@ -13,6 +13,7 @@
     <None Remove="System.Drawing.Common" />
     <None Remove="Microsoft.AspNetCore.Authentication.JwtBearer" />
     <None Remove="kavenegar" />
+    <None Remove="Application\Enums\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
@@ -21,5 +22,8 @@
     <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.6" />
     <PackageReference Include="kavenegar" Version="1.2.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Application\Enums\" />
   </ItemGroup>
 </Project>
