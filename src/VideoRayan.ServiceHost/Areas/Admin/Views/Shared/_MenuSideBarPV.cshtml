@@ -1,0 +1,77 @@
+﻿@using Framework.Application.Authentication
+
+<div class="left side-menu">
+    <div class="sidebar-inner slimscrollleft">
+        <div class="user-details">
+            <div class="pull-left">
+                <img src="~/AdminTheme/assets/images/users/avatar-1.jpg" alt="" class="thumb-md img-circle">
+            </div>
+            <div class="user-info">
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">@User.Identity?.Name<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index"><i class="md md-face-unlock"></i> وب سایت<div class="ripple-wrapper"></div></a></li>
+                        <li><a asp-area="" asp-controller="Account" asp-action="Logout"><i class="md md-settings-power"></i> خروج</a></li>
+                    </ul>
+                </div>
+
+                <p class="text-muted m-0">@User.GetRoleName()</p>
+            </div>
+        </div>
+        <!--- Divider -->
+        <div id="sidebar-menu">
+            <ul>
+                <li>
+                    <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="waves-effect active"><i class="md md-home"></i><span> داشبورد </span></a>
+                </li>
+
+                <li class="has_sub">
+                    <a class="waves-effect"><i class="md md-store"></i><span> سیستم محصولات </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                    <ul class="list-unstyled">
+                        <li><a asp-area="Admin" asp-controller="Category" asp-action="Index">دسته بندی ها</a></li>
+                        <li><a asp-area="Admin" asp-controller="Brand" asp-action="Index">برند ها</a></li>
+                        <li><a asp-area="Admin" asp-controller="Product" asp-action="Index">محصولات</a></li>
+                        <li><a asp-area="Admin" asp-controller="Market" asp-action="Index">فروشگاه ها</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a asp-area="Admin" asp-controller="Discount" asp-action="Index" class="waves-effect"><i class="fa fa-cart-plus"></i><span> سیستم تخفیفات </span></a>
+                </li>
+
+                <li>
+                    <a asp-area="Admin" asp-controller="Visitor" asp-action="Index" class="waves-effect"><i class="fa fa-user"></i><span> سیستم بازایاب ها </span></a>
+                </li>
+
+                <li class="has_sub">
+                    <a class="waves-effect"><i class="fa fa-users"></i><span> سیستم کاربران </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                    <ul class="list-unstyled">
+                        <li><a asp-area="Admin" asp-controller="Role" asp-action="Index">نقش ها</a></li>
+                        <li><a asp-area="Admin" asp-controller="Operator" asp-action="Index">اپراتورها</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a asp-area="Admin" asp-controller="City" asp-action="Index" class="waves-effect"><i class="fa fa-building"></i><span> مدیریت شهر ها </span></a>
+                </li>
+
+                <li class="has_sub">
+                    <a class="waves-effect"><i class="md md-shopping-basket"></i><span> سیستم سفارشات</span><span class="pull-right"><i class="md md-add"></i></span></a>
+                    <ul class="list-unstyled">
+                        <li><a asp-area="Admin" asp-controller="Order" asp-action="Index">محصولات</a></li>
+                    </ul>
+                </li>
+
+                <li class="has_sub">
+                    <a class="waves-effect"><i class="fa fa-cog"></i><span> سیستم تنظیمات </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                    <ul class="list-unstyled">
+                        <li><a asp-area="Admin" asp-controller="Setting" asp-action="Modify">تنظیمات</a></li>
+                        <li><a asp-area="Admin" asp-controller="ContactUs" asp-action="Index">پیام ها</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

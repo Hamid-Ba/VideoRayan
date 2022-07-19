@@ -1,4 +1,5 @@
 using Framework.Api.Jwt;
+using Framework.Application.Authentication;
 using Framework.Application.Hashing;
 using Framework.Application.Sms;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -12,9 +13,12 @@ var service = builder.Services;
 
 service.AddHttpContextAccessor();
 service.AddTransient<IJwtHelper, JwtHelper>();
+service.AddTransient<IAuthHelper, AuthHelper>();
 service.AddTransient<ISmsService, SmsService>();
 service.AddTransient<IPasswordHasher, PasswordHasher>();
 VideoRayanBootstrapper.Configure(service, builder.Configuration.GetConnectionString("Ir-Cafe"));
+
+service.AddControllersWithViews();
 
 service.AddAuthentication(options =>
 {
@@ -50,17 +54,18 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 
+app.UseRouting();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
-
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
-      name: "areas",
-      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+app.MapControllerRoute(
+        name: "areas",
+        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
     );
-});
+
+app.Run();
