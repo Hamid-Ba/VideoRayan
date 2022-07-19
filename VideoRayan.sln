@@ -1,23 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 25.0.1703.0
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E6AF70BC-EFF0-4A8D-8DB1-8DED8D51F314}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoRayan.Domain", "src\VideoRayan.Domain\VideoRayan.Domain.csproj", "{32B11447-0FA6-4906-9D3D-FB2419875175}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoRayan.Domain", "src\VideoRayan.Domain\VideoRayan.Domain.csproj", "{32B11447-0FA6-4906-9D3D-FB2419875175}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoRayan.Application", "src\VideoRayan.Application\VideoRayan.Application.csproj", "{3AEBBC46-ACA4-48E9-950B-8D1286B8A10C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoRayan.Application", "src\VideoRayan.Application\VideoRayan.Application.csproj", "{3AEBBC46-ACA4-48E9-950B-8D1286B8A10C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoRayan.Application.Contract", "src\VideoRayan.Application.Contract\VideoRayan.Application.Contract.csproj", "{6FE4DEE6-AA91-4A48-AEF2-80347A315CBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoRayan.Application.Contract", "src\VideoRayan.Application.Contract\VideoRayan.Application.Contract.csproj", "{6FE4DEE6-AA91-4A48-AEF2-80347A315CBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoRayan.Infrastructure.EfCore", "src\VideoRayan.Infrastructure.EfCore\VideoRayan.Infrastructure.EfCore.csproj", "{0514121E-9982-4E06-86FB-0AEE591B792C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoRayan.Infrastructure.EfCore", "src\VideoRayan.Infrastructure.EfCore\VideoRayan.Infrastructure.EfCore.csproj", "{0514121E-9982-4E06-86FB-0AEE591B792C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoRayan.Infrastructure.Configuration", "src\VideoRayan.Infrastructure.Configuration\VideoRayan.Infrastructure.Configuration.csproj", "{4C078534-92F9-4CD7-AC2F-BEE0E28C6B93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoRayan.Infrastructure.Configuration", "src\VideoRayan.Infrastructure.Configuration\VideoRayan.Infrastructure.Configuration.csproj", "{4C078534-92F9-4CD7-AC2F-BEE0E28C6B93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoRayan.Query", "src\VideoRayan.Query\VideoRayan.Query.csproj", "{1C447017-AADD-4400-80B3-0851E255DAA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoRayan.Query", "src\VideoRayan.Query\VideoRayan.Query.csproj", "{1C447017-AADD-4400-80B3-0851E255DAA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework", "Framework\Framework.csproj", "{BF9402FF-C660-4165-9EA9-DA1DC5C1D1CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework", "Framework\Framework.csproj", "{BF9402FF-C660-4165-9EA9-DA1DC5C1D1CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoRayan.ServiceHost", "src\VideoRayan.ServiceHost\VideoRayan.ServiceHost.csproj", "{1D29EB8E-7680-40D7-A6DC-392DFBAF84D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,12 +55,13 @@ Global
 		{BF9402FF-C660-4165-9EA9-DA1DC5C1D1CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF9402FF-C660-4165-9EA9-DA1DC5C1D1CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF9402FF-C660-4165-9EA9-DA1DC5C1D1CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D29EB8E-7680-40D7-A6DC-392DFBAF84D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D29EB8E-7680-40D7-A6DC-392DFBAF84D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D29EB8E-7680-40D7-A6DC-392DFBAF84D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D29EB8E-7680-40D7-A6DC-392DFBAF84D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {D0B16F38-4B80-4930-945C-790B1D5AC491}
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{32B11447-0FA6-4906-9D3D-FB2419875175} = {E6AF70BC-EFF0-4A8D-8DB1-8DED8D51F314}
@@ -67,5 +70,9 @@ Global
 		{0514121E-9982-4E06-86FB-0AEE591B792C} = {E6AF70BC-EFF0-4A8D-8DB1-8DED8D51F314}
 		{4C078534-92F9-4CD7-AC2F-BEE0E28C6B93} = {E6AF70BC-EFF0-4A8D-8DB1-8DED8D51F314}
 		{1C447017-AADD-4400-80B3-0851E255DAA3} = {E6AF70BC-EFF0-4A8D-8DB1-8DED8D51F314}
+		{1D29EB8E-7680-40D7-A6DC-392DFBAF84D6} = {E6AF70BC-EFF0-4A8D-8DB1-8DED8D51F314}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D0B16F38-4B80-4930-945C-790B1D5AC491}
 	EndGlobalSection
 EndGlobal
