@@ -8,14 +8,14 @@
 
   <ItemGroup>
     <None Remove="MeetingAgg\" />
-    <None Remove="MeetingAgg\Repositories \" />
+    <None Remove="MeetingAgg\Repositories\" />
     <None Remove="UserAgg\Contracts\" />
     <None Remove="AccountAgg\" />
     <None Remove="AccountAgg\Contracts\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MeetingAgg\" />
-    <Folder Include="MeetingAgg\Repositories \" />
+    <Folder Include="MeetingAgg\Repositories\" />
     <Folder Include="CustomerAgg\Contracts\" />
     <Folder Include="AccountAgg\" />
     <Folder Include="AccountAgg\Contracts\" />
