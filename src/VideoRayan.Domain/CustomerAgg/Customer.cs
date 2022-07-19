@@ -6,10 +6,12 @@ namespace VideoRayan.Domain.CustomerAgg
 {
     public class Customer : EntityBase
 	{
+        public string? Title { get;private set; }
         public string? FirstName { get; private set; }
         public string? LastName { get; private set; }
         public string? Mobile { get; private set; }
         public string? PhoneCode { get; private set; }
+        public string? Logo { get;private set; }
         public string? Email { get; private set; }
         public bool IsActive { get;private set; }
         public CustomerType Type { get;private set; }
@@ -18,12 +20,18 @@ namespace VideoRayan.Domain.CustomerAgg
         public List<Meeting>? Meetings { get; set; }
         public List<Audience>? Audiences { get; private set; }
 
-        public Customer(string phone, string phoneCode, string firstName,string lastName, string email,CustomerType type = 0)
+        public Customer(string title,string phone, string phoneCode,string logo, string firstName,string lastName, string email,CustomerType type = 0)
         {
             Guard(phone);
 
+            Title = title;
+
             Mobile = phone;
             PhoneCode = phoneCode;
+
+            if (!string.IsNullOrWhiteSpace(logo))
+                Logo = logo;
+
             FirstName = firstName;
             LastName = lastName;
             Email = email;
@@ -31,7 +39,7 @@ namespace VideoRayan.Domain.CustomerAgg
             Type = type;
         }
 
-        public static Customer Register(string phone, string phoneCode) => new(phone, phoneCode,"", "", "");
+        public static Customer Register(string phone, string phoneCode) => new("",phone, phoneCode,"","", "", "");
 
         public void Edit(string firstName,string lastName,string mobile, string email)
         {

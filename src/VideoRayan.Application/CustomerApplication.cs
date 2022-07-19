@@ -21,6 +21,22 @@ namespace VideoRayan.Application
             _userRepository = userRepository;
         }
 
+        public async Task<OperationResult> Create(CreateCustomerDto command)
+        {
+            OperationResult result = new();
+
+            if (_userRepository.Exists(u => u.Mobile == command.Mobile || u.Email == command.Email))
+                return result.Failed(ApplicationMessage.DuplicatedModel);
+
+            var imageName = Uploader.ImageUploader(command.Logo!, "Customer", null!);
+
+            var customer = new Customer(command.Title!, command.Mobile!, "", imageName, command.FirstName!, command.LastName!, command.Email!, command.Type);
+            await _userRepository.AddEntityAsync(customer);
+            await _userRepository.SaveChangesAsync();
+
+            return result.Succeeded();
+        }
+
         public async Task<OperationResult> Edit(EditCustomerDto command)
         {
             OperationResult result = new();

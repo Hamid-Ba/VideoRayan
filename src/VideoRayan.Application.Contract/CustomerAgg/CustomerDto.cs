@@ -1,21 +1,35 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using Framework.Application;
 using Framework.Application.Enums;
+using Microsoft.AspNetCore.Http;
 
 namespace VideoRayan.Application.Contract.CustomerAgg
 {
-	public class CustomerDto : DtoBase
-	{
-        public string? FirstName { get;  set; }
+    public class CustomerDto : DtoBase
+    {
+        public string? Title { get; set; }
+        public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? UserName { get; set; }
         public string? Mobile { get; set; }
         public string? PhoneCode { get; set; }
+        public string? Logo { get; set; }
         public string? Email { get; set; }
         public string? Password { get; set; }
         public CustomerType Type { get; set; }
-        public DateTime LoginExpireDate { get;  set; }
+        public DateTime LoginExpireDate { get; set; }
+    }
+
+    public class CreateCustomerDto
+    {
+        public string? Title { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public string? Mobile { get; set; }
+        public IFormFile? Logo { get; set; }
+        public string? Email { get; set; }
+        public bool IsActive { get; set; }
+        public CustomerType Type { get; set; }
     }
 
     public class EditCustomerDto
