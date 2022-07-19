@@ -16,7 +16,7 @@ service.AddTransient<IJwtHelper, JwtHelper>();
 service.AddTransient<IAuthHelper, AuthHelper>();
 service.AddTransient<ISmsService, SmsService>();
 service.AddTransient<IPasswordHasher, PasswordHasher>();
-VideoRayanBootstrapper.Configure(service, builder.Configuration.GetConnectionString("Ir-Cafe"));
+VideoRayanBootstrapper.Configure(service, builder.Configuration.GetConnectionString("VideoRayan"));
 
 service.AddControllersWithViews();
 
