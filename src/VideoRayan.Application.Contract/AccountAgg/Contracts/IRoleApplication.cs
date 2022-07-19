@@ -1,16 +1,14 @@
 ﻿using Framework.Application;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace VideoRayan.Application.Contract.AccountAgg.Contracts
 {
     public interface IRoleApplication
     {
-        Task<OperationResult> Delete(long id);
+        Task<OperationResult> Delete(Guid id);
         Task<IEnumerable<RoleVM>> GetAll();
-        Task<EditRoleVM> GetDetailForEditBy(long id);
+        Task<EditRoleVM> GetDetailForEditBy(Guid id);
         Task<OperationResult> Edit(EditRoleVM command);
         Task<OperationResult> Create(CreateRoleVM command);
-        bool IsRoleHasThePermission(long roleId, long permissionId);
+        bool IsRoleHasThePermission(Guid roleId, long permissionId);
     }
 }

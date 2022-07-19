@@ -11,30 +11,6 @@ namespace Framework.Application.Authentication
 
         public AuthHelper(IHttpContextAccessor httpContext) => _httpContext = httpContext;
 
-        public async void SignInAsync(VisitorAuthViewModel account)
-        {
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.NameIdentifier, account.Id.ToString()),
-                new Claim(ClaimTypes.Role, "Visitor"),
-                new Claim(ClaimTypes.Name, account.Fullname!),
-                new Claim(ClaimTypes.MobilePhone, account.Mobile!),
-                new Claim("Code", account.Code!),
-
-            };
-
-            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-            var authProperties = new Microsoft.AspNetCore.Authentication.AuthenticationProperties()
-            {
-                IsPersistent = true
-            };
-
-
-           await _httpContext.HttpContext!.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-               new ClaimsPrincipal(claimsIdentity), authProperties);
-        }
-
         public async void SignInAsync(OperatorAuthViewModel account)
         {
             var claims = new List<Claim>
@@ -54,7 +30,6 @@ namespace Framework.Application.Authentication
             {
                 IsPersistent = true
             };
-
 
             await _httpContext.HttpContext!.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                new ClaimsPrincipal(claimsIdentity), authProperties);

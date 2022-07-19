@@ -7,6 +7,6 @@ namespace VideoRayan.Domain.AccountAgg.Contracts
     {
         Task<Operator> GetBy(string mobile);
         Task<IEnumerable<OperatorVM>> GetAll();
-        Task<EditOperatorVM> GetDetailForEditBy(long id);
+        Task<EditOperatorVM> GetDetailForEditBy(Guid id);
     }
 }

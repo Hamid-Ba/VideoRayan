@@ -5,8 +5,8 @@ namespace VideoRayan.Domain.AccountAgg.Contracts
 {
     public interface IRoleRepository : IRepository<Role>
     {
-        Role GetBy(long roleId);
+        Role GetBy(Guid roleId);
         Task<IEnumerable<RoleVM>> GetAll();
-        Task<EditRoleVM> GetDetailForEditBy(long id);
+        Task<EditRoleVM> GetDetailForEditBy(Guid id);
     }
 }

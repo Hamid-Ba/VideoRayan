@@ -5,6 +5,6 @@ namespace VideoRayan.Application.Contract.AccountAgg.Contracts
 {
     public interface IRolePermissionApplication
     {
-        Task<OperationResult> AddPermissionsToRole(long roleId, long[] permissionsId);
+        Task<OperationResult> AddPermissionsToRole(Guid roleId, long[] permissionsId);
     }
 }
