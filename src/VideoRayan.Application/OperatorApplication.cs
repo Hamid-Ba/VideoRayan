@@ -104,7 +104,7 @@ namespace VideoRayan.Application
                 Mobile = user.Mobile
             };
 
-            _authHelper.SignInAsync(userVM);
+            _authHelper.SignIn(userVM);
 
             return result.Succeeded();
         }

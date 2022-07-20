@@ -11,7 +11,7 @@ namespace Framework.Application.Authentication
 
         public AuthHelper(IHttpContextAccessor httpContext) => _httpContext = httpContext;
 
-        public async void SignInAsync(OperatorAuthViewModel account)
+        public void SignIn(OperatorAuthViewModel account)
         {
             var claims = new List<Claim>
             {
@@ -31,9 +31,9 @@ namespace Framework.Application.Authentication
                 IsPersistent = true
             };
 
-            await _httpContext.HttpContext!.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+            _httpContext.HttpContext!.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                new ClaimsPrincipal(claimsIdentity), authProperties);
         }
-        public async void SignOut() => await _httpContext.HttpContext!.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        public void SignOut() => _httpContext.HttpContext!.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
     }
 }

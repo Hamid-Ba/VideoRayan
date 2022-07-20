@@ -3,6 +3,6 @@
     public interface IAuthHelper
     {
         void SignOut();
-        void SignInAsync(OperatorAuthViewModel account);
+        void SignIn(OperatorAuthViewModel account);
     }
 }
