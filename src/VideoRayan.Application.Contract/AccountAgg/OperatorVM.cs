@@ -17,7 +17,6 @@ namespace VideoRayan.Application.Contract.AccountAgg
     {
         [Display(Name = "نقش")]
         [Required(ErrorMessage = ValidationMessage.IsRequired)]
-        [Range(1, long.MaxValue, ErrorMessage = ValidationMessage.IsRequired)]
         public Guid RoleId { get; set; }
 
         [Display(Name = "نام کامل")]
@@ -42,7 +41,6 @@ namespace VideoRayan.Application.Contract.AccountAgg
 
         [Display(Name = "نقش")]
         [Required(ErrorMessage = ValidationMessage.IsRequired)]
-        [Range(1, long.MaxValue, ErrorMessage = ValidationMessage.IsRequired)]
         public Guid RoleId { get; set; }
 
         [Display(Name = "نام کامل")]

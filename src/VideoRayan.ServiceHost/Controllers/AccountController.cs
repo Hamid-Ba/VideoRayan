@@ -37,7 +37,7 @@ namespace VideoRayan.ServiceHost.Controllers
                 if (result.IsSucceeded)
                 {
                     TempData[SuccessMessage] = result.Message;
-                    return Redirect("admin/home");
+                    return RedirectToAction("Index", "Home", new { Area = "Admin" });
                 }
 
                 TempData[ErrorMessage] = result.Message;
@@ -51,15 +51,8 @@ namespace VideoRayan.ServiceHost.Controllers
         [HttpGet]
         public IActionResult Logout()
         {
-            if (User.Identity!.IsAuthenticated)
-            {
-                _authHelper.SignOut();
-                TempData[SuccessMessage] = "با موفقیت خارج شدید";
-            }
-            else
-                TempData[ErrorMessage] = "هنوز وارد نشده اید که";
-
-
+            _authHelper.SignOut();
+            TempData[SuccessMessage] = "با موفقیت خارج شدید";
             return RedirectToAction("Login", "Account");
         }
     }
