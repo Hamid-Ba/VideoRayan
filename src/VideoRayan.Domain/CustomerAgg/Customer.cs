@@ -39,6 +39,23 @@ namespace VideoRayan.Domain.CustomerAgg
             Type = type;
         }
 
+        public void Edit(string title, string phone, string logo, string firstName, string lastName, string email, CustomerType type = 0)
+        {
+            Guard(phone);
+
+            Title = title;
+            Mobile = phone;
+
+            if (!string.IsNullOrWhiteSpace(logo))
+                Logo = logo;
+
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            IsActive = true;
+            Type = type;
+        }
+
         public static Customer Register(string phone, string phoneCode) => new("",phone, phoneCode,"","", "", "");
 
         public void Edit(string firstName,string lastName,string mobile, string email)

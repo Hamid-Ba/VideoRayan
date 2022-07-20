@@ -42,7 +42,10 @@ namespace VideoRayan.Application
             OperationResult result = new();
 
             var user = await _userRepository.GetEntityByIdAsync(command.Id);
+
             if (user is null) return result.Failed(ApplicationMessage.UserNotExist);
+            if (_userRepository.Exists(u => (u.Mobile == command.Mobile || u.Email == command.Email) && u.Id != command.Id))
+                return result.Failed(ApplicationMessage.DuplicatedModel);
 
             user.Edit(command.FirstName!, command.LastName!, command.Mobile!, command.Email!);
             await _userRepository.SaveChangesAsync();
@@ -50,7 +53,27 @@ namespace VideoRayan.Application
             return result.Succeeded();
         }
 
+        public async Task<OperationResult> Edit(EditByAdminCustomerDto command)
+        {
+            OperationResult result = new();
+
+            var user = await _userRepository.GetEntityByIdAsync(command.Id);
+
+            if (user is null) return result.Failed(ApplicationMessage.UserNotExist);
+            if (_userRepository.Exists(u => (u.Mobile == command.Mobile || u.Email == command.Email) && u.Id != command.Id))
+                return result.Failed(ApplicationMessage.DuplicatedModel);
+
+            var logo = Uploader.ImageUploader(command.LogoFile!, "Customer", command.Logo!);
+
+            user.Edit(command.Title!, command.Mobile!, logo, command.FirstName!, command.LastName!, command.Email!, command.Type);
+            await _userRepository.SaveChangesAsync();
+
+            return result.Succeeded();
+        }
+
         public async Task<EditCustomerDto> GetDetailForEditBy(Guid id) => await _userRepository.GetDetailForEditBy(id);
+
+        public async Task<EditByAdminCustomerDto> GetDetailForEditByAdmin(Guid id) => await _userRepository.GetDetailForEditByAdmin(id);
 
         public async Task<OperationResult> LoginFirstStep(LoginCustomerDto command)
         {
