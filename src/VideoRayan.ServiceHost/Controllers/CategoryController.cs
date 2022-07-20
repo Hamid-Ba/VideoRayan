@@ -63,5 +63,16 @@ namespace VideoRayan.ServiceHost.Controllers
             }
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            try
+            {
+                var result = await _categoryApplication.Delete(id);
+                return result.IsSucceeded ? Ok(result.Message) : BadRequest(result.Message);
+            }
+            catch (Exception e) { return BadRequest(e.InnerException!.Message); } 
+        }
     }
 }

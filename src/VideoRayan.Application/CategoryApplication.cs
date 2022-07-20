@@ -1,5 +1,4 @@
-﻿using System;
-using Framework.Application;
+﻿using Framework.Application;
 using VideoRayan.Application.Contract.MeetingAgg;
 using VideoRayan.Application.Contract.MeetingAgg.Contracts;
 using VideoRayan.Domain.MeetingAgg;
@@ -21,6 +20,19 @@ namespace VideoRayan.Application
             
             var category = new Category(command.Title!, command.Description!);
             await _categoryRepository.AddEntityAsync(category);
+            await _categoryRepository.SaveChangesAsync();
+
+            return result.Succeeded();
+        }
+
+        public async Task<OperationResult> Delete(Guid id)
+        {
+            OperationResult result = new();
+
+            var category = await _categoryRepository.GetEntityByIdAsync(id);
+            if (category is null) return result.Failed(ApplicationMessage.NotExist);
+
+            category.Delete();
             await _categoryRepository.SaveChangesAsync();
 
             return result.Succeeded();
