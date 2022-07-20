@@ -10,6 +10,7 @@ namespace VideoRayan.Infrastructure.EfCore.Mapping.AccountAgg
         {
             builder.HasKey(x => x.Id);
 
+            builder.Property(x => x.Id).ValueGeneratedNever();
             builder.HasMany(r => r.Roles)
                 .WithOne(p => p.Permission)
                 .HasForeignKey(f => f.PermissionId);

@@ -12,7 +12,7 @@ using VideoRayan.Infrastructure.EfCore;
 namespace VideoRayan.Infrastructure.EfCore.Migrations
 {
     [DbContext(typeof(VideoRayanContext))]
-    [Migration("20220719091827_init")]
+    [Migration("20220720041239_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,10 +30,10 @@ namespace VideoRayan.Infrastructure.EfCore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime?>("CreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletionDate")
+                    b.Property<DateTime?>("DeletionDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FullName")
@@ -44,7 +44,7 @@ namespace VideoRayan.Infrastructure.EfCore.Migrations
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("LastUpdateDate")
+                    b.Property<DateTime?>("LastUpdateDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Mobile")
@@ -69,10 +69,7 @@ namespace VideoRayan.Infrastructure.EfCore.Migrations
             modelBuilder.Entity("VideoRayan.Domain.AccountAgg.Permission", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<long?>("ParentId")
                         .HasColumnType("bigint");
@@ -91,10 +88,10 @@ namespace VideoRayan.Infrastructure.EfCore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime?>("CreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletionDate")
+                    b.Property<DateTime?>("DeletionDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -104,7 +101,7 @@ namespace VideoRayan.Infrastructure.EfCore.Migrations
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("LastUpdateDate")
+                    b.Property<DateTime?>("LastUpdateDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")

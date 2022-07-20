@@ -10,6 +10,7 @@ namespace VideoRayan.Infrastructure.EfCore.Mapping.AccountAgg
         {
             builder.HasKey(x => x.Id);
 
+            builder.Property(p => p.Id).ValueGeneratedOnAdd();
             builder.Property(p => p.Name).HasMaxLength(50).IsRequired();
 
             builder.HasMany(o => o.Operators)

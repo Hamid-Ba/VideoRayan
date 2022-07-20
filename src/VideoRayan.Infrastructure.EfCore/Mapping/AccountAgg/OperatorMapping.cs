@@ -10,6 +10,7 @@ namespace VideoRayan.Infrastructure.EfCore.Mapping.AccountAgg
         {
             builder.HasKey(k => k.Id);
 
+            builder.Property(p => p.Id).ValueGeneratedOnAdd();
             builder.Property(p => p.FullName).HasMaxLength(125).IsRequired();
             builder.Property(p => p.Mobile).HasMaxLength(11).IsRequired();
             builder.Property(p => p.Password).IsRequired();

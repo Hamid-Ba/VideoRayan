@@ -13,8 +13,7 @@ namespace VideoRayan.Infrastructure.EfCore.Migrations
                 name: "Permissions",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<long>(type: "bigint", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ParentId = table.Column<long>(type: "bigint", nullable: true)
                 },
@@ -31,9 +30,9 @@ namespace VideoRayan.Infrastructure.EfCore.Migrations
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastUpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletionDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastUpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletionDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -50,9 +49,9 @@ namespace VideoRayan.Infrastructure.EfCore.Migrations
                     Mobile = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastUpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletionDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastUpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletionDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {

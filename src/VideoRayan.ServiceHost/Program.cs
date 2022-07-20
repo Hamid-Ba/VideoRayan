@@ -82,27 +82,27 @@ app.UseAuthorization();
 app.MapControllers();
 
 //Seed Operator
-//void SeedDatabase()
-//{
-//    using (var scope = app.Services.CreateScope())
-//    {
-//        var _context = scope.ServiceProvider.GetRequiredService<VideoRayanContext>();
-//        var passwordHasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher>();
+void SeedDatabase()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var _context = scope.ServiceProvider.GetRequiredService<VideoRayanContext>();
+        var passwordHasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher>();
 
-//        Operator opt = _context.Operators.Where(i => i.Mobile == "09151498722").FirstOrDefault()!;
-//        if (opt is null)
-//        {
-//            string hashpassword = passwordHasher.Hash("123");
-//            //password: 123
-//            Operator admin = new Operator(,"حمید بلال زاده", "09151498722", hashpassword);
+        Operator opt = _context.Operators.Where(i => i.Mobile == "09151498722").FirstOrDefault()!;
+        if (opt is null)
+        {
+            string hashpassword = passwordHasher.Hash("123");
+            //password: 123
+            Operator admin = new Operator(Guid.Parse("7b01f317-af04-4391-a6df-6ef754654ef3"), "حمید بلال زاده", "09151498722", hashpassword);
 
-//            _context.Operators.Add(admin);
-//            _context.SaveChanges();
-//        }
-//    }
-//}
+            _context.Operators.Add(admin);
+            _context.SaveChanges();
+        }
+    }
+}
 
-//SeedDatabase();
+SeedDatabase();
 
 app.MapControllerRoute(
         name: "default",
