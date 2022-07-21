@@ -1,5 +1,6 @@
 ﻿using Framework.Api.Jwt;
 using Framework.Application;
+using Framework.Application.Enums;
 using Framework.Application.Sms;
 using VideoRayan.Application.Contract.CustomerAgg;
 using VideoRayan.Application.Contract.CustomerAgg.Contracts;
@@ -75,7 +76,7 @@ namespace VideoRayan.Application
 
         public async Task<CustomerDto> GetBy(Guid id) => await _userRepository.GetBy(id);
 
-        public async Task<IEnumerable<CustomerDto>> GetAll() => await _userRepository.GetAll();
+        public async Task<IEnumerable<CustomerDto>> GetAll(CustomerType type) => await _userRepository.GetAll(type);
 
         public async Task<EditCustomerDto> GetDetailForEditBy(Guid id) => await _userRepository.GetDetailForEditBy(id);
 

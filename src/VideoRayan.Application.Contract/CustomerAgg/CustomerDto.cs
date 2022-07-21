@@ -15,6 +15,7 @@ namespace VideoRayan.Application.Contract.CustomerAgg
         public string? Logo { get; set; }
         public string? Email { get; set; }
         public string? Password { get; set; }
+        public bool IsActive { get; set; }
         public CustomerType Type { get; set; }
         public DateTime LoginExpireDate { get; set; }
         public string? PersianCreationDate { get; set; }

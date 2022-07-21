@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Framework.Application.Enums;
+using Microsoft.AspNetCore.Mvc;
 using VideoRayan.Application.Contract.CustomerAgg.Contracts;
 
 namespace VideoRayan.ServiceHost.Areas.Admin.Controllers
@@ -9,7 +10,11 @@ namespace VideoRayan.ServiceHost.Areas.Admin.Controllers
 
         public CustomerController(ICustomerApplication customerApplication) => _customerApplication = customerApplication;
 
-        public IActionResult Index() => View();
-        
+        public async Task<IActionResult> Index(CustomerType type)
+        {
+            var result = await _customerApplication.GetAll(type);
+            ViewBag.Type = type;
+            return View(result);
+        }
     }
 }

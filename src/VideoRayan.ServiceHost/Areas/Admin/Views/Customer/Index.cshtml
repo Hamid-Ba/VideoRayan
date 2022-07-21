@@ -1,0 +1,135 @@
+﻿@using Framework.Application.Enums
+@using VideoRayan.Application.Contract.CustomerAgg
+@model IEnumerable<CustomerDto>
+
+@{
+    ViewData["Title"] = "مشتریان";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var count = 0;
+    var type = ViewBag.Type as CustomerType?;
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="page-title pull-right"></h4>
+        <ol class="breadcrumb pull-right">
+            <li><a asp-area="Admin" asp-controller="Home" asp-action="Index">ویدئو رایان</a></li>
+
+            @if (type == CustomerType.ORGANIZATION)
+            {
+                <li class="active"> <a asp-controller="Customer" asp-action="Index" asp-route-type="@CustomerType.FREE">@ViewData["title"]</a> </li>
+                <li class="active">رایگان</li>
+            }
+            else
+            {
+                <li class="active"> <a asp-controller="Customer" asp-action="Index" asp-route-type="@CustomerType.ORGANIZATION">@ViewData["title"]</a> </li>
+                <li class="active">سازمانی</li>
+            }
+        </ol>
+        <p class="pull-left">
+            @if (type == CustomerType.ORGANIZATION)
+            {
+                <a asp-controller="Customer" asp-action="Index" asp-route-type="@CustomerType.FREE">رایگان</a>
+            }
+            else
+            {
+                <a asp-controller="Customer" asp-action="Index" asp-route-type="@CustomerType.ORGANIZATION">سازمانی</a>
+            }
+        </p>
+    </div>
+</div>
+
+<div class="row" id="ProductCategoriesDiv">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">@ViewData["Title"]</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 makeTableResponsive">
+                        <table id="datatable" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+
+                                    @if (type == CustomerType.ORGANIZATION)
+                                    {
+                                        <th>لوگو</th>
+                                    }
+
+                                    <th>نام کامل</th>
+                                    <th>موبایل</th>
+                                    <td>وضعیت</td>
+
+                                    <th>تاریخ ثبت</th>
+
+                                    <th>عملیات</th>
+
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                @foreach (var entity in Model)
+                                {
+                                    <tr class="text-center">
+                                        <td>@(count++)</td>
+                                        @if (type == CustomerType.ORGANIZATION)
+                                        {
+                                            <td> <img src="~Pictures\@entity.Logo"> </td>
+                                        }
+                                        <td>@(entity.FirstName) @(entity.LastName)</td>
+                                        <td>@entity.Mobile</td>
+                                        <td>
+                                            @if (entity.IsActive)
+                                            {
+                                            <i class="btn btn-success fa fa-tick"></i>
+                                            }
+                                            else
+                                            {
+                                            <i class="btn btn-danger fa fa-close"></i>
+                                            }
+                                        </td>
+                                        <td>@entity.PersianCreationDate</td>
+
+                                        <td style="text-align: center;">
+
+                                            @if (entity.IsActive)
+                                            {
+                                                <a class="btn btn-warning" asp-controller="Customer" asp-action="ChangeStatus" asp-route-id="@entity.Id">غیرفعال</a>
+                                            }
+                                            else
+                                            {
+                                                <a class="btn btn-success" asp-controller="Customer" asp-action="ChangeStatus" asp-route-id="@entity.Id">فعال</a>
+                                            }
+
+                                            <a class="btn btn-info pull-right m-rl-5"
+                                           href="#showmodal=@Url.Action("Detail", "Customer", new {id = entity.Id})">
+                                                <i class="fa fa-detail"></i>
+                                            </a>
+
+                                            <a class="btn btn-primary pull-right m-rl-5"
+                                           href="#showmodal=@Url.Action("SendMessage", "Customer", new {id = entity.Id})">
+                                                <i class="fa fa-email"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/AdminTheme/assets/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/AdminTheme/assets/datatables/dataTables.bootstrap.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#datatable').dataTable();
+        });
+    </script>
+}

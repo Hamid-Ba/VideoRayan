@@ -1,4 +1,5 @@
 ﻿using Framework.Application;
+using Framework.Application.Enums;
 using Framework.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using VideoRayan.Application.Contract.CustomerAgg;
@@ -13,7 +14,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
 
         public CustomerRepository(VideoRayanContext context) : base(context) => _context = context;
 
-        public async Task<IEnumerable<CustomerDto>> GetAll() => await _context.Customers.Select(c => new CustomerDto
+        public async Task<IEnumerable<CustomerDto>> GetAll(CustomerType type) => await _context.Customers.Where(c => c.Type == type).Select(c => new CustomerDto
         {
             Id = c.Id,
             FirstName = c.FirstName,
@@ -21,6 +22,8 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
             Logo = c.Logo,
             Mobile = c.Mobile,
             Type = c.Type,
+            PersianCreationDate = c.CreationDate.ToFarsi(),
+            IsActive = c.IsActive
         }).AsNoTracking().ToListAsync();
 
         public async Task<Customer> GetBy(string mobile) => (await _context.Customers.FirstOrDefaultAsync(c => c.Mobile == mobile))!;
