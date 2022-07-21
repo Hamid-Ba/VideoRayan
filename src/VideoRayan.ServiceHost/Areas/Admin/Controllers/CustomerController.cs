@@ -45,18 +45,18 @@ namespace VideoRayan.ServiceHost.Areas.Admin.Controllers
             return new JsonResult(result);
         }
 
-        //[HttpGet]
-        //public IActionResult Delete(Guid id) => PartialView(id);
+        [HttpGet]
+        public IActionResult Delete(Guid id) => PartialView(id);
 
-        //[HttpPost]
-        //[ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> PostDelete(Guid id)
-        //{
-        //    var result = await _customerApplication.Delete(id);
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PostDelete(Guid id)
+        {
+            var result = await _customerApplication.Delete(id);
 
-        //    if (result.IsSucceeded) TempData[SuccessMessage] = result.Message;
-        //    return new JsonResult(result);
-        //}
+            if (result.IsSucceeded) TempData[SuccessMessage] = result.Message;
+            return new JsonResult(result);
+        }
     }
 }
