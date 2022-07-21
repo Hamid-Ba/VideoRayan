@@ -2,9 +2,12 @@
 using Microsoft.Extensions.DependencyInjection;
 using VideoRayan.Application;
 using VideoRayan.Application.Contract.AccountAgg.Contracts;
+using VideoRayan.Application.Contract.CustomerAgg.Contracts;
 using VideoRayan.Domain.AccountAgg.Contracts;
+using VideoRayan.Domain.CustomerAgg.Contracts;
 using VideoRayan.Infrastructure.EfCore;
 using VideoRayan.Infrastructure.EfCore.Repositories.AccountAgg;
+using VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg;
 
 namespace VideoRayan.Infrastructure.Configuration;
 public static class VideoRayanBootstrapper
@@ -30,6 +33,13 @@ public static class VideoRayanBootstrapper
 
         services.AddTransient<IRolePermissionRepository, RolePermissionRepository>();
         services.AddTransient<IRolePermissionApplication, RolePermissionApplication>();
+
+        #endregion
+
+        #region Customer
+
+        services.AddTransient<ICustomerRepository, CustomerRepository>();
+        services.AddTransient<ICustomerApplication, CustomerApplication>();
 
         #endregion
     }

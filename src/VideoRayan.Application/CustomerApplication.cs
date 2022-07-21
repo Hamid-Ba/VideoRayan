@@ -47,7 +47,9 @@ namespace VideoRayan.Application
             if (_userRepository.Exists(u => (u.Mobile == command.Mobile || u.Email == command.Email) && u.Id != command.Id))
                 return result.Failed(ApplicationMessage.DuplicatedModel);
 
-            user.Edit(command.FirstName!, command.LastName!, command.Mobile!, command.Email!);
+            var logo = Uploader.ImageUploader(command.LogoFile!, "Customer", command.Logo!);
+
+            user.Edit(command.Mobile!, logo, command.FirstName!, command.LastName!, command.Email!);
             await _userRepository.SaveChangesAsync();
 
             return result.Succeeded();
@@ -70,6 +72,10 @@ namespace VideoRayan.Application
 
             return result.Succeeded();
         }
+
+        public async Task<CustomerDto> GetBy(Guid id) => await _userRepository.GetBy(id);
+
+        public async Task<IEnumerable<CustomerDto>> GetAll() => await _userRepository.GetAll();
 
         public async Task<EditCustomerDto> GetDetailForEditBy(Guid id) => await _userRepository.GetDetailForEditBy(id);
 

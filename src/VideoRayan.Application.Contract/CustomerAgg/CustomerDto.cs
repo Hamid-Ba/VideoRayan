@@ -10,7 +10,6 @@ namespace VideoRayan.Application.Contract.CustomerAgg
         public string? Title { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
-        public string? UserName { get; set; }
         public string? Mobile { get; set; }
         public string? PhoneCode { get; set; }
         public string? Logo { get; set; }
@@ -18,6 +17,7 @@ namespace VideoRayan.Application.Contract.CustomerAgg
         public string? Password { get; set; }
         public CustomerType Type { get; set; }
         public DateTime LoginExpireDate { get; set; }
+        public string? PersianCreationDate { get; set; }
     }
 
     public class CreateCustomerDto
@@ -37,9 +37,10 @@ namespace VideoRayan.Application.Contract.CustomerAgg
         public Guid Id { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
+        public string? Logo { get; set; }
+        public IFormFile? LogoFile { get; set; }
         public string? Mobile { get; set; }
         public string? Email { get; set; }
-        public CustomerType Type { get; set; }
     }
 
     public class EditByAdminCustomerDto 

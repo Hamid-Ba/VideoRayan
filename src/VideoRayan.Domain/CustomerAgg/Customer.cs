@@ -56,17 +56,19 @@ namespace VideoRayan.Domain.CustomerAgg
             Type = type;
         }
 
-        public static Customer Register(string phone, string phoneCode) => new("",phone, phoneCode,"","", "", "");
-
-        public void Edit(string firstName,string lastName,string mobile, string email)
+        public void Edit(string phone, string logo, string firstName, string lastName, string email)
         {
+            Mobile = phone;
+
+            if (!string.IsNullOrWhiteSpace(logo))
+                Logo = logo;
+
             FirstName = firstName;
             LastName = lastName;
             Email = email;
-            Mobile = mobile;
-
-            LastUpdateDate = DateTime.Now;
         }
+
+        public static Customer Register(string phone, string phoneCode) => new("",phone, phoneCode,"","", "", "");
 
         public void ControlActivation(bool isActive)
         {

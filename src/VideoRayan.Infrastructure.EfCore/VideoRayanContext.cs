@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VideoRayan.Domain.AccountAgg;
+using VideoRayan.Domain.CustomerAgg;
 using VideoRayan.Infrastructure.EfCore.Mapping.AccountAgg;
 
 namespace VideoRayan.Infrastructure.EfCore;
@@ -25,6 +26,12 @@ public class VideoRayanContext : DbContext
     public DbSet<Role> Roles { get; set; }
     public DbSet<Permission> Permissions { get; set; }
     public DbSet<RolePermission> RolePermissions { get; set; }
+
+    #endregion
+
+    #region CustomerAgg
+
+    public DbSet<Customer> Customers { get; set; }
 
     #endregion
 }

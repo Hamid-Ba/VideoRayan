@@ -4,6 +4,8 @@ namespace VideoRayan.Application.Contract.CustomerAgg.Contracts
 {
     public interface ICustomerApplication
 	{
+		Task<CustomerDto> GetBy(Guid id);
+		Task<IEnumerable<CustomerDto>> GetAll();
 		Task<EditCustomerDto> GetDetailForEditBy(Guid id);
 		Task<OperationResult> Edit(EditCustomerDto command);
 		Task<OperationResult> Create(CreateCustomerDto command);
