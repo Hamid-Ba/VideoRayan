@@ -20,13 +20,13 @@ namespace VideoRayan.Domain.CustomerAgg
         public List<Meeting>? Meetings { get; set; }
         public List<Audience>? Audiences { get; private set; }
 
-        public Customer(string title,string phone, string phoneCode,string logo, string firstName,string lastName, string email,CustomerType type = 0)
+        public Customer(string title,string mobile, string phoneCode,string logo, string firstName,string lastName, string email,CustomerType type = 0)
         {
-            Guard(phone);
+            Guard(mobile);
 
             Title = title;
 
-            Mobile = phone;
+            Mobile = mobile;
             PhoneCode = phoneCode;
 
             if (!string.IsNullOrWhiteSpace(logo))

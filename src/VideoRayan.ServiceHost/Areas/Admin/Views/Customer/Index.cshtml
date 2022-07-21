@@ -18,22 +18,22 @@
             @if (type == CustomerType.ORGANIZATION)
             {
                 <li class="active"> <a asp-controller="Customer" asp-action="Index" asp-route-type="@CustomerType.FREE">@ViewData["title"]</a> </li>
-                <li class="active">رایگان</li>
+                <li class="active">سازمانی</li>
             }
             else
             {
                 <li class="active"> <a asp-controller="Customer" asp-action="Index" asp-route-type="@CustomerType.ORGANIZATION">@ViewData["title"]</a> </li>
-                <li class="active">سازمانی</li>
+                <li class="active">رایگان</li>
             }
         </ol>
         <p class="pull-left">
             @if (type == CustomerType.ORGANIZATION)
             {
-                <a asp-controller="Customer" asp-action="Index" asp-route-type="@CustomerType.FREE">رایگان</a>
+                <a class="btn btn-primary" asp-controller="Customer" asp-action="Index" asp-route-type="@CustomerType.FREE">رایگان</a>
             }
             else
             {
-                <a asp-controller="Customer" asp-action="Index" asp-route-type="@CustomerType.ORGANIZATION">سازمانی</a>
+                <a class="btn btn-info" asp-controller="Customer" asp-action="Index" asp-route-type="@CustomerType.ORGANIZATION">سازمانی</a>
             }
         </p>
     </div>
@@ -60,7 +60,7 @@
 
                                     <th>نام کامل</th>
                                     <th>موبایل</th>
-                                    <td>وضعیت</td>
+                                    <th>وضعیت</th>
 
                                     <th>تاریخ ثبت</th>
 

@@ -94,7 +94,7 @@ void SeedDatabase()
         {
             string hashpassword = passwordHasher.Hash("123");
             //password: 123
-            Operator admin = new Operator(Guid.Parse("7b01f317-af04-4391-a6df-6ef754654ef3"), "حمید بلال زاده", "09151498722", hashpassword);
+            Operator admin = new Operator(Guid.Parse("056c5539-626f-4cea-9a1c-a793b5419d78"), "حمید بلال زاده", "09151498722", hashpassword);
 
             _context.Operators.Add(admin);
             _context.SaveChanges();
