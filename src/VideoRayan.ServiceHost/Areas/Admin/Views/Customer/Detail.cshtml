@@ -1,0 +1,102 @@
+﻿@using VideoRayan.Application.Contract.CustomerAgg
+@model CustomerDto
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 class="modal-title">مشخصات مشتری</h4>
+</div>
+
+<div class="modal-body">
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label">نام</label>
+                @if (string.IsNullOrWhiteSpace(Model.FirstName))
+                {
+                    <p class="badge badge-danger">وارد نشده</p>
+                }
+                else
+                {
+                    <p>@Model.FirstName</p>
+                }
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label">نام خانوادگی</label>
+                @if (string.IsNullOrWhiteSpace(Model.LastName))
+                {
+                    <p class="badge badge-danger">وارد نشده</p>
+                }
+                else
+                {
+                    <p>@Model.LastName</p>
+                }
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Mobile" class="control-label">شماره موبایل</label>
+                <p>@Model.Mobile</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        @if (Model.Type == Framework.Application.Enums.CustomerType.ORGANIZATION)
+        {
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label">ایمیل</label>
+                    @if (string.IsNullOrWhiteSpace(Model.Email))
+                    {
+                        <p class="badge badge-danger">وارد نشده</p>
+                    }
+                    else
+                    {
+                        <p>@Model.Email</p>
+                    }
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label">عنوان سازمانی</label>
+                    <p>@Model.Title</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="PersianCreationDate" class="control-label">تاریخ ثبت</label>
+                    <p>@Model.PersianCreationDate</p>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label">ایمیل</label>
+                    @if (string.IsNullOrWhiteSpace(Model.Email))
+                    {
+                        <p class="badge badge-danger">وارد نشده</p>
+                    }
+                    else
+                    {
+                        <p>@Model.Email</p>
+                    }
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="PersianCreationDate" class="control-label">تاریخ ثبت</label>
+                    <p>@Model.PersianCreationDate</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">بستن</button>
+</div>

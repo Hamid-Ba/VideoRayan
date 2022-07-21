@@ -1,10 +1,11 @@
 ﻿using Framework.Application.Enums;
 using Microsoft.AspNetCore.Mvc;
+using VideoRayan.Application.Contract.CustomerAgg;
 using VideoRayan.Application.Contract.CustomerAgg.Contracts;
 
 namespace VideoRayan.ServiceHost.Areas.Admin.Controllers
 {
-    public class CustomerController : Controller
+    public class CustomerController : AdminBaseController
     {
         private readonly ICustomerApplication _customerApplication;
 
@@ -16,5 +17,46 @@ namespace VideoRayan.ServiceHost.Areas.Admin.Controllers
             ViewBag.Type = type;
             return View(result);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Detail(Guid id) => PartialView(await _customerApplication.GetBy(id));
+
+        //[HttpGet]
+        //public async Task<IActionResult> ChangeStatus(Guid id)
+        //{
+        //    var result = await _customerApplication.ActiveOrDeactive(id);
+
+        //    if (result.IsSucceeded) TempData[SuccessMessage] = result.Message;
+
+        //    return new JsonResult(result);
+        //}
+
+        //[HttpGet]
+        //public IActionResult SendMessage(Guid id) => PartialView(new SendSmsCustomerDto() { Id = id });
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> SendMessage(SendSmsCustomerDto command)
+        //{
+        //    var result = await _customerApplication.SendMessage(command);
+
+        //    if (result.IsSucceeded) TempData[SuccessMessage] = result.Message;
+
+        //    return new JsonResult(result);
+        //}
+
+        //[HttpGet]
+        //public IActionResult Delete(Guid id) => PartialView(id);
+
+        //[HttpPost]
+        //[ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> PostDelete(Guid id)
+        //{
+        //    var result = await _customerApplication.Delete(id);
+
+        //    if (result.IsSucceeded) TempData[SuccessMessage] = result.Message;
+        //    return new JsonResult(result);
+        //}
     }
 }

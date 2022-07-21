@@ -84,4 +84,14 @@ namespace VideoRayan.Application.Contract.CustomerAgg
         [MaxLength(6)]
         public string? Token { get; set; }
     }
+
+    public class SendSmsCustomerDto
+    {
+        public Guid Id { get; set; }
+        
+        [Display(Name = "پیام")]
+        [Required(ErrorMessage = ValidationMessage.IsRequired)]
+        [MaxLength(500, ErrorMessage = "حداکثر تعداد کاراکتر مجاز {1} می باشد")]
+        public string? Message { get; set; }
+    }
 }
