@@ -159,6 +159,19 @@ namespace VideoRayan.Application
             return result.Succeeded();
         }
 
+        public async Task<OperationResult> SendMessage(SendSmsCustomerDto command)
+        {
+            OperationResult result = new();
+
+            var user = await _userRepository.GetEntityByIdAsync(command.Id);
+            if (user is null) return result.Failed(ApplicationMessage.UserNotExist);
+
+            //ToDo : Send Phone Code
+            _smsService.SendSms(user.Mobile!, command.Message!);
+
+            return result.Succeeded();
+        }
+
         //public async Task<(OperationResult, string)> VerifyRegister(AccessTokenDto command)
         //{
         //    OperationResult result = new();

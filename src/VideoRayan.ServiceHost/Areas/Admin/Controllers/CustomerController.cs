@@ -31,19 +31,19 @@ namespace VideoRayan.ServiceHost.Areas.Admin.Controllers
             return new JsonResult(result);
         }
 
-        //[HttpGet]
-        //public IActionResult SendMessage(Guid id) => PartialView(new SendSmsCustomerDto() { Id = id });
+        [HttpGet]
+        public IActionResult SendMessage(Guid id) => PartialView(new SendSmsCustomerDto() { Id = id });
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> SendMessage(SendSmsCustomerDto command)
-        //{
-        //    var result = await _customerApplication.SendMessage(command);
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SendMessage(SendSmsCustomerDto command)
+        {
+            var result = await _customerApplication.SendMessage(command);
 
-        //    if (result.IsSucceeded) TempData[SuccessMessage] = result.Message;
+            if (result.IsSucceeded) TempData[SuccessMessage] = result.Message;
 
-        //    return new JsonResult(result);
-        //}
+            return new JsonResult(result);
+        }
 
         //[HttpGet]
         //public IActionResult Delete(Guid id) => PartialView(id);
