@@ -21,15 +21,15 @@ namespace VideoRayan.ServiceHost.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Detail(Guid id) => PartialView(await _customerApplication.GetBy(id));
 
-        //[HttpGet]
-        //public async Task<IActionResult> ChangeStatus(Guid id)
-        //{
-        //    var result = await _customerApplication.ActiveOrDeactive(id);
+        [HttpGet]
+        public async Task<IActionResult> ChangeStatus(Guid id)
+        {
+            var result = await _customerApplication.ActiveOrDeactive(id);
 
-        //    if (result.IsSucceeded) TempData[SuccessMessage] = result.Message;
+            if (result.IsSucceeded) TempData[SuccessMessage] = result.Message;
 
-        //    return new JsonResult(result);
-        //}
+            return new JsonResult(result);
+        }
 
         //[HttpGet]
         //public IActionResult SendMessage(Guid id) => PartialView(new SendSmsCustomerDto() { Id = id });

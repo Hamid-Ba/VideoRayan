@@ -16,5 +16,6 @@ namespace VideoRayan.Application.Contract.CustomerAgg.Contracts
 		Task<OperationResult> LoginFirstStep(LoginCustomerDto command);
 		//Task<(OperationResult, string)> VerifyRegister(AccessTokenDto command);
 		Task<(OperationResult, string)> VerifyLoginRegister(AccessTokenDto command);
-	}
+        Task ActiveOrDeactive(Guid id);
+    }
 }
