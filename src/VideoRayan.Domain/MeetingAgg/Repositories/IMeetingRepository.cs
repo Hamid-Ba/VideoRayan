@@ -5,8 +5,8 @@ namespace VideoRayan.Domain.MeetingAgg.Repositories
 {
     public interface IMeetingRepository : IRepository<Meeting>
     {
-        Task<IEnumerable<MeetingDto>> GetAll();
         Task<MeetingDto> GetBy(Guid id);
         Task<EditMeetingDto> GetDetailForEditBy(Guid id);
+        Task<IEnumerable<MeetingDto>> GetAll(Guid cutomerId);
     }
 }

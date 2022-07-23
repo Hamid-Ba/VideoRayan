@@ -67,7 +67,7 @@ namespace VideoRayan.Application
             return result.Succeeded();
         }
 
-        public async Task<IEnumerable<MeetingDto>> GetAll() => await _meetingRepository.GetAll();
+        public async Task<IEnumerable<MeetingDto>> GetAll(Guid customeriId) => await _meetingRepository.GetAll(customeriId);
 
         public async Task<MeetingDto> GetBy(Guid id) => await _meetingRepository.GetBy(id);
 

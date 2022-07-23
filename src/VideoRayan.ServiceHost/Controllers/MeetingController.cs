@@ -11,14 +11,14 @@ namespace VideoRayan.ServiceHost.Controllers
 
         public MeetingController(IMeetingApplication meetingApplication) => _meetingApplication = meetingApplication;
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [HttpGet("{customerId}")]
+        public async Task<IActionResult> GetAll(Guid customerId)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var result = await _meetingApplication.GetAll();
+                    var result = await _meetingApplication.GetAll(customerId);
                     return Ok(result);
                 }
 

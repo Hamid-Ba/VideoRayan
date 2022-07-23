@@ -13,6 +13,8 @@ namespace VideoRayan.Application.Contract.MeetingAgg
         public bool IsInteractiveBoard { get; set; }
         public MeetingType Type { get; set; }
         public DateTime StartDateTime { get; set; }
+        public string? PersianCreationDate { get; set; }
+        public string? PersianStartDate { get; set; }
     }
 
     public class CreateMeetingDto
