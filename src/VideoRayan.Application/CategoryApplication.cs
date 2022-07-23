@@ -56,7 +56,7 @@ namespace VideoRayan.Application
             return result.Succeeded();
         }
 
-        public async Task<IEnumerable<CategoryDto>> GetAll() => await _categoryRepository.GetAll();
+        public async Task<IEnumerable<CategoryDto>> GetAll(Guid customerId) => await _categoryRepository.GetAll(customerId);
 
         public async Task<CategoryDto> GetBy(Guid id) => await _categoryRepository.GetBy(id);
 

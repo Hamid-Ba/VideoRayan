@@ -11,12 +11,12 @@ namespace VideoRayan.ServiceHost.Controllers
 
         public CategoryController(ICategoryApplication categoryApplication) => _categoryApplication = categoryApplication;
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [HttpGet("{customerId}")]
+        public async Task<IActionResult> GetAll(Guid customerId)
         {
             try
             {
-                var result = await _categoryApplication.GetAll();
+                var result = await _categoryApplication.GetAll(customerId);
                 return Ok(result);
             }
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }

@@ -18,6 +18,7 @@ namespace VideoRayan.Domain.CustomerAgg
         public DateTime LoginExpireDate { get; private set; }
 
         public List<Meeting>? Meetings { get; set; }
+        public List<Category>? Categories { get;private set; }
         public List<Audience>? Audiences { get; private set; }
 
         public Customer(string title,string mobile, string phoneCode,string logo, string firstName,string lastName, string email,CustomerType type = 0)

@@ -54,6 +54,9 @@ public static class VideoRayanBootstrapper
         services.AddTransient<IMeetingRepository, MeetingRepository>();
         services.AddTransient<IMeetingApplication, MeetingApplication>();
 
+        services.AddTransient<ICategoryRepository, CategoryRepository>();
+        services.AddTransient<ICategoryApplication, CategoryApplication>();
+
         #endregion
     }
 }
