@@ -41,6 +41,9 @@ public static class VideoRayanBootstrapper
         services.AddTransient<ICustomerRepository, CustomerRepository>();
         services.AddTransient<ICustomerApplication, CustomerApplication>();
 
+        services.AddTransient<IAudienceRepository, AudienceRepository>();
+        services.AddTransient<IAudienceApplication, AudienceApplication>();
+
         #endregion
     }
 }

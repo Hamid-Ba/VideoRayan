@@ -32,6 +32,7 @@ public class VideoRayanContext : DbContext
     #region CustomerAgg
 
     public DbSet<Customer> Customers { get; set; }
+    public DbSet<Audience> Audiences { get; set; }
 
     #endregion
 }

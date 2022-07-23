@@ -10,8 +10,8 @@ namespace VideoRayan.Infrastructure.EfCore.Mapping
         {
             builder.HasKey(k => new {k.MeetingId , k.AudienceId});
 
-            builder.HasOne(m => m.Meeting).WithMany(a => a.Audiences).HasForeignKey(f => f.AudienceId);
-            builder.HasOne(m => m.Audience).WithMany(a => a.Meetings).HasForeignKey(f => f.MeetingId);
+            builder.HasOne(m => m.Meeting).WithMany(a => a.Audiences).HasForeignKey(f => f.MeetingId);
+            builder.HasOne(m => m.Audience).WithMany(a => a.Meetings).HasForeignKey(f => f.AudienceId);
         }
     }
 }

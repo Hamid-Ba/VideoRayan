@@ -10,6 +10,7 @@ namespace VideoRayan.Domain.MeetingAgg
         public string Description { get; private set; }
 
         public Customer? Customer { get; private set; }
+        public List<Audience>? Audiences { get; private set; }
 
         public Category(Guid customerId,string title, string description)
         {

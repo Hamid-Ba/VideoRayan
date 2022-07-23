@@ -6,9 +6,12 @@ namespace VideoRayan.Application.Contract.CustomerAgg
     {
         public Guid UserId { get; set; }
         public Guid CategoryId { get; set; }
+        public string? CreatorName { get; set; }
+        public string? CategoryTitle { get; set; }
         public string? FullName { get; set; }
         public string? Mobile { get; set; }
         public string? Position { get; set; }
+        public string? PersianCreationDte { get; set; }
     }
 
     public class CreateAudienceDto
