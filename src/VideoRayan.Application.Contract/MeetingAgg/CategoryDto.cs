@@ -1,15 +1,16 @@
-﻿using System;
-namespace VideoRayan.Application.Contract.MeetingAgg
+﻿namespace VideoRayan.Application.Contract.MeetingAgg
 {
-	public class CategoryDto : DtoBase
+    public class CategoryDto : DtoBase
 	{
-		public string? Title { get; set; }
+        public Guid CustomerId { get; set; }
+        public string? Title { get; set; }
 		public string? Description { get; set; }
 	}
 
 	public class CreateCategoryDto
     {
-		public string? Title { get; set; }
+        public Guid CustomerId { get; set; }
+        public string? Title { get; set; }
 		public string? Description { get; set; }
 	}
 

@@ -10,7 +10,7 @@
         public const string NotExist = "اطلاعاتی با این مشخصات وجود ندارد";
         public const string UploadImage = "لطفا تصویر را وارد نمایید";
         public const string WrongFormat = "لطفا به فرمت مجاز را وارد نمایید";
-        public const string DoNotAccessToOtherStore = "شما به حساب دیگران دسترسی ندارید";
+        public const string DoNotAccessToOtherAccount = "شما به حساب دیگران دسترسی ندارید";
         public const string WrongPassword = "رمز عبور صحیح نمی باشد";
         public const string WrongStoreCode = "فروشگاهی با این کد وجود ندارد";
         public const string StoreOwnerHasAlreadyAStore = "فروشگاه این کاربر قبلا تایید شده است";

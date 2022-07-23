@@ -16,21 +16,22 @@ namespace VideoRayan.Application
         {
             OperationResult result = new();
 
-            if (_categoryRepository.Exists(c => c.Title == command.Title)) return result.Failed(ApplicationMessage.DuplicatedModel);
+            if (_categoryRepository.Exists(c => c.Title == command.Title && c.CustomerId == command.CustomerId)) return result.Failed(ApplicationMessage.DuplicatedModel);
             
-            var category = new Category(command.Title!, command.Description!);
+            var category = new Category(command.CustomerId,command.Title!, command.Description!);
             await _categoryRepository.AddEntityAsync(category);
             await _categoryRepository.SaveChangesAsync();
 
             return result.Succeeded();
         }
 
-        public async Task<OperationResult> Delete(Guid id)
+        public async Task<OperationResult> Delete(Guid id,Guid customerId)
         {
             OperationResult result = new();
 
             var category = await _categoryRepository.GetEntityByIdAsync(id);
             if (category is null) return result.Failed(ApplicationMessage.NotExist);
+            if (category.CustomerId != customerId) return result.Failed(ApplicationMessage.DoNotAccessToOtherAccount);
 
             category.Delete();
             await _categoryRepository.SaveChangesAsync();
@@ -45,7 +46,9 @@ namespace VideoRayan.Application
             var category = await _categoryRepository.GetEntityByIdAsync(command.Id);
 
             if (category is null) return result.Failed(ApplicationMessage.NotExist);
-            if (_categoryRepository.Exists(c => c.Title == command.Title && c.Id != command.Id)) return result.Failed(ApplicationMessage.DuplicatedModel);
+            if (category.CustomerId != command.CustomerId) return result.Failed(ApplicationMessage.DoNotAccessToOtherAccount);
+            if (_categoryRepository.Exists(c => (c.Title == command.Title && c.CustomerId == command.CustomerId) && c.Id != command.Id)) 
+                return result.Failed(ApplicationMessage.DuplicatedModel);
 
             category.Edit(command.Title!, command.Description!);
             await _categoryRepository.SaveChangesAsync();
