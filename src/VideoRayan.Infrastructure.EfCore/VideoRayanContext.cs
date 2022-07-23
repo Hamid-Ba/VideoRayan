@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using VideoRayan.Domain;
 using VideoRayan.Domain.AccountAgg;
 using VideoRayan.Domain.CustomerAgg;
 using VideoRayan.Domain.MeetingAgg;
@@ -47,4 +48,6 @@ public class VideoRayanContext : DbContext
     public DbSet<Category> Categories { get; set; }
 
     #endregion
+
+    public DbSet<AudienceMeeting> AudienceMeetings { get; set; }
 }

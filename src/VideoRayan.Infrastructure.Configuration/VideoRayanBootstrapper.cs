@@ -8,6 +8,7 @@ using VideoRayan.Domain.AccountAgg.Contracts;
 using VideoRayan.Domain.CustomerAgg.Contracts;
 using VideoRayan.Domain.MeetingAgg.Repositories;
 using VideoRayan.Infrastructure.EfCore;
+using VideoRayan.Infrastructure.EfCore.Repositories;
 using VideoRayan.Infrastructure.EfCore.Repositories.AccountAgg;
 using VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg;
 using VideoRayan.Infrastructure.EfCore.Repositories.MeetingAgg;
@@ -58,5 +59,8 @@ public static class VideoRayanBootstrapper
         services.AddTransient<ICategoryApplication, CategoryApplication>();
 
         #endregion
+
+        services.AddTransient<IAudienceMeetingRepository, AudienceMeetingRepository>();
+        services.AddTransient<IAudienceMeetingApplication, AudienceMeetingApplication>();
     }
 }
