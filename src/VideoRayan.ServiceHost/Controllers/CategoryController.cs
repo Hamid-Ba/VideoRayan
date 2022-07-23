@@ -34,7 +34,7 @@ namespace VideoRayan.ServiceHost.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateCategoryDto command)
+        public async Task<IActionResult> Create([FromBody] CreateCategoryDto command)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace VideoRayan.ServiceHost.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Edit(EditCategoryDto command)
+        public async Task<IActionResult> Edit([FromBody] EditCategoryDto command)
         {
             try
             {

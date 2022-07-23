@@ -35,7 +35,7 @@ namespace VideoRayan.ServiceHost.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateAudienceDto command)
+        public async Task<IActionResult> Create([FromBody]CreateAudienceDto command)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace VideoRayan.ServiceHost.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Edit(EditAudienceDto command)
+        public async Task<IActionResult> Edit([FromBody] EditAudienceDto command)
         {
             try
             {
