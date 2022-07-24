@@ -187,6 +187,9 @@ namespace VideoRayan.Application
 
         public async Task<string> GetPhone(Guid id) => await _userRepository.GetPhone(id);
 
+        public async Task<CustomerType> GetTypeBy(Guid id) => await _userRepository.GetTypeBy(id);
+        
+
         //public async Task<(OperationResult, string)> VerifyRegister(AccessTokenDto command)
         //{
         //    OperationResult result = new();

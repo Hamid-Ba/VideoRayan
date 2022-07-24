@@ -63,5 +63,8 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
         }).AsNoTracking().FirstOrDefaultAsync(c => c.Id == id))!;
 
         public async Task<string> GetPhone(Guid id) => (await _context.Customers.FindAsync(id))!.Mobile!;
+
+        public async Task<CustomerType> GetTypeBy(Guid id) => (await _context.Customers.FindAsync(id))!.Type;
+        
     }
 }

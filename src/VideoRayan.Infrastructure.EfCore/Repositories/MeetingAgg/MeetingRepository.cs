@@ -26,7 +26,8 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.MeetingAgg
                 PersianCreationDate = m.CreationDate.ToFarsi(),
                 PersianStartDate = m.StartDateTime.ToFarsi(),
                 Title = m.Title,
-                Type = m.Type
+                Type = m.Type,
+                AudienceCount = m.Audiences!.Count
             }).AsNoTracking().ToListAsync();
         
 

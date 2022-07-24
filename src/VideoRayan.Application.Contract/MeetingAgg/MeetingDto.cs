@@ -11,6 +11,7 @@ namespace VideoRayan.Application.Contract.MeetingAgg
         public bool IsRecord { get; set; }
         public bool CanTalk { get; set; }
         public bool IsInteractiveBoard { get; set; }
+        public int AudienceCount { get; set; }
         public MeetingType Type { get; set; }
         public DateTime StartDateTime { get; set; }
         public string? PersianCreationDate { get; set; }

@@ -1,0 +1,81 @@
+﻿@using VideoRayan.Application.Contract.MeetingAgg
+@using  Framework.Application
+@model IEnumerable<MeetingDto>
+
+@{
+    ViewData["Title"] = "جلسات";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    int count = 1;
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="page-title pull-right"></h4>
+        <ol class="breadcrumb pull-right">
+            <li><a asp-area="Admin" asp-controller="Home" asp-action="Index">ویدئو رایان</a></li>
+            <li><a href="#showmodal=@Url.Action("Detail", "Customer", new {id = @ViewBag.CustomerId})"></a></li>
+            <li class="active">@ViewData["Title"]</li>
+        </ol>
+        </p>
+    </div>
+</div>
+
+<div class="row" id="ProductCategoriesDiv">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">@ViewData["Title"]</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 makeTableResponsive">
+                        <table id="datatable" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>موضوع</th>
+                                    <th>نوع</th>
+                                    <th>تعداد اعضاء</th>
+                                    <th>تاریخ ایجاد</th>
+                                    <th>عملیات</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                @foreach (var entity in Model)
+                                {
+                                    <tr class="text-center">
+                                        <td>@(count++)</td>
+                                        <td>@entity.Title</td>
+                                        <td>@entity.Type.GetEnumName()</td>
+                                        <td>@entity.AudienceCount</td>
+                                        <td>@entity.PersianCreationDate</td>
+
+                                        <td style="text-align: center;">
+
+                                            <a class="btn btn-info pull-right m-rl-5"
+                                               href="#showmodal=@Url.Action("Detail", "Meeting", new {id = entity.Id})">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/AdminTheme/assets/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/AdminTheme/assets/datatables/dataTables.bootstrap.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#datatable').dataTable();
+        });
+    </script>
+}
