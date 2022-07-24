@@ -11,7 +11,7 @@ namespace VideoRayan.Application.Contract.CustomerAgg
         public string? FullName { get; set; }
         public string? Mobile { get; set; }
         public string? Position { get; set; }
-        public string? PersianCreationDte { get; set; }
+        public string? PersianCreationDate { get; set; }
     }
 
     public class CreateAudienceDto
