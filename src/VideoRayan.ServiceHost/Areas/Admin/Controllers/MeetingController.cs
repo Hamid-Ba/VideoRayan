@@ -22,5 +22,7 @@ namespace VideoRayan.ServiceHost.Areas.Admin.Controllers
             var type = await _customerApplication.GetTypeBy(customerId);
             return View(await _customerApplication.GetAll(type));
         }
+
+        public async Task<IActionResult> Detail(Guid id) => PartialView(await _meetingApplication.GetBy(id));
     }
 }

@@ -29,22 +29,24 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.MeetingAgg
                 Type = m.Type,
                 AudienceCount = m.Audiences!.Count
             }).AsNoTracking().ToListAsync();
-        
+
 
         public async Task<MeetingDto> GetBy(Guid id) => (await _context.Meetings.Select(m => new MeetingDto
-            {
-                Id = m.Id,
-                CanTalk = m.CanTalk,
-                UserId = m.UserId,
-                IsInteractiveBoard = m.IsInteractiveBoard,
-                IsLive = m.IsLive,
-                IsMute = m.IsMute,
-                IsRecord = m.IsRecord,
-                PersianCreationDate = m.CreationDate.ToFarsi(),
-                PersianStartDate = m.StartDateTime.ToFarsi(),
-                Title = m.Title,
-                Type = m.Type
-            }).AsNoTracking().FirstOrDefaultAsync(m => m.Id == id))!;
+        {
+            Id = m.Id,
+            CanTalk = m.CanTalk,
+            UserId = m.UserId,
+            IsInteractiveBoard = m.IsInteractiveBoard,
+            IsLive = m.IsLive,
+            IsMute = m.IsMute,
+            IsRecord = m.IsRecord,
+            PersianCreationDate = m.CreationDate.ToFarsi(),
+            PersianStartDate = m.StartDateTime.ToFarsi(),
+            Title = m.Title,
+            Type = m.Type,
+            StartTime = m.StartDateTime.GetTime(),
+            StartDate = m.StartDateTime.ToFarsi()
+        }).AsNoTracking().FirstOrDefaultAsync(m => m.Id == id))!;
 
         public async Task<EditMeetingDto> GetDetailForEditBy(Guid id) => (await _context.Meetings.Select(m => new EditMeetingDto
         {

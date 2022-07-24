@@ -16,6 +16,8 @@ namespace VideoRayan.Application.Contract.MeetingAgg
         public DateTime StartDateTime { get; set; }
         public string? PersianCreationDate { get; set; }
         public string? PersianStartDate { get; set; }
+        public string? StartDate { get; set; }
+        public string? StartTime { get; set; }
     }
 
     public class CreateMeetingDto

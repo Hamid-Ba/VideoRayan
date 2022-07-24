@@ -1,0 +1,123 @@
+﻿@using Framework.Application
+@using VideoRayan.Application.Contract.MeetingAgg
+@model MeetingDto
+
+@{
+    ViewData["Title"] = "جزئیات";
+}
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 class="modal-title"> @ViewData["Title"] @Model.Title</h4>
+</div>
+
+<div class="modal-body">
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Type" class="control-label "></label>
+                    <p> @Model.Type.GetEnumName() </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="CanTalk" class="control-label">همه صحبت کنند؟</label>
+                    <p>
+                        @if (Model.CanTalk)
+                        {
+                            <span class="text-success"><i class="fa fa-check"></i></span>
+                        }
+                        else
+                        {
+                            <span class="text-danger"><i class="fa fa-times"></i></span>
+                        }
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="IsLive" class="control-label ">آیا زنده است؟</label>
+                    <p>
+                        @if (Model.IsLive)
+                        {
+                            <span class="text-success"><i class="fa fa-check"></i></span>
+                        }
+                        else
+                        {
+                            <span class="text-danger"><i class="fa fa-times"></i></span>
+                        }
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="IsMute" class="control-label ">همه ساکت باشند؟</label>
+                    <p>
+                        @if (Model.IsMute)
+                        {
+                            <span class="text-success"><i class="fa fa-check"></i></span>
+                        }
+                        else
+                        {
+                            <span class="text-danger"><i class="fa fa-times"></i></span>
+                        }
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="IsRecord" class="control-label ">جلسه ظبط شود؟</label>
+                    <p>
+                        @if (Model.IsRecord)
+                        {
+                            <span class="text-success"><i class="fa fa-check"></i></span>
+                        }
+                        else
+                        {
+                            <span class="text-danger"><i class="fa fa-times"></i></span>
+                        }
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="IsInteractiveBoard" class="control-label ">جلسه تخته هوشمند دارد؟</label>
+                    <p>
+                        @if (Model.IsInteractiveBoard)
+                        {
+                            <span class="text-success"><i class="fa fa-check"></i></span>
+                        }
+                        else
+                        {
+                            <span class="text-danger"><i class="fa fa-times"></i></span>
+                        }
+                    </p>
+                </div>
+            </div>
+        </div>
+
+         <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="StartDate" class="control-label ">تاریخ برگزاری</label>
+                    <p>@Model.StartDate</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="StartTime" class="control-label ">ساعت برگزاری</label>
+                    <p>@Model.StartTime</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">بستن</button>
+    </div>
+</div>
