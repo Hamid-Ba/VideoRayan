@@ -102,6 +102,10 @@
                                                 <a class="btn btn-success" asp-controller="Customer" asp-action="ChangeStatus" asp-route-id="@entity.Id">فعال</a>
                                             }
 
+                                            <a class="btn btn-secondary" asp-controller="Category" asp-action="Index" asp-route-customerId="@entity.Id">گروه ها</a>
+                                            <a class="btn btn-secondary" asp-controller="Audience" asp-action="Index" asp-route-customerId="@entity.Id">مخاطبان</a>
+                                            <a class="btn btn-secondary" asp-controller="Meeting" asp-action="Index" asp-route-customerId="@entity.Id">جلسات</a>
+
                                             <a class="btn btn-info pull-right m-rl-5"
                                            href="#showmodal=@Url.Action("Detail", "Customer", new {id = entity.Id})">
                                                 <i class="fa fa-detail"></i>

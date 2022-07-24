@@ -35,13 +35,15 @@ namespace VideoRayan.Application
             if (_audienceRepository.Exists(a => a.Mobile == command.Mobile && a.UserId == command.UserId && command.Id != a.Id))
                 return result.Failed(ApplicationMessage.DuplicatedMobile);
 
+            if(audience.UserId != command.UserId) return result.Failed(ApplicationMessage.DoNotAccessToOtherAccount);
+
             audience.Edit(command.CategoryId, command.FullName, command.Mobile, command.Position);
             await _audienceRepository.SaveChangesAsync();
 
             return result.Succeeded();
         }
 
-        public async Task<IEnumerable<AudienceDto>> GetAll(string categoryName) => await _audienceRepository.GetAll(categoryName);
+        public async Task<IEnumerable<AudienceDto>> GetAll(Guid customerId,string categoryName) => await _audienceRepository.GetAll(customerId,categoryName);
 
         public async Task<AudienceDto> GetBy(Guid id) => await _audienceRepository.GetBy(id);
 

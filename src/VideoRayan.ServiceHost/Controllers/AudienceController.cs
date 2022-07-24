@@ -12,12 +12,12 @@ namespace VideoRayan.ServiceHost.Controllers
         public AudienceController(IAudienceApplication audienceApplication) => _audienceApplication = audienceApplication;
 
 
-        [HttpGet("{categoryName}")]
-        public async Task<IActionResult> GetAll(string categoryName)
+        [HttpGet("{customerId}/{categoryName}")]
+        public async Task<IActionResult> GetAll(Guid customerId, string categoryName)
         {
             try
             {
-                var result = await _audienceApplication.GetAll(categoryName);
+                var result = await _audienceApplication.GetAll(customerId, categoryName);
                 return Ok(result);
             }
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
@@ -35,7 +35,7 @@ namespace VideoRayan.ServiceHost.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody]CreateAudienceDto command)
+        public async Task<IActionResult> Create([FromBody] CreateAudienceDto command)
         {
             try
             {

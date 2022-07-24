@@ -5,6 +5,7 @@ namespace VideoRayan.Application.Contract.CustomerAgg.Contracts
 {
     public interface ICustomerApplication
 	{
+		Task<string> GetPhone(Guid id);
 		Task<CustomerDto> GetBy(Guid id);
 		Task<OperationResult> Delete(Guid id);
         Task<OperationResult> ActiveOrDeactive(Guid id);

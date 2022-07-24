@@ -185,6 +185,8 @@ namespace VideoRayan.Application
             return result.Succeeded();
         }
 
+        public async Task<string> GetPhone(Guid id) => await _userRepository.GetPhone(id);
+
         //public async Task<(OperationResult, string)> VerifyRegister(AccessTokenDto command)
         //{
         //    OperationResult result = new();

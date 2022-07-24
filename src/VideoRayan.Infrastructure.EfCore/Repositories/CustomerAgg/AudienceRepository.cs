@@ -13,8 +13,8 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
 
         public AudienceRepository(VideoRayanContext context) : base(context) => _context = context;
 
-        public async Task<IEnumerable<AudienceDto>> GetAll(string categoryName) => await _context.Audiences.Include(c => c.Category).Include(c => c.User)
-            .Where(c => c.Category!.Title.Contains(categoryName)).Select(c => new AudienceDto
+        public async Task<IEnumerable<AudienceDto>> GetAll(Guid customerId, string categoryName) => await _context.Audiences.Include(c => c.Category).Include(c => c.User)
+            .Where(c => c.UserId == customerId && c.Category!.Title.Contains(categoryName)).Select(c => new AudienceDto
             {
                 Id = c.Id,
                 CategoryId = c.CategoryId,
@@ -40,7 +40,6 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
                 Position = c.Position,
                 CreatorName = $"{c.User!.FirstName} {c.User!.LastName}"
             }).AsNoTracking().FirstOrDefaultAsync(c => c.Id == id))!;
-
 
         public async Task<EditAudienceDto> GetDetailForEditBy(Guid id) => (await _context.Audiences.Select(c => new EditAudienceDto
         {

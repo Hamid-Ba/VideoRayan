@@ -32,12 +32,14 @@ namespace VideoRayan.Application
             return result.Succeeded();
         }
 
-        public async Task<OperationResult> Delete(Guid id)
+        public async Task<OperationResult> Delete(Guid customerId,Guid id)
         {
             OperationResult result = new();
 
             var meeting = await _meetingRepository.GetEntityByIdAsync(id);
+            
             if (meeting is null) return result.Failed(ApplicationMessage.NotExist);
+            if (meeting.UserId != customerId) return result.Failed(ApplicationMessage.DoNotAccessToOtherAccount);
 
             meeting.Delete();
             await _meetingRepository.SaveChangesAsync();
@@ -59,6 +61,8 @@ namespace VideoRayan.Application
 
             if (_meetingRepository.Exists(m => m.StartDateTime == compliteDate && m.UserId == command.UserId && m.Id != command.Id))
                 return result.Failed(ApplicationMessage.DuplicatedMeetingTime);
+
+            if (meeting.UserId != command.UserId) return result.Failed(ApplicationMessage.DoNotAccessToOtherAccount);
 
             meeting.Edit(command.Title!,command.IsLive,command.IsMute,command.IsRecord,command.CanTalk,command.IsInteractiveBoard,
                 command.Type, compliteDate);
