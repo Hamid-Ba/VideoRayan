@@ -1,5 +1,4 @@
-﻿using System;
-using Framework.Domain;
+﻿using Framework.Domain;
 using VideoRayan.Application.Contract.CustomerAgg;
 
 namespace VideoRayan.Domain.CustomerAgg.Contracts
@@ -8,6 +7,7 @@ namespace VideoRayan.Domain.CustomerAgg.Contracts
     {
         Task<AudienceDto> GetBy(Guid id);
         Task<EditAudienceDto> GetDetailForEditBy(Guid id);
+        Task<IEnumerable<AudienceDto>> GetAllBy(Guid meetingId);
         Task<IEnumerable<AudienceDto>> GetAll(Guid customerId, string categoryName);
     }
 }

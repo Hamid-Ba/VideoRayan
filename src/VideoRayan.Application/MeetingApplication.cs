@@ -1,6 +1,8 @@
 ﻿using Framework.Application;
+using VideoRayan.Application.Contract.CustomerAgg;
 using VideoRayan.Application.Contract.MeetingAgg;
 using VideoRayan.Application.Contract.MeetingAgg.Contracts;
+using VideoRayan.Domain.CustomerAgg.Contracts;
 using VideoRayan.Domain.MeetingAgg;
 using VideoRayan.Domain.MeetingAgg.Repositories;
 
@@ -9,8 +11,13 @@ namespace VideoRayan.Application
     public class MeetingApplication : IMeetingApplication
     {
         private readonly IMeetingRepository _meetingRepository;
+        private readonly IAudienceRepository _audienceRepository;
 
-        public MeetingApplication(IMeetingRepository meetingRepository) => _meetingRepository = meetingRepository;
+        public MeetingApplication(IMeetingRepository meetingRepository, IAudienceRepository audienceRepository)
+        {
+            _meetingRepository = meetingRepository;
+            _audienceRepository = audienceRepository;
+        }
 
         public async Task<OperationResult> Create(CreateMeetingDto command)
         {
@@ -72,6 +79,8 @@ namespace VideoRayan.Application
         }
 
         public async Task<IEnumerable<MeetingDto>> GetAll(Guid customeriId) => await _meetingRepository.GetAll(customeriId);
+
+        public async Task<IEnumerable<AudienceDto>> GetAllBy(Guid id) => await _audienceRepository.GetAllBy(meetingId : id);
 
         public async Task<MeetingDto> GetBy(Guid id) => await _meetingRepository.GetBy(id);
 

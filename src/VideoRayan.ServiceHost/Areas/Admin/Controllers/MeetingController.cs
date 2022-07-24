@@ -24,5 +24,7 @@ namespace VideoRayan.ServiceHost.Areas.Admin.Controllers
         }
 
         public async Task<IActionResult> Detail(Guid id) => PartialView(await _meetingApplication.GetBy(id));
+
+        public async Task<IActionResult> Participants(Guid id) => View(await _meetingApplication.GetAllBy(id));
     }
 }

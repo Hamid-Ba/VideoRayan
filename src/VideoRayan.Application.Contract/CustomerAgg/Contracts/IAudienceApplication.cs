@@ -1,9 +1,8 @@
-﻿using System;
-using Framework.Application;
+﻿using Framework.Application;
 
 namespace VideoRayan.Application.Contract.CustomerAgg.Contracts
 {
-	public interface IAudienceApplication
+    public interface IAudienceApplication
 	{
 		Task<AudienceDto> GetBy(Guid id);
 		Task<EditAudienceDto> GetDetailForEditBy(Guid id);
