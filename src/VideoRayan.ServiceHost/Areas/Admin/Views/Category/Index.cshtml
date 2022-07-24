@@ -12,7 +12,7 @@
         <h4 class="page-title pull-right"></h4>
         <ol class="breadcrumb pull-right">
             <li><a asp-area="Admin" asp-controller="Home" asp-action="Index">ویدئو رایان</a></li>
-            <li><a href="#showmodal=@Url.Action("Detail", "Customer", new {id = @ViewBag.CustomerId})"></a></li>
+            <li><a href="#showmodal=@Url.Action("Detail", "Customer", new {id = @ViewBag.CustomerId})">@ViewBag.CustomerPhone</a></li>
             <li class="active">گروه ها</li>
         </ol>
         </p>
