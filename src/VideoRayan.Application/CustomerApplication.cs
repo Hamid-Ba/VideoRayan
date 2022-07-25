@@ -95,8 +95,8 @@ namespace VideoRayan.Application
             var phoneCode = Guid.NewGuid().ToString().Substring(0, 6);
 
             //ToDo : Send Phone Code
-            var smsMessage = $"کاربر گرامی با شماره موبایل {command.Phone},\nکد تایید شما : {phoneCode} می باشد";
-            _smsService.SendSms(command.Phone!, smsMessage);
+            //var smsMessage = $"کاربر گرامی با شماره موبایل {command.Phone},\nکد تایید شما : {phoneCode} می باشد";
+            //_smsService.SendSms(command.Phone!, smsMessage);
 
             user.ChangePhoneCode(phoneCode);
             await _userRepository.SaveChangesAsync();
@@ -114,8 +114,8 @@ namespace VideoRayan.Application
             var user = Customer.Register(command.Phone!, phoneCode);
 
             //ToDo : Send Phone Code
-            var smsMessage = $"کاربر گرامی با شماره موبایل {command.Phone},\nکد تایید شما : {phoneCode} می باشد";
-            _smsService.SendSms(command.Phone!, smsMessage);
+            //var smsMessage = $"کاربر گرامی با شماره موبایل {command.Phone},\nکد تایید شما : {phoneCode} می باشد";
+            //_smsService.SendSms(command.Phone!, smsMessage);
 
             await _userRepository.AddEntityAsync(user);
             await _userRepository.SaveChangesAsync();

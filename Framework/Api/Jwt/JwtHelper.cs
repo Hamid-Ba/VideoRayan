@@ -16,7 +16,7 @@ namespace Framework.Api.Jwt
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
 
-            var key = Encoding.ASCII.GetBytes(_configuration.GetSection("JwtConfig").GetSection("Secret").Value);
+            var key = Encoding.ASCII.GetBytes(_configuration.GetSection("JWT").GetSection("Secret").Value);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
