@@ -28,7 +28,7 @@ namespace VideoRayan.ServiceHost.Areas.Admin.Controllers
 
             if (result.IsSucceeded) TempData[SuccessMessage] = result.Message;
 
-            return new JsonResult(result);
+            return RedirectToAction("Index");
         }
 
         [HttpGet]

@@ -20,7 +20,7 @@ namespace VideoRayan.ServiceHost.Areas.Admin.Controllers
             ViewBag.CustomerId = customerId;
             ViewBag.CustomerPhone = await _customerApplication.GetPhone(customerId);
             var type = await _customerApplication.GetTypeBy(customerId);
-            return View(await _customerApplication.GetAll(type));
+            return View(await _meetingApplication.GetAll(customerId));
         }
 
         public async Task<IActionResult> Detail(Guid id) => PartialView(await _meetingApplication.GetBy(id));

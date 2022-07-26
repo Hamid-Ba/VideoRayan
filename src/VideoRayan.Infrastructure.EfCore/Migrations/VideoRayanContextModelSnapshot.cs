@@ -61,7 +61,7 @@ namespace VideoRayan.Infrastructure.EfCore.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("Operators");
+                    b.ToTable("Operators", (string)null);
                 });
 
             modelBuilder.Entity("VideoRayan.Domain.AccountAgg.Permission", b =>
@@ -77,7 +77,7 @@ namespace VideoRayan.Infrastructure.EfCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Permissions");
+                    b.ToTable("Permissions", (string)null);
                 });
 
             modelBuilder.Entity("VideoRayan.Domain.AccountAgg.Role", b =>
@@ -109,7 +109,7 @@ namespace VideoRayan.Infrastructure.EfCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("VideoRayan.Domain.AccountAgg.RolePermission", b =>
@@ -124,7 +124,7 @@ namespace VideoRayan.Infrastructure.EfCore.Migrations
 
                     b.HasIndex("PermissionId");
 
-                    b.ToTable("RolePermissions");
+                    b.ToTable("RolePermissions", (string)null);
                 });
 
             modelBuilder.Entity("VideoRayan.Domain.AudienceMeeting", b =>
@@ -139,7 +139,7 @@ namespace VideoRayan.Infrastructure.EfCore.Migrations
 
                     b.HasIndex("AudienceId");
 
-                    b.ToTable("AudienceMeetings");
+                    b.ToTable("AudienceMeetings", (string)null);
                 });
 
             modelBuilder.Entity("VideoRayan.Domain.CustomerAgg.Audience", b =>
@@ -187,7 +187,7 @@ namespace VideoRayan.Infrastructure.EfCore.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Audiences");
+                    b.ToTable("Audiences", (string)null);
                 });
 
             modelBuilder.Entity("VideoRayan.Domain.CustomerAgg.Customer", b =>
@@ -246,7 +246,7 @@ namespace VideoRayan.Infrastructure.EfCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("VideoRayan.Domain.MeetingAgg.Category", b =>
@@ -284,7 +284,7 @@ namespace VideoRayan.Infrastructure.EfCore.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("VideoRayan.Domain.MeetingAgg.Meeting", b =>
@@ -338,7 +338,7 @@ namespace VideoRayan.Infrastructure.EfCore.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Meetings");
+                    b.ToTable("Meetings", (string)null);
                 });
 
             modelBuilder.Entity("VideoRayan.Domain.AccountAgg.Operator", b =>
