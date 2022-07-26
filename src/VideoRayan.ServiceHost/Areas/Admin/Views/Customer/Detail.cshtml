@@ -15,7 +15,7 @@
                 <label asp-for="FirstName" class="control-label">نام</label>
                 @if (string.IsNullOrWhiteSpace(Model.FirstName))
                 {
-                    <p class="badge badge-danger">وارد نشده</p>
+                    <p><span class="badge badge-danger">وارد نشده</span></p>
                 }
                 else
                 {
@@ -28,7 +28,7 @@
                 <label asp-for="LastName" class="control-label">نام خانوادگی</label>
                 @if (string.IsNullOrWhiteSpace(Model.LastName))
                 {
-                    <p class="badge badge-danger">وارد نشده</p>
+                    <p><span class="badge badge-danger">وارد نشده</span></p>
                 }
                 else
                 {
@@ -52,7 +52,7 @@
                     <label asp-for="Email" class="control-label">ایمیل</label>
                     @if (string.IsNullOrWhiteSpace(Model.Email))
                     {
-                        <p class="badge badge-danger">وارد نشده</p>
+                        <p><span class="badge badge-danger">وارد نشده</span></p>
                     }
                     else
                     {
@@ -80,7 +80,7 @@
                     <label asp-for="Email" class="control-label">ایمیل</label>
                     @if (string.IsNullOrWhiteSpace(Model.Email))
                     {
-                        <p class="badge badge-danger">وارد نشده</p>
+                        <p><span class="badge badge-danger">وارد نشده</span></p>
                     }
                     else
                     {

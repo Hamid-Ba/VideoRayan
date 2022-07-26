@@ -5,7 +5,7 @@
 @{
     ViewData["Title"] = "مشتریان";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
-    var count = 0;
+    var count = 1;
     var type = ViewBag.Type as CustomerType?;
 }
 
@@ -82,16 +82,16 @@
                                         <td>
                                             @if (entity.IsActive)
                                             {
-                                            <i class="btn btn-success fa fa-tick"></i>
+                                            <i class="text text-success fa fa-check"></i>
                                             }
                                             else
                                             {
-                                            <i class="btn btn-danger fa fa-close"></i>
+                                            <i class="text text-danger fa fa-close"></i>
                                             }
                                         </td>
                                         <td>@entity.PersianCreationDate</td>
 
-                                        <td style="text-align: center;">
+                                        <td style="text-align: right;">
 
                                             @if (entity.IsActive)
                                             {
@@ -113,7 +113,7 @@
 
                                             <a class="btn btn-primary pull-right m-rl-5"
                                            href="#showmodal=@Url.Action("SendMessage", "Customer", new {id = entity.Id})">
-                                                <i class="fa fa-email"></i>
+                                                <i class="fa fa-envelope-o"></i>
                                             </a>
                                         </td>
                                     </tr>
