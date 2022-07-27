@@ -23,7 +23,7 @@ namespace VideoRayan.ServiceHost.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Edit([FromBody]EditCustomerDto command)
+        public async Task<IActionResult> Edit([FromForm]EditCustomerDto command)
         {
             try
             {

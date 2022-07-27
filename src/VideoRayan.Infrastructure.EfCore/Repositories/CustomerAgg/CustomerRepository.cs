@@ -37,6 +37,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
             Email = c.Email,
             Title = c.Title,
             Type = c.Type,
+            PhoneCode = c.PhoneCode,
             PersianCreationDate = c.CreationDate.ToFarsi(),
         }).AsNoTracking().FirstOrDefaultAsync(c => c.Id == id))!;
 
