@@ -27,6 +27,9 @@
             }
         </ol>
         <p class="pull-left">
+
+            <a class="btn btn-success" href="#showmodal=@Url.Action("Create", "Customer")">ایجاد اپراتور جدید</a>
+
             @if (type == CustomerType.ORGANIZATION)
             {
                 <a class="btn btn-primary" asp-controller="Customer" asp-action="Index" asp-route-type="@CustomerType.FREE">رایگان</a>
@@ -82,11 +85,11 @@
                                         <td>
                                             @if (entity.IsActive)
                                             {
-                                            <i class="text text-success fa fa-check"></i>
+                                                <i class="text text-success fa fa-check"></i>
                                             }
                                             else
                                             {
-                                            <i class="text text-danger fa fa-close"></i>
+                                                <i class="text text-danger fa fa-close"></i>
                                             }
                                         </td>
                                         <td>@entity.PersianCreationDate</td>
@@ -109,6 +112,11 @@
                                             <a class="btn btn-info pull-right m-rl-5"
                                            href="#showmodal=@Url.Action("Detail", "Customer", new {id = entity.Id})">
                                                 <i class="fa fa-eye"></i>
+                                            </a>
+
+                                            <a class="btn btn-warning pull-right m-rl-5"
+                                           href="#showmodal=@Url.Action("Edit", "Customer", new {id = entity.Id})">
+                                                <i class="fa fa-edit"></i>
                                             </a>
 
                                             <a class="btn btn-primary pull-right m-rl-5"
