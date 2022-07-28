@@ -14,7 +14,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
 
         public CustomerRepository(VideoRayanContext context) : base(context) => _context = context;
 
-        public async Task<IEnumerable<CustomerDto>> GetAll(CustomerType type = CustomerType.ORGANIZATION) => await _context.Customers.Where(c => c.Type == type).Select(c => new CustomerDto
+        public async Task<IEnumerable<CustomerDto>> GetAll(CustomerType type) => await _context.Customers.Where(c => c.Type == type).Select(c => new CustomerDto
         {
             Id = c.Id,
             FirstName = c.FirstName,

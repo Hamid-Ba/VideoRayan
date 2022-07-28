@@ -11,7 +11,7 @@ namespace VideoRayan.ServiceHost.Areas.Admin.Controllers
 
         public CustomerController(ICustomerApplication customerApplication) => _customerApplication = customerApplication;
 
-        public async Task<IActionResult> Index(CustomerType type = CustomerType.ORGANIZATION)
+        public async Task<IActionResult> Index(CustomerType type)
         {
             var result = await _customerApplication.GetAll(type);
             ViewBag.Type = type;
@@ -35,10 +35,11 @@ namespace VideoRayan.ServiceHost.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(Guid id) => PartialView("Edit",await _customerApplication.GetDetailForEditByAdmin(id));
+        public async Task<IActionResult> Edit(Guid id) => PartialView(await _customerApplication.GetDetailForEditByAdmin(id));
 
-        [HttpPost,ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(EditCustomerDto command)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(EditByAdminCustomerDto command)
         {
             var result = await _customerApplication.Edit(command);
 
