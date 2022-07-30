@@ -92,7 +92,7 @@ namespace VideoRayan.Application
 
             user.SetAccessToLoginDate(DateTime.Now.AddMinutes(5));
 
-            var phoneCode = Guid.NewGuid().ToString().Substring(0, 6);
+            var phoneCode = new Random().Next(100000, 999999).ToString();//Guid.NewGuid().ToString().Substring(0, 6);
 
             //ToDo : Send Phone Code
             //var smsMessage = $"کاربر گرامی با شماره موبایل {command.Phone},\nکد تایید شما : {phoneCode} می باشد";
@@ -110,7 +110,7 @@ namespace VideoRayan.Application
 
             if (_userRepository.Exists(u => u.Mobile == command.Phone)) return result.Failed(ApplicationMessage.DuplicatedMobile);
 
-            var phoneCode = Guid.NewGuid().ToString().Substring(0, 6);
+            var phoneCode = new Random().Next(100000, 999999).ToString();//Guid.NewGuid().ToString().Substring(0, 6);
             var user = Customer.Register(command.Phone!, phoneCode);
 
             //ToDo : Send Phone Code
@@ -131,6 +131,10 @@ namespace VideoRayan.Application
 
             if (user.LoginExpireDate <= DateTime.Now) return (result.Failed("کد وارد شده نامعتبر می باشد، مجدداً لاگین کنید"), "");
             if (user.PhoneCode != command.Token) return (result.Failed(ApplicationMessage.InvalidAccessToken), "");
+
+            var phoneCode = new Random().Next(100000, 999999).ToString();//Guid.NewGuid().ToString().Substring(0, 6);
+            user.ChangePhoneCode(phoneCode);
+            await _userRepository.SaveChangesAsync();
 
             var loginDto = new JwtDto
             {
