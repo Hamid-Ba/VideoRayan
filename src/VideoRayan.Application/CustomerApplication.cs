@@ -63,7 +63,7 @@ namespace VideoRayan.Application
             var user = await _userRepository.GetEntityByIdAsync(command.Id);
 
             if (user is null) return result.Failed(ApplicationMessage.UserNotExist);
-            if (_userRepository.Exists(u => (u.Mobile == command.Mobile || u.Email == command.Email) && u.Id != command.Id))
+            if (_userRepository.Exists(u => u.Mobile == command.Mobile && u.Id != command.Id))
                 return result.Failed(ApplicationMessage.DuplicatedModel);
 
             var logo = Uploader.ImageUploader(command.LogoFile!, "Customer", command.Logo!);
@@ -192,7 +192,7 @@ namespace VideoRayan.Application
         public async Task<string> GetPhone(Guid id) => await _userRepository.GetPhone(id);
 
         public async Task<CustomerType> GetTypeBy(Guid id) => await _userRepository.GetTypeBy(id);
-        
+
 
         //public async Task<(OperationResult, string)> VerifyRegister(AccessTokenDto command)
         //{

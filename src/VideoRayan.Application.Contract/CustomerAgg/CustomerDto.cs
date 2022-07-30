@@ -56,7 +56,7 @@ namespace VideoRayan.Application.Contract.CustomerAgg
     {
         public Guid Id { get; set; }
 
-        [Required(ErrorMessage = ValidationMessage.IsRequired)]
+        //[Required(ErrorMessage = ValidationMessage.IsRequired)]
         public string? Title { get; set; }
 
         public string? FirstName { get; set; }

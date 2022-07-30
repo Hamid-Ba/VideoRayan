@@ -34,7 +34,7 @@ namespace VideoRayan.ServiceHost.Areas.Admin.Controllers
             return new JsonResult(result);
         }
 
-        [HttpGet]
+        [HttpGet("Admin/Customer/Edit/{id}")]
         public async Task<IActionResult> Edit(Guid id) => PartialView(await _customerApplication.GetDetailForEditByAdmin(id));
 
         [HttpPost]
