@@ -39,7 +39,8 @@ namespace VideoRayan.ServiceHost.Controllers
                     return result.Item1.IsSucceeded ? Ok(new
                     {
                         Message = result.Item1.Message,
-                        Token = result.Item2
+                        Id = result.Item2,
+                        Token = result.Item3
                     })
                     :
                     Problem(result.Item1.Message);

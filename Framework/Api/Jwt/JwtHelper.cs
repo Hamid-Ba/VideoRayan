@@ -25,7 +25,7 @@ namespace Framework.Api.Jwt
                     new Claim(ClaimTypes.NameIdentifier, command.Id.ToString()),
                     new Claim(ClaimTypes.Name, command.FullName!),
                     new Claim(ClaimTypes.MobilePhone, command.Mobile!),
-                    new Claim(ClaimTypes.Email, command.Email!),
+                    //new Claim(ClaimTypes.Email, command.Email!),
                     new Claim(ClaimTypes.Expired, command.LoginExpireDate.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddDays(10),

@@ -123,14 +123,14 @@ namespace VideoRayan.Application
             return result.Succeeded();
         }
 
-        public async Task<(OperationResult, string)> VerifyLoginRegister(AccessTokenDto command)
+        public async Task<(OperationResult, string ,string)> VerifyLoginRegister(AccessTokenDto command)
         {
             OperationResult result = new();
 
             var user = await _userRepository.GetBy(command.Phone!);
 
-            if (user.LoginExpireDate <= DateTime.Now) return (result.Failed("کد وارد شده نامعتبر می باشد، مجدداً لاگین کنید"), "");
-            if (user.PhoneCode != command.Token) return (result.Failed(ApplicationMessage.InvalidAccessToken), "");
+            if (user.LoginExpireDate <= DateTime.Now) return (result.Failed("کد وارد شده نامعتبر می باشد، مجدداً لاگین کنید"),"", "");
+            if (user.PhoneCode != command.Token) return (result.Failed(ApplicationMessage.InvalidAccessToken),"", "");
 
             var phoneCode = new Random().Next(100000, 999999).ToString();//Guid.NewGuid().ToString().Substring(0, 6);
             user.ChangePhoneCode(phoneCode);
@@ -147,7 +147,7 @@ namespace VideoRayan.Application
             };
 
             var token = _jwtHelper.SignIn(loginDto);
-            return (result.Succeeded(), token);
+            return (result.Succeeded(),user.Id.ToString(), token);
         }
 
         public async Task<OperationResult> ActiveOrDeactive(Guid id)

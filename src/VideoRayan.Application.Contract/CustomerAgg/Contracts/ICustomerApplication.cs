@@ -20,6 +20,6 @@ namespace VideoRayan.Application.Contract.CustomerAgg.Contracts
         Task<EditByAdminCustomerDto> GetDetailForEditByAdmin(Guid id);
         Task<OperationResult> LoginFirstStep(LoginCustomerDto command);
         //Task<(OperationResult, string)> VerifyRegister(AccessTokenDto command);
-        Task<(OperationResult, string)> VerifyLoginRegister(AccessTokenDto command);
+        Task<(OperationResult,string, string)> VerifyLoginRegister(AccessTokenDto command);
     }
 }
