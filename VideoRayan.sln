@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoRayan.Query", "src\Vid
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework", "Framework\Framework.csproj", "{BF9402FF-C660-4165-9EA9-DA1DC5C1D1CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoRayan.ServiceHost", "src\VideoRayan.ServiceHost\VideoRayan.ServiceHost.csproj", "{1D29EB8E-7680-40D7-A6DC-392DFBAF84D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoRayan.ServiceHost", "src\VideoRayan.ServiceHost\VideoRayan.ServiceHost.csproj", "{1D29EB8E-7680-40D7-A6DC-392DFBAF84D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

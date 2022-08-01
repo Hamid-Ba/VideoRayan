@@ -45,12 +45,10 @@ namespace VideoRayan.Application
             var user = await _userRepository.GetEntityByIdAsync(command.Id);
 
             if (user is null) return result.Failed(ApplicationMessage.UserNotExist);
-            if (_userRepository.Exists(u => (u.Mobile == command.Mobile || u.Email == command.Email) && u.Id != command.Id))
+            if (_userRepository.Exists(u => u.Mobile == command.Mobile && u.Id != command.Id))
                 return result.Failed(ApplicationMessage.DuplicatedModel);
 
-            var logo = Uploader.ImageUploader(command.LogoFile!, "Customer", command.Logo!);
-
-            user.Edit(command.Mobile!, logo, command.FirstName!, command.LastName!, command.Email!);
+            user.Edit(command.Mobile!, command.FirstName!, command.LastName!, command.Email!);
             await _userRepository.SaveChangesAsync();
 
             return result.Succeeded();
@@ -123,14 +121,14 @@ namespace VideoRayan.Application
             return result.Succeeded();
         }
 
-        public async Task<(OperationResult, string ,string)> VerifyLoginRegister(AccessTokenDto command)
+        public async Task<(OperationResult, string, string)> VerifyLoginRegister(AccessTokenDto command)
         {
             OperationResult result = new();
 
             var user = await _userRepository.GetBy(command.Phone!);
 
-            if (user.LoginExpireDate <= DateTime.Now) return (result.Failed("کد وارد شده نامعتبر می باشد، مجدداً لاگین کنید"),"", "");
-            if (user.PhoneCode != command.Token) return (result.Failed(ApplicationMessage.InvalidAccessToken),"", "");
+            if (user.LoginExpireDate <= DateTime.Now) return (result.Failed("کد وارد شده نامعتبر می باشد، مجدداً لاگین کنید"), "", "");
+            if (user.PhoneCode != command.Token) return (result.Failed(ApplicationMessage.InvalidAccessToken), "", "");
 
             var phoneCode = new Random().Next(100000, 999999).ToString();//Guid.NewGuid().ToString().Substring(0, 6);
             user.ChangePhoneCode(phoneCode);
@@ -147,7 +145,7 @@ namespace VideoRayan.Application
             };
 
             var token = _jwtHelper.SignIn(loginDto);
-            return (result.Succeeded(),user.Id.ToString(), token);
+            return (result.Succeeded(), user.Id.ToString(), token);
         }
 
         public async Task<OperationResult> ActiveOrDeactive(Guid id)
@@ -192,6 +190,22 @@ namespace VideoRayan.Application
         public async Task<string> GetPhone(Guid id) => await _userRepository.GetPhone(id);
 
         public async Task<CustomerType> GetTypeBy(Guid id) => await _userRepository.GetTypeBy(id);
+
+        public async Task<OperationResult> EditLogo(EditLogoCustomerDto command)
+        {
+            OperationResult result = new();
+
+            var user = await _userRepository.GetEntityByIdAsync(command.Id);
+
+            if (user is null) return result.Failed(ApplicationMessage.UserNotExist);
+
+            var logo = Uploader.ImageUploader(command.LogoFile!, "Customer", command.Logo!);
+
+            user.EditLogo(logo);
+            await _userRepository.SaveChangesAsync();
+
+            return result.Succeeded();
+        }
 
 
         //public async Task<(OperationResult, string)> VerifyRegister(AccessTokenDto command)

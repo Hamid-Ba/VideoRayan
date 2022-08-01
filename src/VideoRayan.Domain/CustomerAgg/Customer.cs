@@ -40,7 +40,7 @@ namespace VideoRayan.Domain.CustomerAgg
             Type = type;
         }
 
-        public void Edit(string title, string phone, string logo, string firstName, string lastName, string email, CustomerType type = 0)
+        public void Edit(string title, string phone,string logo, string firstName, string lastName, string email, CustomerType type = 0)
         {
             Guard(phone);
 
@@ -57,13 +57,15 @@ namespace VideoRayan.Domain.CustomerAgg
             Type = type;
         }
 
-        public void Edit(string phone, string logo, string firstName, string lastName, string email)
+        public void EditLogo(string logo) 
         {
-            Mobile = phone;
-
             if (!string.IsNullOrWhiteSpace(logo))
                 Logo = logo;
+        }
 
+        public void Edit(string phone, string firstName, string lastName, string email)
+        {
+            Mobile = phone;
             FirstName = firstName;
             LastName = lastName;
             Email = email;

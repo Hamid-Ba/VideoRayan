@@ -8,6 +8,7 @@ namespace VideoRayan.Domain.CustomerAgg.Contracts
 	{
 		Task<Customer> GetBy(string mobile);
         Task<EditCustomerDto> GetDetailForEditBy(Guid id);
+        Task<EditLogoCustomerDto> GetDetailForEditLogoBy(Guid id);
         Task<EditByAdminCustomerDto> GetDetailForEditByAdmin(Guid id);
         Task<IEnumerable<CustomerDto>> GetAll(CustomerType type);
         Task<CustomerDto> GetBy(Guid id);

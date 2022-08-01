@@ -15,6 +15,7 @@ namespace VideoRayan.Application.Contract.CustomerAgg.Contracts
         Task<OperationResult> Create(CreateCustomerDto command);
         Task<IEnumerable<CustomerDto>> GetAll(CustomerType type);
         Task<OperationResult> Edit(EditByAdminCustomerDto command);
+        Task<OperationResult> EditLogo(EditLogoCustomerDto command);
         Task<OperationResult> Register(RegisterCustomerDto command);
         Task<OperationResult> SendMessage(SendSmsCustomerDto command);
         Task<EditByAdminCustomerDto> GetDetailForEditByAdmin(Guid id);

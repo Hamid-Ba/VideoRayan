@@ -1,6 +1,7 @@
 ﻿using Framework.Application;
 using Framework.Application.Enums;
 using Framework.Infrastructure;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using VideoRayan.Application.Contract.CustomerAgg;
 using VideoRayan.Domain.CustomerAgg;
@@ -10,9 +11,14 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
 {
     public class CustomerRepository : Repository<Customer>, ICustomerRepository
     {
+        private readonly HttpContext _current;
         private readonly VideoRayanContext _context;
 
-        public CustomerRepository(VideoRayanContext context) : base(context) => _context = context;
+        public CustomerRepository(VideoRayanContext context, IHttpContextAccessor accessor) : base(context)
+        {
+            _context = context;
+            _current = accessor.HttpContext!;
+        } 
 
         public async Task<IEnumerable<CustomerDto>> GetAll(CustomerType type) => await _context.Customers.Where(c => c.Type == type).Select(c => new CustomerDto
         {
@@ -39,6 +45,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
             Type = c.Type,
             PhoneCode = c.PhoneCode,
             PersianCreationDate = c.CreationDate.ToFarsi(),
+            Logo = $"{_current.Request.Scheme}://{_current.Request.Host}{_current.Request.PathBase}/Pictures//{c.Logo}",
         }).AsNoTracking().FirstOrDefaultAsync(c => c.Id == id))!;
 
         public async Task<EditCustomerDto> GetDetailForEditBy(Guid id) => (await _context.Customers.Select(c => new EditCustomerDto
@@ -48,7 +55,6 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
             LastName = c.LastName,
             Email = c.Email,
             Mobile = c.Mobile,
-            Logo = c.Logo
         }).AsNoTracking().FirstOrDefaultAsync(c => c.Id == id))!;
 
         public async Task<EditByAdminCustomerDto> GetDetailForEditByAdmin(Guid id) => (await _context.Customers.Select(c => new EditByAdminCustomerDto
@@ -63,9 +69,15 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
             Type = c.Type
         }).AsNoTracking().FirstOrDefaultAsync(c => c.Id == id))!;
 
+        public async Task<EditLogoCustomerDto> GetDetailForEditLogoBy(Guid id) => (await _context.Customers.Select(c => new EditLogoCustomerDto
+        {
+            Id = c.Id,
+            Logo = c.Logo
+        }).AsNoTracking().FirstOrDefaultAsync(c => c.Id == id))!;
+
         public async Task<string> GetPhone(Guid id) => (await _context.Customers.FindAsync(id))!.Mobile!;
 
         public async Task<CustomerType> GetTypeBy(Guid id) => (await _context.Customers.FindAsync(id))!.Type;
-        
+
     }
 }

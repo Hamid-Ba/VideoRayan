@@ -23,13 +23,29 @@ namespace VideoRayan.ServiceHost.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Edit([FromForm]EditCustomerDto command)
+        public async Task<IActionResult> Edit([FromBody]EditCustomerDto command)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
                     var result = await _customerApplication.Edit(command);
+                    return result.IsSucceeded ? Ok(result.Message) : BadRequest(result.Message);
+                }
+
+                return BadRequest(ApiResultMessages.ModelStateNotValid);
+            }
+            catch (Exception e) { return BadRequest(e.InnerException!.Message); }
+        }
+
+        [HttpPut("editLogo")]
+        public async Task<IActionResult> EditLogo([FromForm] EditLogoCustomerDto command)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var result = await _customerApplication.EditLogo(command);
                     return result.IsSucceeded ? Ok(result.Message) : BadRequest(result.Message);
                 }
 
