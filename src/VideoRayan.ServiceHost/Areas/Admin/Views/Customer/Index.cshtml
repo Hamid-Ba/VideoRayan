@@ -74,7 +74,14 @@
                                     <tr class="text-center">
                                         <td>@(count++)</td>
 
-                                        <td> <img src="~/Pictures/@entity.Logo" style="width: 85px; height: 85px; border-radius: 10px"> </td>
+                                        @if (string.IsNullOrWhiteSpace(entity.Logo))
+                                        {
+                                            <td> <img src="~/noimage.png" style="width: 85px; height: 85px; border-radius: 10px"> </td>
+                                        }
+                                        else
+                                        {
+                                            <td> <img src="~/Pictures/@entity.Logo" style="width: 85px; height: 85px; border-radius: 10px"> </td>
+                                        }
 
                                         <td>@(entity.FirstName) @(entity.LastName)</td>
                                         <td>@entity.Mobile</td>
