@@ -42,7 +42,7 @@ namespace VideoRayan.ServiceHost.Controllers
                 if (ModelState.IsValid)
                 {
                     var result = await _audienceApplication.Create(command);
-                    return result.IsSucceeded ? Ok(result.Message) : BadRequest(result.Message);
+                    return result.Item1.IsSucceeded ? Ok(new { message = result.Item1.Message, value = result.Item2 }) : BadRequest(result.Item1.Message);
                 }
                 return BadRequest(ApiResultMessages.ModelStateNotValid);
             }
@@ -57,7 +57,7 @@ namespace VideoRayan.ServiceHost.Controllers
                 if (ModelState.IsValid)
                 {
                     var result = await _audienceApplication.Edit(command);
-                    return result.IsSucceeded ? Ok(result.Message) : BadRequest(result.Message);
+                    return result.Item1.IsSucceeded ? Ok(new { message = result.Item1.Message, value = result.Item2 }) : BadRequest(result.Item1.Message);
                 }
 
                 return BadRequest(ApiResultMessages.ModelStateNotValid);
