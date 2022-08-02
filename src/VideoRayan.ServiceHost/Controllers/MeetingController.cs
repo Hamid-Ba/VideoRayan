@@ -54,7 +54,7 @@ namespace VideoRayan.ServiceHost.Controllers
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }
 
-        [HttpPut]
+        [HttpPost("edit")]
         public async Task<IActionResult> Edit([FromBody] EditMeetingDto command)
         {
             try
@@ -70,12 +70,12 @@ namespace VideoRayan.ServiceHost.Controllers
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }
 
-        [HttpDelete("{customerId}/{id}")]
-        public async Task<IActionResult> Delete(Guid customerId,Guid id)
+        [HttpPost("delete/{customerId}/{id}")]
+        public async Task<IActionResult> Delete(Guid customerId, Guid id)
         {
             try
             {
-                var result = await _meetingApplication.Delete(customerId,id);
+                var result = await _meetingApplication.Delete(customerId, id);
                 return result.IsSucceeded ? Ok(result.Message) : BadRequest(result.Message);
             }
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }

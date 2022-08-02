@@ -49,7 +49,7 @@ namespace VideoRayan.ServiceHost.Controllers
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }
 
-        [HttpPut]
+        [HttpPost("edit")]
         public async Task<IActionResult> Edit([FromBody] EditAudienceDto command)
         {
             try
