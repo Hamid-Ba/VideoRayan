@@ -38,20 +38,20 @@ namespace VideoRayan.Application
             return result.Succeeded();
         }
 
-        public async Task<OperationResult> Edit(EditCustomerDto command)
+        public async Task<(OperationResult, CustomerDto)> Edit(EditCustomerDto command)
         {
             OperationResult result = new();
 
             var user = await _userRepository.GetEntityByIdAsync(command.Id);
 
-            if (user is null) return result.Failed(ApplicationMessage.UserNotExist);
+            if (user is null) return (result.Failed(ApplicationMessage.UserNotExist), default)!;
             if (_userRepository.Exists(u => u.Mobile == command.Mobile && u.Id != command.Id))
-                return result.Failed(ApplicationMessage.DuplicatedModel);
+                return (result.Failed(ApplicationMessage.DuplicatedModel), default)!;
 
             user.Edit(command.Mobile!, command.FirstName!, command.LastName!, command.Email!);
             await _userRepository.SaveChangesAsync();
 
-            return result.Succeeded();
+            return (result.Succeeded(), await GetBy(command.Id));
         }
 
         public async Task<OperationResult> Edit(EditByAdminCustomerDto command)

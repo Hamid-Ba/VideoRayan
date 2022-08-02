@@ -48,7 +48,7 @@ namespace VideoRayan.ServiceHost.Controllers
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }
 
-        [HttpPut]
+        [HttpPost("Edit")]
         public async Task<IActionResult> Edit([FromBody] EditCategoryDto command)
         {
             try
@@ -64,7 +64,7 @@ namespace VideoRayan.ServiceHost.Controllers
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }
 
-        [HttpDelete("{id}/{customerId}")]
+        [HttpPost("Delete/{id}/{customerId}")]
         public async Task<IActionResult> Delete(Guid id, Guid customerId)
         {
             try

@@ -22,7 +22,7 @@ namespace VideoRayan.ServiceHost.Controllers
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }
 
-        [HttpPut]
+        [HttpPost("edit")]
         public async Task<IActionResult> Edit([FromBody]EditCustomerDto command)
         {
             try
@@ -30,7 +30,7 @@ namespace VideoRayan.ServiceHost.Controllers
                 if (ModelState.IsValid)
                 {
                     var result = await _customerApplication.Edit(command);
-                    return result.IsSucceeded ? Ok(result.Message) : BadRequest(result.Message);
+                    return result.Item1.IsSucceeded ? Ok(new { message = result.Item1.Message, value = result.Item2 }) : BadRequest(result.Item1.Message);
                 }
 
                 return BadRequest(ApiResultMessages.ModelStateNotValid);
@@ -38,7 +38,7 @@ namespace VideoRayan.ServiceHost.Controllers
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }
 
-        [HttpPut("editLogo")]
+        [HttpPost("editLogo")]
         public async Task<IActionResult> EditLogo([FromForm] EditLogoCustomerDto command)
         {
             try

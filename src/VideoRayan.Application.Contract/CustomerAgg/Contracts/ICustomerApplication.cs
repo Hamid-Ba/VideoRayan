@@ -11,7 +11,6 @@ namespace VideoRayan.Application.Contract.CustomerAgg.Contracts
         Task<CustomerType> GetTypeBy(Guid id);
         Task<OperationResult> ActiveOrDeactive(Guid id);
         Task<EditCustomerDto> GetDetailForEditBy(Guid id);
-        Task<OperationResult> Edit(EditCustomerDto command);
         Task<OperationResult> Create(CreateCustomerDto command);
         Task<IEnumerable<CustomerDto>> GetAll(CustomerType type);
         Task<OperationResult> Edit(EditByAdminCustomerDto command);
@@ -20,6 +19,7 @@ namespace VideoRayan.Application.Contract.CustomerAgg.Contracts
         Task<OperationResult> SendMessage(SendSmsCustomerDto command);
         Task<EditByAdminCustomerDto> GetDetailForEditByAdmin(Guid id);
         Task<OperationResult> LoginFirstStep(LoginCustomerDto command);
+        Task<(OperationResult,CustomerDto)> Edit(EditCustomerDto command);
         //Task<(OperationResult, string)> VerifyRegister(AccessTokenDto command);
         Task<(OperationResult,string, string)> VerifyLoginRegister(AccessTokenDto command);
     }
