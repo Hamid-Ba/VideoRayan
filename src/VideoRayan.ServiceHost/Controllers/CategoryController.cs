@@ -11,7 +11,7 @@ namespace VideoRayan.ServiceHost.Controllers
 
         public CategoryController(ICategoryApplication categoryApplication) => _categoryApplication = categoryApplication;
 
-        [HttpGet("{customerId}")]
+        [HttpGet("getAll/{customerId}")]
         public async Task<IActionResult> GetAll(Guid customerId)
         {
             try
@@ -41,7 +41,7 @@ namespace VideoRayan.ServiceHost.Controllers
                 if (ModelState.IsValid)
                 {
                     var result = await _categoryApplication.Create(command);
-                    return result.IsSucceeded ? Ok(result.Message) : BadRequest(result.Message);
+                    return result.Item1.IsSucceeded ? Ok(new {message = result.Item1.Message,value = result.Item2 }) : BadRequest(result.Item1.Message);
                 }
                 return BadRequest(ApiResultMessages.ModelStateNotValid);
             }
@@ -56,7 +56,7 @@ namespace VideoRayan.ServiceHost.Controllers
                 if (ModelState.IsValid)
                 {
                     var result = await _categoryApplication.Edit(command);
-                    return result.IsSucceeded ? Ok(result.Message) : BadRequest(result.Message);
+                    return result.Item1.IsSucceeded ? Ok(new { message = result.Item1.Message, value = result.Item2 }) : BadRequest(result.Item1.Message);
                 }
 
                 return BadRequest(ApiResultMessages.ModelStateNotValid);
@@ -70,7 +70,7 @@ namespace VideoRayan.ServiceHost.Controllers
             try
             {
                 var result = await _categoryApplication.Delete(id, customerId);
-                return result.IsSucceeded ? Ok(result.Message) : BadRequest(result.Message);
+                return result.Item1.IsSucceeded ? Ok(new { message = result.Item1.Message, value = result.Item2 }) : BadRequest(result.Item1.Message);
             }
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }

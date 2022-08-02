@@ -56,10 +56,7 @@
                                 <tr>
                                     <th>#</th>
 
-                                    @if (type == CustomerType.ORGANIZATION)
-                                    {
-                                        <th>لوگو</th>
-                                    }
+                                    <th>لوگو</th>
 
                                     <th>نام کامل</th>
                                     <th>موبایل</th>
@@ -76,10 +73,9 @@
                                 {
                                     <tr class="text-center">
                                         <td>@(count++)</td>
-                                        @if (type == CustomerType.ORGANIZATION)
-                                        {
-                                            <td> <img src="~Pictures\@entity.Logo"> </td>
-                                        }
+
+                                        <td> <img src="~/Pictures/@entity.Logo" style="width: 85px; height: 85px; border-radius: 10px"> </td>
+
                                         <td>@(entity.FirstName) @(entity.LastName)</td>
                                         <td>@entity.Mobile</td>
                                         <td>
@@ -115,7 +111,7 @@
                                             </a>
 
                                             <a class="btn btn-warning pull-right m-rl-5"
-                                               href="#showmodal=@Url.Action("Edit", "Customer", new {id = entity.Id})">
+                                           href="#showmodal=@Url.Action("Edit", "Customer", new {id = entity.Id})">
                                                 <i class="fa fa-edit"></i>
                                             </a>
 
