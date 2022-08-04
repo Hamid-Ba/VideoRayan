@@ -60,7 +60,7 @@ namespace VideoRayan.Application
             return (result.Succeeded(), await GetBy(command.Id));
         }
 
-        public async Task<IEnumerable<AudienceDto>> GetAll(Guid customerId, string categoryName) => await _audienceRepository.GetAll(customerId, categoryName);
+        public async Task<IEnumerable<AudienceDto>> GetAll(SearchAudienceDto filter) => await _audienceRepository.GetAll(filter);
 
         public async Task<AudienceDto> GetBy(Guid id) => await _audienceRepository.GetBy(id);
 

@@ -59,6 +59,13 @@ Date: Jun 2015
     font-style: normal;
 }
 
+/*@font-face {
+    font-family: 'IRANSansWeb_Light';
+    src: url('../../fonts/IRANSansWeb_Light.eot'), url('../../fonts/IRANSansWeb_Light.eot') format('embedded-opentype'), url('../../fonts/IRANSansWeb_Light.woff') format('woff'), url('../../fonts/IRANSansWeb_Light.ttf') format('truetype'), url('../../fonts/IranianSans.svg') format('svg') !important;
+    font-weight: normal;
+    font-style: normal;
+}*/
+
 /******** 1. General ********/
 
 body {

@@ -13,19 +13,26 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
 
         public AudienceRepository(VideoRayanContext context) : base(context) => _context = context;
 
-        public async Task<IEnumerable<AudienceDto>> GetAll(Guid customerId, string categoryName) => await _context.Audiences.Include(c => c.Category).Include(c => c.User)
-            .Where(c => c.UserId == customerId && c.Category!.Title.Contains(categoryName)).Select(c => new AudienceDto
-            {
-                Id = c.Id,
-                CategoryId = c.CategoryId,
-                CategoryTitle = c.Category!.Title,
-                PersianCreationDate = c.CreationDate.ToFarsi(),
-                FullName = c.FullName,
-                UserId = c.UserId,
-                Mobile = c.Mobile,
-                Position = c.Position,
-                CreatorName = $"{c.User!.FirstName} {c.User!.LastName}"
-            }).AsNoTracking().ToListAsync();
+        public async Task<IEnumerable<AudienceDto>> GetAll(SearchAudienceDto filter)
+        {
+            var result = _context.Audiences.Include(c => c.Category).Include(c => c.User)
+             .Where(c => c.UserId == filter.CustomerId).Select(c => new AudienceDto
+             {
+                 Id = c.Id,
+                 CategoryId = c.CategoryId,
+                 CategoryTitle = c.Category!.Title,
+                 PersianCreationDate = c.CreationDate.ToFarsi(),
+                 FullName = c.FullName,
+                 UserId = c.UserId,
+                 Mobile = c.Mobile,
+                 Position = c.Position,
+                 CreatorName = $"{c.User!.FirstName} {c.User!.LastName}"
+             }).AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(filter.Category)) result = result.Where(a => a.CategoryTitle!.Contains(filter.Category));
+
+            return await result.ToListAsync();
+        }
 
         public async Task<IEnumerable<AudienceDto>> GetAllBy(Guid meetingId)
         {

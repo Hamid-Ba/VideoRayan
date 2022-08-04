@@ -27,4 +27,10 @@ namespace VideoRayan.Application.Contract.CustomerAgg
     {
         public Guid Id { get; set; }
     }
+
+    public class SearchAudienceDto
+    {
+        public Guid CustomerId { get; set; }
+        public string? Category { get; set; }
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using VideoRayan.Application.Contract.CustomerAgg;
 using VideoRayan.Application.Contract.CustomerAgg.Contracts;
 
 namespace VideoRayan.ServiceHost.Areas.Admin.Controllers
@@ -14,11 +15,11 @@ namespace VideoRayan.ServiceHost.Areas.Admin.Controllers
             _audienceApplication = audienceApplication;
         }
 
-        public async Task<IActionResult>  Index(Guid customerId)
+        public async Task<IActionResult> Index(Guid customerId)
         {
             ViewBag.CustomerId = customerId;
             ViewBag.CustomerPhone = await _customerApplication.GetPhone(customerId);
-            return View(await _audienceApplication.GetAll(customerId,""));
+            return View(await _audienceApplication.GetAll(new SearchAudienceDto { CustomerId = customerId, Category = "" }));
         }
     }
 }
