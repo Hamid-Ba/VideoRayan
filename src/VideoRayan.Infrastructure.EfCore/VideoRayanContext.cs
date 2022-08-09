@@ -3,6 +3,7 @@ using VideoRayan.Domain;
 using VideoRayan.Domain.AccountAgg;
 using VideoRayan.Domain.CustomerAgg;
 using VideoRayan.Domain.MeetingAgg;
+using VideoRayan.Domain.PlanAgg;
 using VideoRayan.Infrastructure.EfCore.Mapping.AccountAgg;
 
 namespace VideoRayan.Infrastructure.EfCore;
@@ -39,6 +40,12 @@ public class VideoRayanContext : DbContext
 
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Audience> Audiences { get; set; }
+
+    #endregion
+
+    #region Plan
+
+    public DbSet<Plan> Plans { get; set; }
 
     #endregion
 
