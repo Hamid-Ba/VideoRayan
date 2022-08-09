@@ -19,7 +19,6 @@
     <Folder Include="CustomerAgg\Contracts\" />
     <Folder Include="AccountAgg\" />
     <Folder Include="AccountAgg\Contracts\" />
-    <Folder Include="PlanAgg\Contracts\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework\Framework.csproj" />
