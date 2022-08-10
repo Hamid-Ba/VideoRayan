@@ -94,7 +94,7 @@ namespace VideoRayan.Application
 
             //ToDo : Send Phone Code
             //var smsMessage = $"کاربر گرامی با شماره موبایل {command.Phone},\nکد تایید شما : {phoneCode} می باشد";
-            //_smsService.SendSms(command.Phone!, smsMessage);
+            await _smsService.SendVerifySms(command.Phone!, phoneCode);
 
             user.ChangePhoneCode(phoneCode);
             await _userRepository.SaveChangesAsync();
@@ -113,7 +113,7 @@ namespace VideoRayan.Application
 
             //ToDo : Send Phone Code
             //var smsMessage = $"کاربر گرامی با شماره موبایل {command.Phone},\nکد تایید شما : {phoneCode} می باشد";
-            //_smsService.SendSms(command.Phone!, smsMessage);
+            await _smsService.SendVerifySms(command.Phone!, phoneCode);
 
             await _userRepository.AddEntityAsync(user);
             await _userRepository.SaveChangesAsync();
@@ -169,7 +169,7 @@ namespace VideoRayan.Application
             if (user is null) return result.Failed(ApplicationMessage.UserNotExist);
 
             //ToDo : Send Phone Code
-            _smsService.SendSms(user.Mobile!, command.Message!);
+            _smsService.SendVerifySms(user.Mobile!, command.Message!);
 
             return result.Succeeded();
         }

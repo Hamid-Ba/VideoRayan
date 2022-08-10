@@ -38,6 +38,7 @@ namespace VideoRayan.Domain.CustomerAgg
             Email = email;
             IsActive = true;
             Type = type;
+            LoginExpireDate = DateTime.Now.AddMinutes(5);
         }
 
         public void Edit(string title, string phone,string logo, string firstName, string lastName, string email, CustomerType type = 0)

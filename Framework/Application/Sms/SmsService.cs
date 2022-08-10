@@ -1,21 +1,18 @@
-﻿using System;
-using Kavenegar;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 
 namespace Framework.Application.Sms
 {
-	public class SmsService : ISmsService
+    public class SmsService : ISmsService
 	{
         private IConfiguration _configuration;
 
         public SmsService(IConfiguration configuration) => _configuration = configuration;
 
-        public void SendSms(string mobile, string message)
+        public async Task SendVerifySms(string mobile, string token)
         {
             var smsConfig = _configuration.GetSection("SmsService");
-            var sender = smsConfig.GetSection("Number").Value;
-            var api = new KavenegarApi(smsConfig.GetSection("ApiKey").Value);
-            api.Send(sender, mobile, message);
+            var api = new Ghasedak.Core.Api(smsConfig.GetSection("ApiKey").Value);
+            await api.VerifyAsync(1, "pedpo", new string[] { mobile }, token);
         }
     }
 }
