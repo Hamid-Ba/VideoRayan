@@ -199,7 +199,7 @@ namespace VideoRayan.Application
 
             if (user is null) return result.Failed(ApplicationMessage.UserNotExist);
 
-            var logo = Uploader.ImageUploader(command.LogoFile!, "Customer", command.Logo!);
+            var logo = Uploader.ImageUploader(command.LogoFile!, "Customer", user.Logo!);
 
             user.EditLogo(logo);
             await _userRepository.SaveChangesAsync();

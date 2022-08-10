@@ -72,7 +72,6 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
         public async Task<EditLogoCustomerDto> GetDetailForEditLogoBy(Guid id) => (await _context.Customers.Select(c => new EditLogoCustomerDto
         {
             Id = c.Id,
-            Logo = c.Logo
         }).AsNoTracking().FirstOrDefaultAsync(c => c.Id == id))!;
 
         public async Task<string> GetPhone(Guid id) => (await _context.Customers.FindAsync(id))!.Mobile!;

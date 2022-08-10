@@ -59,7 +59,6 @@ namespace VideoRayan.Application.Contract.CustomerAgg
     public class EditLogoCustomerDto
     {
         public Guid Id { get; set; }
-        public string? Logo { get; set; }
         public IFormFile? LogoFile { get; set; }
     }
 
