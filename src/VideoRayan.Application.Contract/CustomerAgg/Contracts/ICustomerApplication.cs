@@ -14,12 +14,12 @@ namespace VideoRayan.Application.Contract.CustomerAgg.Contracts
         Task<OperationResult> Create(CreateCustomerDto command);
         Task<IEnumerable<CustomerDto>> GetAll(CustomerType type);
         Task<OperationResult> Edit(EditByAdminCustomerDto command);
-        Task<OperationResult> EditLogo(EditLogoCustomerDto command);
         Task<OperationResult> Register(RegisterCustomerDto command);
         Task<OperationResult> SendMessage(SendSmsCustomerDto command);
         Task<EditByAdminCustomerDto> GetDetailForEditByAdmin(Guid id);
         Task<OperationResult> LoginFirstStep(LoginCustomerDto command);
         Task<(OperationResult,CustomerDto)> Edit(EditCustomerDto command);
+        Task<(OperationResult,CustomerDto)> EditLogo(EditLogoCustomerDto command);
         //Task<(OperationResult, string)> VerifyRegister(AccessTokenDto command);
         Task<(OperationResult,string, string)> VerifyLoginRegister(AccessTokenDto command);
     }

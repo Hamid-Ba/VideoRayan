@@ -191,22 +191,21 @@ namespace VideoRayan.Application
 
         public async Task<CustomerType> GetTypeBy(Guid id) => await _userRepository.GetTypeBy(id);
 
-        public async Task<OperationResult> EditLogo(EditLogoCustomerDto command)
+        public async Task<(OperationResult, CustomerDto)> EditLogo(EditLogoCustomerDto command)
         {
             OperationResult result = new();
 
             var user = await _userRepository.GetEntityByIdAsync(command.Id);
 
-            if (user is null) return result.Failed(ApplicationMessage.UserNotExist);
+            if (user is null) return (result.Failed(ApplicationMessage.UserNotExist), default)!;
 
             var logo = Uploader.ImageUploader(command.LogoFile!, "Customer", user.Logo!);
 
             user.EditLogo(logo);
             await _userRepository.SaveChangesAsync();
 
-            return result.Succeeded();
+            return (result.Succeeded(), await GetBy(user.Id));
         }
-
 
         //public async Task<(OperationResult, string)> VerifyRegister(AccessTokenDto command)
         //{
