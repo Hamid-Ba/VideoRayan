@@ -11,6 +11,11 @@ namespace VideoRayan.ServiceHost.Controllers
 
         public CategoryController(ICategoryApplication categoryApplication) => _categoryApplication = categoryApplication;
 
+        /// <summary>
+        /// همه گروه های یک مشتری را برمیگرداند
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <returns></returns>
         [HttpGet("getAll/{customerId}")]
         public async Task<IActionResult> GetAll(Guid customerId)
         {
@@ -22,6 +27,11 @@ namespace VideoRayan.ServiceHost.Controllers
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }
 
+        /// <summary>
+        /// تنها یک گروه خاص را برمیگرداند
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBy(Guid id)
         {
@@ -32,6 +42,12 @@ namespace VideoRayan.ServiceHost.Controllers
             }
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }
+
+        /// <summary>
+        /// برای ایجاد گروه استفاده می شود
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateCategoryDto command)
@@ -48,6 +64,11 @@ namespace VideoRayan.ServiceHost.Controllers
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }
 
+        /// <summary>
+        /// برای ویرایش گروه استفاده می شود
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpPost("Edit")]
         public async Task<IActionResult> Edit([FromBody] EditCategoryDto command)
         {
@@ -63,6 +84,11 @@ namespace VideoRayan.ServiceHost.Controllers
             }
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }
+
+        /// <summary>
+        /// برای حذف گروه استفاده می شود
+        /// </summary>
+        /// <returns></returns>
 
         [HttpPost("Delete/{id}/{customerId}")]
         public async Task<IActionResult> Delete(Guid id, Guid customerId)
