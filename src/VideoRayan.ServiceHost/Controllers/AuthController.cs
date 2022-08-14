@@ -12,6 +12,11 @@ namespace VideoRayan.ServiceHost.Controllers
 
         public AuthController(ICustomerApplication customerApplication) => _customerApplication = customerApplication;
 
+        /// <summary>
+        /// مرحله اول ورود یا ثبت نام
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpPost("Login")]
         public async Task<IActionResult> LoginOrRegister([FromBody] LoginCustomerDto command)
         {
@@ -28,6 +33,11 @@ namespace VideoRayan.ServiceHost.Controllers
             catch (Exception e) { return BadRequest(e.InnerException?.Message); }
         }
 
+        /// <summary>
+        /// مرحله دوم ورود یا ثبت نام (احراز هویت)
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpPost("Verify")]
         public async Task<IActionResult> GetTokenByVerification([FromBody] AccessTokenDto command)
         {
