@@ -41,7 +41,12 @@ namespace Framework.Application
 
         public static string GetTime(this DateTime date)
         {
-            return $"_{date.Hour:00}_{date.Minute:00}_{date.Second:00}";
+            return $"_{date.Hour:00}:{date.Minute:00}:{date.Second:00}";
+        }
+
+        public static string GetTimeRightFormat(this DateTime date)
+        {
+            return $"{date.Hour:00}:{date.Minute:00}";
         }
 
         public static string ToFarsiFull(this DateTime date)
@@ -101,13 +106,16 @@ namespace Framework.Application
             return new DateTime(year, month, day, new PersianCalendar());
         }
 
-        public static DateTime GetCompliteDate(this string persianDate, int hour, int minute)
+        public static DateTime GetCompliteDate(this string georgianDate, int hour, int minute)
         {
-            var compliteDate = persianDate.ToGeorgianDateTime();
-            compliteDate.AddHours(hour);
-            compliteDate.AddMinutes(minute);
+            //var compliteDate = persianDate.ToGeorgianDateTime();
+            var splitedDate = georgianDate.Split("/");
+            var day = int.Parse(splitedDate[1]);
+            var month = int.Parse(splitedDate[0]);
+            var year = int.Parse(splitedDate[2]);
+            var date = new DateTime(year, month, day,hour,minute,0);
 
-            return compliteDate;
+            return date;
         }
 
         public static string ToMoney(this double myMoney)

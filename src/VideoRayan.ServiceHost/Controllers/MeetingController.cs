@@ -11,7 +11,7 @@ namespace VideoRayan.ServiceHost.Controllers
 
         public MeetingController(IMeetingApplication meetingApplication) => _meetingApplication = meetingApplication;
 
-        [HttpGet("{customerId}")]
+        [HttpGet("all/{customerId}")]
         public async Task<IActionResult> GetAll(Guid customerId)
         {
             try
