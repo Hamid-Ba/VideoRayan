@@ -11,6 +11,8 @@ using System.Text.Unicode;
 using VideoRayan.Domain.AccountAgg;
 using VideoRayan.Infrastructure.Configuration;
 using VideoRayan.Infrastructure.EfCore;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 var service = builder.Services;
@@ -73,7 +75,18 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "Video Rayan API",
+        Description = "An ASP.Net Core Web Api Project For Managing Video Rayan APIs",
+    });
+
+    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+});
 
 var app = builder.Build();
 

@@ -12,6 +12,11 @@ namespace VideoRayan.ServiceHost.Controllers
         public AudienceController(IAudienceApplication audienceApplication) => _audienceApplication = audienceApplication;
 
 
+        /// <summary>
+        /// همه مخاطبان یک مشتری را برمیگرداند
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery]SearchAudienceDto filter)
         {
@@ -23,6 +28,12 @@ namespace VideoRayan.ServiceHost.Controllers
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }
 
+
+        /// <summary>
+        /// تنها یک مخاطب بر میگرداند
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
@@ -34,6 +45,11 @@ namespace VideoRayan.ServiceHost.Controllers
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }
 
+        /// <summary>
+        /// برای ایجاد یک مخاطب استفاده می شود
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateAudienceDto command)
         {
@@ -49,6 +65,11 @@ namespace VideoRayan.ServiceHost.Controllers
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }
 
+        /// <summary>
+        /// برای ویرایش یک مخاطب استفاده می شود
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpPost("edit")]
         public async Task<IActionResult> Edit([FromBody] EditAudienceDto command)
         {
@@ -65,6 +86,10 @@ namespace VideoRayan.ServiceHost.Controllers
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }
 
+        /// <summary>
+        /// برای حذف یک مخاطب استفاده می شود
+        /// </summary>
+        /// <returns></returns>
         [HttpPost("Delete/{id}/{customerId}")]
         public async Task<IActionResult> Delete(Guid id, Guid customerId)
         {
