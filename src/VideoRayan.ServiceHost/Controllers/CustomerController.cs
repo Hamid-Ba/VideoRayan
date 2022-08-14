@@ -11,6 +11,11 @@ namespace VideoRayan.ServiceHost.Controllers
 
         public CustomerController(ICustomerApplication customerApplication) => _customerApplication = customerApplication;
 
+        /// <summary>
+        /// دریافت مشتری به خصوص
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBy(Guid id)
         {
@@ -22,6 +27,11 @@ namespace VideoRayan.ServiceHost.Controllers
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }
 
+        /// <summary>
+        /// برای ویرایش مشتری استفاده می شود
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpPost("edit")]
         public async Task<IActionResult> Edit([FromBody]EditCustomerDto command)
         {
@@ -38,6 +48,11 @@ namespace VideoRayan.ServiceHost.Controllers
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }
 
+        /// <summary>
+        /// برای ویرایش لوگو مشتری استفاده می شود
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpPost("editLogo")]
         public async Task<IActionResult> EditLogo([FromForm] EditLogoCustomerDto command)
         {
