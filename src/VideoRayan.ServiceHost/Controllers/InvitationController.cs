@@ -11,6 +11,12 @@ namespace VideoRayan.ServiceHost.Controllers
 
         public InvitationController(IAudienceMeetingApplication audienceMeetingApplication) => _audienceMeetingApplication = audienceMeetingApplication;
 
+
+        /// <summary>
+        /// سرویس مربوط به افزودن مخاطبان به کنفرانس
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> InviteToMeeting([FromBody] AudienceMeetingDto command)
         {
