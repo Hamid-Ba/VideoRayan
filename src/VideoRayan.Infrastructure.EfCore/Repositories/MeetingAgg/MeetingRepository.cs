@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using VideoRayan.Application.Contract.MeetingAgg;
 using VideoRayan.Domain.MeetingAgg;
 using VideoRayan.Domain.MeetingAgg.Repositories;
+using Framework.Application.Enums;
 
 namespace VideoRayan.Infrastructure.EfCore.Repositories.MeetingAgg
 {
@@ -35,27 +36,35 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.MeetingAgg
              }).AsNoTracking().ToListAsync();
 
             result.ForEach(m => m.PersianStartDate = $"{m.StartDate} - {m.StartTime}");
+            result.ForEach(m => m.Status = (m.StartDateTime > DateTime.Now) ? MeetingStatus.HasNotArrived : (m.StartDateTime.AddHours(1) <= DateTime.Now) ? MeetingStatus.Done : MeetingStatus.HasArrived);
 
             return result;
         }
 
-        public async Task<MeetingDto> GetBy(Guid id) => (await _context.Meetings.Select(m => new MeetingDto
+        public async Task<MeetingDto> GetBy(Guid id)
         {
-            Id = m.Id,
-            CanTalk = m.CanTalk,
-            UserId = m.UserId,
-            IsInteractiveBoard = m.IsInteractiveBoard,
-            IsLive = m.IsLive,
-            IsMute = m.IsMute,
-            IsRecord = m.IsRecord,
-            PersianCreationDate = m.CreationDate.ToFarsi(),
-            StartDateTime = m.StartDateTime,
-            PersianStartDate = m.StartDateTime.ToFarsi() + m.StartDateTime.GetTime(),
-            Title = m.Title,
-            Type = m.Type,
-            StartTime = m.StartDateTime.GetTimeRightFormat(),
-            StartDate = m.StartDateTime.ToFarsi()
-        }).AsNoTracking().FirstOrDefaultAsync(m => m.Id == id))!;
+            var result = await _context.Meetings.Select(m => new MeetingDto
+            {
+                Id = m.Id,
+                CanTalk = m.CanTalk,
+                UserId = m.UserId,
+                IsInteractiveBoard = m.IsInteractiveBoard,
+                IsLive = m.IsLive,
+                IsMute = m.IsMute,
+                IsRecord = m.IsRecord,
+                PersianCreationDate = m.CreationDate.ToFarsi(),
+                StartDateTime = m.StartDateTime,
+                PersianStartDate = m.StartDateTime.ToFarsi() + m.StartDateTime.GetTime(),
+                Title = m.Title,
+                Type = m.Type,
+                StartTime = m.StartDateTime.GetTimeRightFormat(),
+                StartDate = m.StartDateTime.ToFarsi()
+            }).AsNoTracking().FirstOrDefaultAsync(m => m.Id == id)!;
+
+            result!.Status = (result.StartDateTime > DateTime.Now) ? MeetingStatus.HasNotArrived : (result.StartDateTime.AddHours(1) <= DateTime.Now) ? MeetingStatus.Done : MeetingStatus.HasArrived;
+
+            return result;
+        }
 
         public async Task<EditMeetingDto> GetDetailForEditBy(Guid id) => (await _context.Meetings.Select(m => new EditMeetingDto
         {

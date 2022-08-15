@@ -24,7 +24,4 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.6" />
     <PackageReference Include="kavenegar" Version="1.2.4" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Application\Enums\" />
-  </ItemGroup>
 </Project>

@@ -1,5 +1,6 @@
 ﻿@using VideoRayan.Application.Contract.MeetingAgg
-@using  Framework.Application
+@using Framework.Application
+@using Framework.Application.Enums
 @model IEnumerable<MeetingDto>
 
 @{
@@ -34,26 +35,42 @@
                                 <tr>
                                     <th>#</th>
                                     <th>موضوع</th>
+                                    <th>وضعیت</th>
                                     <th>نوع</th>
                                     <th>تعداد اعضاء</th>
                                     <th>تاریخ ایجاد</th>
                                     <th>عملیات</th>
                                 </tr>
                             </thead>
-                            <tbody style="text-align: right;">
+                            <tbody style="text-align: center;">
                                 @foreach (var entity in Model)
                                 {
                                     <tr class="text-center">
                                         <td>@(count++)</td>
                                         <td>@entity.Title</td>
+                                        <td>
+                                            @if (entity.Status == MeetingStatus.HasNotArrived)
+                                            {
+                                                <span class="badge badge-warning">@entity.Status.GetEnumName()</span>
+                                            }
+                                            else if (entity.Status == MeetingStatus.HasArrived)
+                                            {
+                                                <span class="badge badge-danger">@entity.Status.GetEnumName()</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge badge-success">@entity.Status.GetEnumName()</span>
+                                            }
+
+                                        </td>
                                         <td>@entity.Type.GetEnumName()</td>
                                         <td>@entity.AudienceCount</td>
                                         <td>@entity.PersianCreationDate</td>
 
-                                        <td style="text-align: center;">
+                                        <td style="text-align: right;">
 
                                             <a class="btn btn-info pull-right m-rl-5"
-                                               href="#showmodal=@Url.Action("Detail", "Meeting", new {id = entity.Id})">
+                                           href="#showmodal=@Url.Action("Detail", "Meeting", new {id = entity.Id})">
                                                 <i class="fa fa-eye"></i>
                                             </a>
 
