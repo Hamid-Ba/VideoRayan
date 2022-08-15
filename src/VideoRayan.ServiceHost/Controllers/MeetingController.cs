@@ -49,6 +49,27 @@ namespace VideoRayan.ServiceHost.Controllers
         }
 
         /// <summary>
+        /// دریافت مخاطبان دعوت شده به جلسه
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("audiences/{id}")]
+        public async Task<IActionResult> GetAudiences(Guid id)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var result = await _meetingApplication.GetAllBy(id);
+                    return Ok(result);
+                }
+
+                return BadRequest(ApiResultMessages.ModelStateNotValid);
+            }
+            catch (Exception e) { return BadRequest(e.InnerException!.Message); }
+        }
+
+        /// <summary>
         /// سرویس مربوط به ایجاد کنفرانس
         /// </summary>
         /// <param name="command"></param>
