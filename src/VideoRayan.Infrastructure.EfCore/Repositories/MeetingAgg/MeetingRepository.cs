@@ -36,7 +36,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.MeetingAgg
              }).AsNoTracking().ToListAsync();
 
             result.ForEach(m => m.PersianStartDate = $"{m.StartDate} - {m.StartTime}");
-            result.ForEach(m => m.Status = (m.StartDateTime > DateTime.Now) ? MeetingStatus.HasNotArrived : (m.StartDateTime.AddHours(1) <= DateTime.Now) ? MeetingStatus.Done : MeetingStatus.HasArrived);
+            result.ForEach(m => m.Status = (m.StartDateTime > DateTime.Now) ? MeetingStatus.HasNotArrived : (m.StartDateTime.AddDays(1) <= DateTime.Now) ? MeetingStatus.Done : MeetingStatus.HasArrived);
 
             return result;
         }
@@ -61,7 +61,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.MeetingAgg
                 StartDate = m.StartDateTime.ToFarsi()
             }).AsNoTracking().FirstOrDefaultAsync(m => m.Id == id)!;
 
-            result!.Status = (result.StartDateTime > DateTime.Now) ? MeetingStatus.HasNotArrived : (result.StartDateTime.AddHours(1) <= DateTime.Now) ? MeetingStatus.Done : MeetingStatus.HasArrived;
+            result!.Status = (result.StartDateTime > DateTime.Now) ? MeetingStatus.HasNotArrived : (result.StartDateTime.AddDays(1) <= DateTime.Now) ? MeetingStatus.Done : MeetingStatus.HasArrived;
 
             return result;
         }
@@ -80,6 +80,5 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.MeetingAgg
             StartTime = m.StartDateTime.GetTime(),
             StartDate = m.StartDateTime.ToFarsi()
         }).AsNoTracking().FirstOrDefaultAsync(m => m.Id == id))!;
-
     }
 }
