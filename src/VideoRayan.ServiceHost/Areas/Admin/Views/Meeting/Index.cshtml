@@ -40,7 +40,7 @@
                                     <th>عملیات</th>
                                 </tr>
                             </thead>
-                            <tbody class="text-center">
+                            <tbody style="text-align: right;">
                                 @foreach (var entity in Model)
                                 {
                                     <tr class="text-center">
@@ -54,11 +54,6 @@
 
                                             <a class="btn btn-info pull-right m-rl-5"
                                                href="#showmodal=@Url.Action("Detail", "Meeting", new {id = entity.Id})">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-
-                                            <a class="btn btn-info pull-right m-rl-5"
-                                               href="#showmodal=@Url.Action("Participants", "Meeting", new {id = entity.Id})">
                                                 <i class="fa fa-eye"></i>
                                             </a>
 
