@@ -169,7 +169,7 @@ namespace VideoRayan.Application
             if (user is null) return result.Failed(ApplicationMessage.UserNotExist);
 
             //ToDo : Send Phone Code
-            await _smsService.SendVerifySms(user.Mobile!, command.Message!);
+            await _smsService.SendSms(user.Mobile!, command.Message!);
 
             return result.Succeeded();
         }

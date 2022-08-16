@@ -1,4 +1,5 @@
 ﻿using Framework.Api;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VideoRayan.Application.Contract.CustomerAgg;
@@ -18,6 +19,7 @@ namespace VideoRayan.ServiceHost.Controllers
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpPost("Login")]
+        [AllowAnonymous]
         public async Task<IActionResult> LoginOrRegister([FromBody] LoginCustomerDto command)
         {
             try
@@ -39,6 +41,7 @@ namespace VideoRayan.ServiceHost.Controllers
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpPost("Verify")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetTokenByVerification([FromBody] AccessTokenDto command)
         {
             try

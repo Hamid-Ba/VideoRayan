@@ -19,7 +19,7 @@ var service = builder.Services;
 // Add services to the container.
 
 service.AddHttpContextAccessor();
-service.AddTransient<IJwtHelper, JwtHelper>();
+service.AddSingleton<IJwtHelper, JwtHelper>();
 service.AddTransient<IAuthHelper, AuthHelper>();
 service.AddTransient<ISmsService, SmsService>();
 service.AddTransient<IPasswordHasher, PasswordHasher>();
@@ -51,8 +51,10 @@ service.AddAuthentication(options =>
     options.RequireHttpsMetadata = false;
     options.TokenValidationParameters = new TokenValidationParameters()
     {
-        ValidateIssuer = true,
-        ValidateAudience = true,
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
         ValidAudience = builder.Configuration["JWT:ValidAudience"],
         ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
@@ -68,7 +70,7 @@ builder.Services.AddCors(options =>
                       {
                           //policy.WithOrigins("http://localhost:3000",
                           //                    "http://192.168134.59:3000");
-                          policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                          policy.AllowAnyOrigin().AllowAnyMethod();
                       });
 });
 

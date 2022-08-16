@@ -1,10 +1,12 @@
 ﻿using Framework.Api;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VideoRayan.Application.Contract.MeetingAgg;
 using VideoRayan.Application.Contract.MeetingAgg.Contracts;
 
 namespace VideoRayan.ServiceHost.Controllers
 {
+    
     public class CategoryController : ApiBaseController
     {
         private readonly ICategoryApplication _categoryApplication;
