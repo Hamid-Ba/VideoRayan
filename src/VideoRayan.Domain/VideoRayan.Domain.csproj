@@ -14,8 +14,6 @@
     <None Remove="AccountAgg\Contracts\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="MeetingAgg\" />
-    <Folder Include="MeetingAgg\Repositories\" />
     <Folder Include="CustomerAgg\Contracts\" />
     <Folder Include="AccountAgg\" />
     <Folder Include="AccountAgg\Contracts\" />

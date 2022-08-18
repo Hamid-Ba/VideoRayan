@@ -9,5 +9,6 @@ namespace VideoRayan.Domain.CustomerAgg.Contracts
         Task<EditAudienceDto> GetDetailForEditBy(Guid id);
         Task<IEnumerable<AudienceDto>> GetAllBy(Guid meetingId);
         Task<IEnumerable<AudienceDto>> GetAll(SearchAudienceDto filter);
+        Task<IEnumerable<AudienceDto>> GetAllByFaceToFace(Guid id);
     }
 }

@@ -65,6 +65,9 @@ public static class VideoRayanBootstrapper
         services.AddTransient<IMeetingRepository, MeetingRepository>();
         services.AddTransient<IMeetingApplication, MeetingApplication>();
 
+        services.AddTransient<IFaceToFaceRepository, FaceToFaceRepository>();
+        services.AddTransient<IFaceToFaceApplication, FaceToFaceApplication>();
+
         services.AddTransient<ICategoryRepository, CategoryRepository>();
         services.AddTransient<ICategoryApplication, CategoryApplication>();
 
@@ -72,5 +75,8 @@ public static class VideoRayanBootstrapper
 
         services.AddTransient<IAudienceMeetingRepository, AudienceMeetingRepository>();
         services.AddTransient<IAudienceMeetingApplication, AudienceMeetingApplication>();
+
+        services.AddTransient<IAudienceFaceToFaceRepository, AudienceFaceToFaceRepository>();
+        services.AddTransient<IAudienceFaceToFaceApplication, AudienceFaceToFaceApplication>();
     }
 }

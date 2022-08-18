@@ -16,8 +16,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CustomerAgg\" />
-    <Folder Include="MeetingAgg\" />
-    <Folder Include="MeetingAgg\Contracts\" />
     <Folder Include="CustomerAgg\Contracts\" />
     <Folder Include="AccountAgg\" />
     <Folder Include="AccountAgg\Contracts\" />

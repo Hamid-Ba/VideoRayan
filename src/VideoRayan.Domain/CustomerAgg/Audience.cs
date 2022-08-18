@@ -1,5 +1,4 @@
-﻿using Framework.Application.Enums;
-using Framework.Domain;
+﻿using Framework.Domain;
 using VideoRayan.Domain.MeetingAgg;
 
 namespace VideoRayan.Domain.CustomerAgg
@@ -15,6 +14,7 @@ namespace VideoRayan.Domain.CustomerAgg
         public Customer? User { get; private set; }
         public Category? Category { get; private set; }
         public List<AudienceMeeting>? Meetings { get; private set; }
+        public List<AudienceFaceToFace>? FaceToFaces { get; private set; }
 
         public Audience(Guid userId, Guid categoryId, string? fullName, string? mobile, string? position)
         {

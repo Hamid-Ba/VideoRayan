@@ -62,6 +62,34 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
             return result;
         }
 
+        public async Task<IEnumerable<AudienceDto>> GetAllByFaceToFace(Guid meetingId)
+        {
+            var meeting = await _context.FaceToFaces.Include(m => m.Audiences).FirstOrDefaultAsync(m => m.Id == meetingId);
+
+            var audiences = meeting!.Audiences!.Select(a => a.AudienceId).ToList();
+
+            List<AudienceDto> result = new();
+
+            foreach (var audience in audiences)
+            {
+                var audi = (await _context.Audiences.Include(c => c.Category).Select(c => new AudienceDto
+                {
+                    Id = c.Id,
+                    CategoryId = c.CategoryId,
+                    CategoryTitle = c.Category!.Title,
+                    PersianCreationDate = c.CreationDate.ToFarsi(),
+                    FullName = c.FullName,
+                    UserId = c.UserId,
+                    Mobile = c.Mobile,
+                    Position = c.Position,
+                }).FirstOrDefaultAsync(u => u.Id == audience));
+
+                result.Add(audi!);
+            }
+
+            return result;
+        }
+
         public async Task<AudienceDto> GetBy(Guid id) => (await _context.Audiences.Include(c => c.Category).Include(c => c.User)
             .Select(c => new AudienceDto
             {
@@ -85,6 +113,5 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
             Mobile = c.Mobile,
             Position = c.Position
         }).AsNoTracking().FirstOrDefaultAsync(c => c.Id == id))!;
-
     }
 }

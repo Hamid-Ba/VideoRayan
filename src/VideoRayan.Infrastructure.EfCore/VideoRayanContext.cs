@@ -25,6 +25,7 @@ public class VideoRayanContext : DbContext
         modelBuilder.Entity<Category>().HasQueryFilter(u => !u.IsDelete);
         modelBuilder.Entity<Customer>().HasQueryFilter(u => !u.IsDelete);
         modelBuilder.Entity<Audience>().HasQueryFilter(u => !u.IsDelete);
+        modelBuilder.Entity<FaceToFace>().HasQueryFilter(u => !u.IsDelete);
     }
 
     #region AccountAgg
@@ -52,9 +53,11 @@ public class VideoRayanContext : DbContext
     #region MeetingAgg
 
     public DbSet<Meeting> Meetings { get; set; }
+    public DbSet<FaceToFace> FaceToFaces { get; set; }
     public DbSet<Category> Categories { get; set; }
 
     #endregion
 
     public DbSet<AudienceMeeting> AudienceMeetings { get; set; }
+    public DbSet<AudienceFaceToFace> AudienceFaceToFaces { get; set; }
 }
