@@ -7,10 +7,14 @@ namespace VideoRayan.ServiceHost.Controllers
 {
     public class InvitationController : ApiBaseController
     {
+        private readonly IMeetingApplication _meetingApplication;
         private readonly IAudienceMeetingApplication _audienceMeetingApplication;
 
-        public InvitationController(IAudienceMeetingApplication audienceMeetingApplication) => _audienceMeetingApplication = audienceMeetingApplication;
-
+        public InvitationController(IMeetingApplication meetingApplication, IAudienceMeetingApplication audienceMeetingApplication)
+        {
+            _meetingApplication = meetingApplication;
+            _audienceMeetingApplication = audienceMeetingApplication;
+        }
 
         /// <summary>
         /// سرویس مربوط به افزودن مخاطبان به کنفرانس
@@ -25,7 +29,14 @@ namespace VideoRayan.ServiceHost.Controllers
                 if (ModelState.IsValid)
                 {
                     var result = await _audienceMeetingApplication.AddAudiencesToMeeting(command);
-                    return result.IsSucceeded ? Ok(result.Message) : BadRequest(result.Message);
+
+                    if (result.IsSucceeded)
+                    {
+                        var setHostResult = await _meetingApplication.SetHost(command.MeetingId,command.HostId);
+                        return setHostResult.IsSucceeded ? Ok(setHostResult.Message) : BadRequest(setHostResult.Message);
+                    }
+
+                    return Problem(result.Message);
                 }
 
                 return BadRequest(ApiResultMessages.ModelStateNotValid);

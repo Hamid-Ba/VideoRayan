@@ -7,6 +7,7 @@ namespace VideoRayan.Domain.MeetingAgg
     public class Meeting : EntityBase
     {
         public Guid UserId { get; private set; }
+        public Guid HostId { get; private set; }
         public string Title { get; private set; }
         public bool IsLive { get; private set; }
         public bool IsMute { get; private set; }
@@ -51,6 +52,8 @@ namespace VideoRayan.Domain.MeetingAgg
             if (startDateTime != null)
                 StartDateTime = (DateTime)startDateTime;
         }
+
+        public void SetHost(Guid hostId) => HostId = hostId;
 
         private void Guard(string title, DateTime? startDate)
         {

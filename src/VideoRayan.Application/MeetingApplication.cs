@@ -85,5 +85,18 @@ namespace VideoRayan.Application
         public async Task<MeetingDto> GetBy(Guid id) => await _meetingRepository.GetBy(id);
 
         public async Task<EditMeetingDto> GetDetailForEditBy(Guid id) => await _meetingRepository.GetDetailForEditBy(id);
+
+        public async Task<OperationResult> SetHost(Guid id,Guid hostId)
+        {
+            OperationResult result = new();
+
+            var meeting = await _meetingRepository.GetEntityByIdAsync(id);
+            if (meeting is null) return result.Failed(ApplicationMessage.NotExist);
+
+            meeting.SetHost(hostId);
+            await _meetingRepository.SaveChangesAsync();
+
+            return result.Succeeded();
+        }
     }
 }

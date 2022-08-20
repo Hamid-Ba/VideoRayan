@@ -5,7 +5,9 @@ namespace VideoRayan.Application.Contract.MeetingAgg
     public class MeetingDto : DtoBase
     {
         public Guid UserId { get; set; }
+        public Guid HostId { get; set; }
         public string? Title { get; set; }
+        public string? HostName { get; set; }
         public bool IsLive { get; set; }
         public bool IsMute { get; set; }
         public bool IsRecord { get; set; }
