@@ -7,6 +7,7 @@ namespace VideoRayan.Application.Contract.CustomerAgg.Contracts
 		Task<AudienceDto> GetBy(Guid id);
 		Task<EditAudienceDto> GetDetailForEditBy(Guid id);
 		Task<IEnumerable<AudienceDto>> GetAll(SearchAudienceDto filter);
+		Task<GetAllAudienceDto> GetAllPaginated(SearchAudienceDto filter);
 		Task<(OperationResult, AudienceDto)> Edit(EditAudienceDto command);
 		Task<(OperationResult, AudienceDto)> Delete(Guid id,Guid customerId);
 		Task<(OperationResult,AudienceDto)> Create(CreateAudienceDto command);

@@ -62,6 +62,8 @@ namespace VideoRayan.Application
 
         public async Task<IEnumerable<AudienceDto>> GetAll(SearchAudienceDto filter) => await _audienceRepository.GetAll(filter);
 
+        public async Task<GetAllAudienceDto> GetAllPaginated(SearchAudienceDto filter) => await _audienceRepository.GetAllPaginated(filter);
+
         public async Task<AudienceDto> GetBy(Guid id) => await _audienceRepository.GetBy(id);
 
         public async Task<EditAudienceDto> GetDetailForEditBy(Guid id) => await _audienceRepository.GetDetailForEditBy(id);

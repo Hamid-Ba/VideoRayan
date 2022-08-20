@@ -18,11 +18,11 @@ namespace VideoRayan.ServiceHost.Controllers
         /// <param name="filter"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery]SearchAudienceDto filter)
+        public async Task<IActionResult>  GetAll([FromQuery] SearchAudienceDto filter)
         {
             try
             {
-                var result = await _audienceApplication.GetAll(filter);
+                var result = await _audienceApplication.GetAllPaginated(filter);
                 return Ok(result);
             }
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }

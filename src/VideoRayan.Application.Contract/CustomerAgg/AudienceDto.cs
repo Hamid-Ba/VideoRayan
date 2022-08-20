@@ -1,4 +1,6 @@
-﻿using Framework.Application.Enums;
+﻿using Framework.Application;
+using Framework.Application.Enums;
+using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
 namespace VideoRayan.Application.Contract.CustomerAgg
 {
@@ -28,9 +30,14 @@ namespace VideoRayan.Application.Contract.CustomerAgg
         public Guid Id { get; set; }
     }
 
-    public class SearchAudienceDto
+    public class SearchAudienceDto : BaseFilterParam
     {
         public Guid CustomerId { get; set; }
         public string? Category { get; set; }
     }
+
+    public class GetAllAudienceDto : BaseFilter<AudienceDto, SearchAudienceDto>
+    {
+
+    } 
 }

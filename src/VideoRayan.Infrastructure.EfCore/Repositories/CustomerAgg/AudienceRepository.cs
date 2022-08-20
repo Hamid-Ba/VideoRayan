@@ -90,6 +90,34 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
             return result;
         }
 
+        public async Task<GetAllAudienceDto> GetAllPaginated(SearchAudienceDto filter)
+        {
+            var data = _context.Audiences.Include(c => c.Category).Include(c => c.User)
+            .Where(c => c.UserId == filter.CustomerId).Select(c => new AudienceDto
+            {
+                Id = c.Id,
+                CategoryId = c.CategoryId,
+                CategoryTitle = c.Category!.Title,
+                PersianCreationDate = c.CreationDate.ToFarsi(),
+                FullName = c.FullName,
+                UserId = c.UserId,
+                Mobile = c.Mobile,
+                Position = c.Position,
+                CreatorName = $"{c.User!.FirstName} {c.User!.LastName}"
+            }).AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(filter.Category)) data = data.Where(a => a.CategoryTitle!.Contains(filter.Category));
+
+            var result = new GetAllAudienceDto()
+            {
+                FilterParams = filter,
+                Data = await data.Skip((filter.PageId - 1) * filter.Take).Take(filter.Take).ToListAsync()
+            };
+            result.GeneratePaging(data, filter.Take, filter.PageId);
+
+            return result;
+        }
+
         public async Task<AudienceDto> GetBy(Guid id) => (await _context.Audiences.Include(c => c.Category).Include(c => c.User)
             .Select(c => new AudienceDto
             {
