@@ -1,9 +1,4 @@
 ﻿using Framework.Application;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VideoRayan.Application.Contract.MeetingAgg;
 using VideoRayan.Application.Contract.MeetingAgg.Contracts;
 using VideoRayan.Domain;
