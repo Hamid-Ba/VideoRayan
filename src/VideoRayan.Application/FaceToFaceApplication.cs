@@ -83,5 +83,18 @@ namespace VideoRayan.Application
         public async Task<FaceToFaceDto> GetBy(Guid id) => await _faceToFaceRepository.GetBy(id);
 
         public async Task<EditFaceToFaceDto> GetDetailForEditBy(Guid id) => await _faceToFaceRepository.GetDetailForEditBy(id);
+
+        public async Task<OperationResult> SetHost(Guid id, Guid hostId)
+        {
+            OperationResult result = new();
+
+            var meeting = await _faceToFaceRepository.GetEntityByIdAsync(id);
+            if (meeting is null) return result.Failed(ApplicationMessage.NotExist);
+
+            meeting.SetHost(hostId);
+            await _faceToFaceRepository.SaveChangesAsync();
+
+            return result.Succeeded();
+        }
     }
 }

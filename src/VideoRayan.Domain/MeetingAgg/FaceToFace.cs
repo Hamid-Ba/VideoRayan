@@ -7,6 +7,7 @@ namespace VideoRayan.Domain.MeetingAgg
     public class FaceToFace : EntityBase
     {
         public Guid UserId { get; private set; }
+        public Guid HostId { get; private set; }
         public string Title { get; private set; }
         public MeetingType Type { get; private set; }
         public DateTime StartDateTime { get; private set; }
@@ -29,6 +30,8 @@ namespace VideoRayan.Domain.MeetingAgg
             Type = type;
             StartDateTime = startDateTime;
         }
+
+        public void SetHost(Guid hostId) => HostId = HostId;
 
         private void Guard(string title, DateTime? startDate)
         {
