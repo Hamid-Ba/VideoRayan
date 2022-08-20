@@ -18,7 +18,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
         {
             _context = context;
             _current = accessor.HttpContext!;
-        } 
+        }
 
         public async Task<IEnumerable<CustomerDto>> GetAll(CustomerType type) => await _context.Customers.Where(c => c.Type == type).Select(c => new CustomerDto
         {
@@ -34,19 +34,26 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
 
         public async Task<Customer> GetBy(string mobile) => (await _context.Customers.FirstOrDefaultAsync(c => c.Mobile == mobile))!;
 
-        public async Task<CustomerDto> GetBy(Guid id) => (await _context.Customers.Select(c => new CustomerDto
+        public async Task<CustomerDto> GetBy(Guid id)
         {
-            Id = c.Id,
-            FirstName = c.FirstName,
-            LastName = c.LastName,
-            Mobile = c.Mobile,
-            Email = c.Email,
-            Title = c.Title,
-            Type = c.Type,
-            PhoneCode = c.PhoneCode,
-            PersianCreationDate = c.CreationDate.ToFarsi(),
-            Logo = $"{_current.Request.Scheme}://{_current.Request.Host}{_current.Request.PathBase}/Pictures//{c.Logo}",
-        }).AsNoTracking().FirstOrDefaultAsync(c => c.Id == id))!;
+            var result = (await _context.Customers.Select(c => new CustomerDto
+            {
+                Id = c.Id,
+                FirstName = c.FirstName,
+                LastName = c.LastName,
+                Mobile = c.Mobile,
+                Email = c.Email,
+                Title = c.Title,
+                Type = c.Type,
+                PhoneCode = c.PhoneCode,
+                PersianCreationDate = c.CreationDate.ToFarsi(),
+                Logo = c.Logo
+            }).AsNoTracking().FirstOrDefaultAsync(c => c.Id == id))!;
+
+            if (!string.IsNullOrWhiteSpace(result.Logo)) result.Logo = $"{_current.Request.Scheme}://{_current.Request.Host}{_current.Request.PathBase}/Pictures//{result.Logo}";
+
+            return result;
+        }
 
         public async Task<EditCustomerDto> GetDetailForEditBy(Guid id) => (await _context.Customers.Select(c => new EditCustomerDto
         {
@@ -77,6 +84,5 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
         public async Task<string> GetPhone(Guid id) => (await _context.Customers.FindAsync(id))!.Mobile!;
 
         public async Task<CustomerType> GetTypeBy(Guid id) => (await _context.Customers.FindAsync(id))!.Type;
-
     }
 }
