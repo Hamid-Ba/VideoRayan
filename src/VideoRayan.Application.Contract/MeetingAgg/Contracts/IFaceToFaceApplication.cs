@@ -13,5 +13,6 @@ namespace VideoRayan.Application.Contract.MeetingAgg.Contracts
         Task<IEnumerable<FaceToFaceDto>> GetAll(Guid customerId);
         Task<OperationResult> Delete(Guid customerId, Guid id);
         Task<OperationResult> Create(CreateFaceToFaceDto command);
+        Task<GetAllFaceToFaceDto> GetAllFaceToFacePaginated(FilterFaceToFace filter);
     }
 }

@@ -80,6 +80,8 @@ namespace VideoRayan.Application
 
         public async Task<IEnumerable<AudienceDto>> GetAllBy(Guid id) => await _audienceRepository.GetAllByFaceToFace(id);
 
+        public async Task<GetAllFaceToFaceDto> GetAllFaceToFacePaginated(FilterFaceToFace filter) => await _faceToFaceRepository.GetAllFaceToFacePaginated(filter);
+
         public async Task<FaceToFaceDto> GetBy(Guid id) => await _faceToFaceRepository.GetBy(id);
 
         public async Task<EditFaceToFaceDto> GetDetailForEditBy(Guid id) => await _faceToFaceRepository.GetDetailForEditBy(id);

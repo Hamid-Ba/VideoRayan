@@ -8,5 +8,6 @@ namespace VideoRayan.Domain.MeetingAgg.Repositories
         Task<FaceToFaceDto> GetBy(Guid id);
         Task<EditFaceToFaceDto> GetDetailForEditBy(Guid id);
         Task<IEnumerable<FaceToFaceDto>> GetAll(Guid customerId);
+        Task<GetAllFaceToFaceDto> GetAllFaceToFacePaginated(FilterFaceToFace filter);
     }
 }

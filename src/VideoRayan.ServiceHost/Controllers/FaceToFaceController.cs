@@ -16,14 +16,14 @@ namespace VideoRayan.ServiceHost.Controllers
         /// </summary>
         /// <param name="customerId"></param>
         /// <returns></returns>
-        [HttpGet("all/{customerId}")]
-        public async Task<IActionResult> GetAll(Guid customerId)
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAll([FromQuery]FilterFaceToFace filter)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var result = await _faceToFaceApplication.GetAll(customerId);
+                    var result = await _faceToFaceApplication.GetAllFaceToFacePaginated(filter);
                     return Ok(result);
                 }
 
