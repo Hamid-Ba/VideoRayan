@@ -1,0 +1,63 @@
+﻿@using Framework.Application
+@using Framework.Application.Enums
+@using VideoRayan.Application.Contract.MeetingAgg
+@model FaceToFaceDto
+
+@{
+    ViewData["Title"] = "جزئیات";
+}
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 class="modal-title"> @ViewData["Title"] @Model.Title</h4>
+</div>
+
+<div class="modal-body">
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label asp-for="Type" class="control-label ">نوع</label>
+                    <p> @Model.Type.GetEnumName() </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="StartDate" class="control-label ">تاریخ برگزاری</label>
+                    <p>@Model.StartDate</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="StartTime" class="control-label ">ساعت برگزاری</label>
+                    <p>@Model.StartTime</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Status" class="control-label ">وضعیت</label>
+                    @if (Model.Status == MeetingStatus.HasNotArrived)
+                    {
+                        <p> <span class="badge badge-warning">@Model.Status.GetEnumName()</span></p>
+                    }
+                    else if (Model.Status == MeetingStatus.HasArrived)
+                    {
+                        <p><span class="badge badge-danger">@Model.Status.GetEnumName()</span></p>
+                    }
+                    else
+                    {
+                        <p><span class="badge badge-success">@Model.Status.GetEnumName()</span></p>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">بستن</button>
+    </div>
+</div>

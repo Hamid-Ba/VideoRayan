@@ -5,7 +5,7 @@ namespace VideoRayan.ServiceHost.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class ApiBaseController : ControllerBase
     {
     }

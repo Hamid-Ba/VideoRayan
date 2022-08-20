@@ -50,11 +50,11 @@ namespace VideoRayan.ServiceHost.Controllers
         }
 
         /// <summary>
-        /// سرویس مربوط به افزودن مخاطبان به کنفرانس
+        /// سرویس مربوط به افزودن مخاطبان به کنفرانس حضوری
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost("faceToFace")]
         public async Task<IActionResult> InviteToFaceToFace([FromBody] AudienceFaceToFaceDto command)
         {
             try
