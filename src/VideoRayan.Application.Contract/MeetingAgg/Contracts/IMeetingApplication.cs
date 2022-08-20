@@ -13,5 +13,6 @@ namespace VideoRayan.Application.Contract.MeetingAgg.Contracts
 		Task<IEnumerable<MeetingDto>> GetAll(Guid cutomerId);
 		Task<OperationResult> Delete(Guid customerId,Guid id);
 		Task<OperationResult> Create(CreateMeetingDto command);
+		Task<GetAllMeetingDto> GetAllMeetingPaginated(FilterMeeting filter);
 	}
 }

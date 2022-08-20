@@ -82,6 +82,8 @@ namespace VideoRayan.Application
 
         public async Task<IEnumerable<AudienceDto>> GetAllBy(Guid id) => await _audienceRepository.GetAllBy(meetingId : id);
 
+        public async Task<GetAllMeetingDto> GetAllMeetingPaginated(FilterMeeting filter) => await _meetingRepository.GetAllMeetingPaginated(filter);
+
         public async Task<MeetingDto> GetBy(Guid id) => await _meetingRepository.GetBy(id);
 
         public async Task<EditMeetingDto> GetDetailForEditBy(Guid id) => await _meetingRepository.GetDetailForEditBy(id);

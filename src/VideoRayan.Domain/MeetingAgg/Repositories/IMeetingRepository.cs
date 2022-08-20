@@ -8,5 +8,6 @@ namespace VideoRayan.Domain.MeetingAgg.Repositories
         Task<MeetingDto> GetBy(Guid id);
         Task<EditMeetingDto> GetDetailForEditBy(Guid id);
         Task<IEnumerable<MeetingDto>> GetAll(Guid cutomerId);
+        Task<GetAllMeetingDto> GetAllMeetingPaginated(FilterMeeting filter);
     }
 }

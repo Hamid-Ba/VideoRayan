@@ -1,4 +1,5 @@
-﻿using Framework.Application.Enums;
+﻿using Framework.Application;
+using Framework.Application.Enums;
 
 namespace VideoRayan.Application.Contract.MeetingAgg
 {
@@ -41,4 +42,11 @@ namespace VideoRayan.Application.Contract.MeetingAgg
     {
         public Guid Id { get; set; }
     }
+
+    public class FilterMeeting : BaseFilterParam 
+    {
+        public Guid CustomerId { get; set; }
+    }
+
+    public class GetAllMeetingDto : BaseFilter<MeetingDto, FilterMeeting> { }
 }
