@@ -17,7 +17,7 @@ namespace VideoRayan.ServiceHost.Controllers
         /// <param name="customerId"></param>
         /// <returns></returns>
         [HttpGet("all")]
-        public async Task<IActionResult> GetAll([FromQuery]FilterMeeting filter)
+        public async Task<IActionResult> GetAll([FromQuery] FilterMeeting filter)
         {
             try
             {
@@ -82,7 +82,7 @@ namespace VideoRayan.ServiceHost.Controllers
                 if (ModelState.IsValid)
                 {
                     var result = await _meetingApplication.Create(command);
-                    return result.IsSucceeded ? Ok(result.Message) : BadRequest(result.Message);
+                    return result.Item1.IsSucceeded ? Ok(new { message = result.Item1.Message, value = result.Item2 }) : BadRequest(result.Item1.Message);
                 }
 
                 return BadRequest(ApiResultMessages.ModelStateNotValid);
@@ -103,7 +103,7 @@ namespace VideoRayan.ServiceHost.Controllers
                 if (ModelState.IsValid)
                 {
                     var result = await _meetingApplication.Edit(command);
-                    return result.IsSucceeded ? Ok(result.Message) : BadRequest(result.Message);
+                    return result.Item1.IsSucceeded ? Ok(new { message = result.Item1.Message, value = result.Item2 }) : BadRequest(result.Item1.Message);
                 }
 
                 return BadRequest(ApiResultMessages.ModelStateNotValid);
@@ -121,7 +121,7 @@ namespace VideoRayan.ServiceHost.Controllers
             try
             {
                 var result = await _meetingApplication.Delete(customerId, id);
-                return result.IsSucceeded ? Ok(result.Message) : BadRequest(result.Message);
+                return result.Item1.IsSucceeded ? Ok(new { message = result.Item1.Message, value = result.Item2 }) : BadRequest(result.Item1.Message);
             }
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }

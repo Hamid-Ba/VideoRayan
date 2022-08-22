@@ -19,7 +19,7 @@ namespace VideoRayan.Application
             _audienceRepository = audienceRepository;
         }
 
-        public async Task<OperationResult> Create(CreateMeetingDto command)
+        public async Task<(OperationResult, MeetingDto)> Create(CreateMeetingDto command)
         {
             OperationResult result = new();
 
@@ -28,59 +28,60 @@ namespace VideoRayan.Application
             var compliteDate = command.StartDate!.GetCompliteDate(hour, minute);
 
             if (_meetingRepository.Exists(m => m.StartDateTime == compliteDate))
-                return result.Failed(ApplicationMessage.DuplicatedMeetingTime);
+                return (result.Failed(ApplicationMessage.DuplicatedMeetingTime), default)!;
 
-            var meeting = new Meeting(command.UserId, command.Title!,command.IsLive,command.IsMute,command.IsRecord,
-                command.CanTalk,command.IsInteractiveBoard,command.Type, compliteDate);
+            var meeting = new Meeting(command.UserId, command.Title!, command.IsLive, command.IsMute, command.IsRecord,
+                command.CanTalk, command.IsInteractiveBoard, command.Type, compliteDate);
 
             await _meetingRepository.AddEntityAsync(meeting);
             await _meetingRepository.SaveChangesAsync();
 
-            return result.Succeeded();
+            return (result.Succeeded(), await GetBy(meeting.Id));
         }
 
-        public async Task<OperationResult> Delete(Guid customerId,Guid id)
+        public async Task<(OperationResult, MeetingDto)> Delete(Guid customerId, Guid id)
         {
             OperationResult result = new();
 
             var meeting = await _meetingRepository.GetEntityByIdAsync(id);
-            
-            if (meeting is null) return result.Failed(ApplicationMessage.NotExist);
-            if (meeting.UserId != customerId) return result.Failed(ApplicationMessage.DoNotAccessToOtherAccount);
 
+            if (meeting is null) return (result.Failed(ApplicationMessage.NotExist), default)!;
+            if (meeting.UserId != customerId) return (result.Failed(ApplicationMessage.DoNotAccessToOtherAccount), default)!;
+
+            var meetingDto = await GetBy(id);
             meeting.Delete();
             await _meetingRepository.SaveChangesAsync();
 
-            return result.Succeeded();
+            return (result.Succeeded(), meetingDto);
         }
 
-        public async Task<OperationResult> Edit(EditMeetingDto command)
+        public async Task<(OperationResult, MeetingDto)> Edit(EditMeetingDto command)
         {
             OperationResult result = new();
 
             var meeting = await _meetingRepository.GetEntityByIdAsync(command.Id);
 
-            if (meeting is null) return result.Failed(ApplicationMessage.NotExist);
+            if (meeting is null) return (result.Failed(ApplicationMessage.NotExist), default)!;
 
             var hour = int.Parse(command.StartTime!.Split(':')[0]);
             var minute = int.Parse(command.StartTime.Split(':')[1]);
             var compliteDate = command.StartDate!.GetCompliteDate(hour, minute);
 
             if (_meetingRepository.Exists(m => m.StartDateTime == compliteDate && m.UserId == command.UserId && m.Id != command.Id))
-                return result.Failed(ApplicationMessage.DuplicatedMeetingTime);
+                return (result.Failed(ApplicationMessage.DuplicatedMeetingTime), default)!;
 
-            if (meeting.UserId != command.UserId) return result.Failed(ApplicationMessage.DoNotAccessToOtherAccount);
+            if (meeting.UserId != command.UserId) return (result.Failed(ApplicationMessage.DoNotAccessToOtherAccount), default)!;
 
-            meeting.Edit(command.Title!,command.IsLive,command.IsMute,command.IsRecord,command.CanTalk,command.IsInteractiveBoard,
+            meeting.Edit(command.Title!, command.IsLive, command.IsMute, command.IsRecord, command.CanTalk, command.IsInteractiveBoard,
                 command.Type, compliteDate);
             await _meetingRepository.SaveChangesAsync();
 
-            return result.Succeeded();
+            return (result.Succeeded(), await GetBy(meeting.Id));
         }
 
         public async Task<IEnumerable<MeetingDto>> GetAll(Guid customeriId) => await _meetingRepository.GetAll(customeriId);
 
-        public async Task<IEnumerable<AudienceDto>> GetAllBy(Guid id) => await _audienceRepository.GetAllBy(meetingId : id);
+        public async Task<IEnumerable<AudienceDto>> GetAllBy(Guid id) => await _audienceRepository.GetAllBy(meetingId: id);
 
         public async Task<GetAllMeetingDto> GetAllMeetingPaginated(FilterMeeting filter) => await _meetingRepository.GetAllMeetingPaginated(filter);
 
@@ -88,7 +89,7 @@ namespace VideoRayan.Application
 
         public async Task<EditMeetingDto> GetDetailForEditBy(Guid id) => await _meetingRepository.GetDetailForEditBy(id);
 
-        public async Task<OperationResult> SetHost(Guid id,Guid hostId)
+        public async Task<OperationResult> SetHost(Guid id, Guid hostId)
         {
             OperationResult result = new();
 
