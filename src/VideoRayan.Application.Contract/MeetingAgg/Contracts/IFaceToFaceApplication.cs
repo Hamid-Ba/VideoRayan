@@ -9,10 +9,10 @@ namespace VideoRayan.Application.Contract.MeetingAgg.Contracts
         Task<IEnumerable<AudienceDto>> GetAllBy(Guid id);
         Task<EditFaceToFaceDto> GetDetailForEditBy(Guid id);
         Task<OperationResult> SetHost(Guid id, Guid hostId);
-        Task<OperationResult> Edit(EditFaceToFaceDto command);
+        Task<(OperationResult,FaceToFaceDto)> Edit(EditFaceToFaceDto command);
         Task<IEnumerable<FaceToFaceDto>> GetAll(Guid customerId);
-        Task<OperationResult> Delete(Guid customerId, Guid id);
-        Task<OperationResult> Create(CreateFaceToFaceDto command);
+        Task<(OperationResult, FaceToFaceDto)> Delete(Guid customerId, Guid id);
+        Task<(OperationResult, FaceToFaceDto)> Create(CreateFaceToFaceDto command);
         Task<GetAllFaceToFaceDto> GetAllFaceToFacePaginated(FilterFaceToFace filter);
     }
 }

@@ -19,7 +19,7 @@ namespace VideoRayan.Application
             _audienceRepository = audienceRepository;
         }
 
-        public async Task<OperationResult> Create(CreateFaceToFaceDto command)
+        public async Task<(OperationResult, FaceToFaceDto)> Create(CreateFaceToFaceDto command)
         {
             OperationResult result = new();
 
@@ -28,52 +28,53 @@ namespace VideoRayan.Application
             var compliteDate = command.StartDate!.GetCompliteDate(hour, minute);
 
             if (_faceToFaceRepository.Exists(m => m.StartDateTime == compliteDate))
-                return result.Failed(ApplicationMessage.DuplicatedMeetingTime);
+                return (result.Failed(ApplicationMessage.DuplicatedMeetingTime), default)!;
 
             var faceToFace = new FaceToFace(command.UserId, command.Title!, command.Type, compliteDate);
 
             await _faceToFaceRepository.AddEntityAsync(faceToFace);
             await _faceToFaceRepository.SaveChangesAsync();
 
-            return result.Succeeded();
+            return (result.Succeeded(), await GetBy(faceToFace.Id));
         }
 
-        public async Task<OperationResult> Delete(Guid customerId, Guid id)
+        public async Task<(OperationResult, FaceToFaceDto)> Delete(Guid customerId, Guid id)
         {
             OperationResult result = new();
 
             var faceToFace = await _faceToFaceRepository.GetEntityByIdAsync(id);
 
-            if (faceToFace is null) return result.Failed(ApplicationMessage.NotExist);
-            if (faceToFace.UserId != customerId) return result.Failed(ApplicationMessage.DoNotAccessToOtherAccount);
+            if (faceToFace is null) return (result.Failed(ApplicationMessage.NotExist), default)!;
+            if (faceToFace.UserId != customerId) return (result.Failed(ApplicationMessage.DoNotAccessToOtherAccount), default)!;
 
+            var faceToFaceDto = await GetBy(id);
             faceToFace.Delete();
             await _faceToFaceRepository.SaveChangesAsync();
 
-            return result.Succeeded();
+            return (result.Succeeded(), faceToFaceDto);
         }
 
-        public async Task<OperationResult> Edit(EditFaceToFaceDto command)
+        public async Task<(OperationResult, FaceToFaceDto)> Edit(EditFaceToFaceDto command)
         {
             OperationResult result = new();
 
             var faceToFace = await _faceToFaceRepository.GetEntityByIdAsync(command.Id);
 
-            if (faceToFace is null) return result.Failed(ApplicationMessage.NotExist);
+            if (faceToFace is null) return (result.Failed(ApplicationMessage.NotExist), default)!;
 
             var hour = int.Parse(command.StartTime!.Split(':')[0]);
             var minute = int.Parse(command.StartTime.Split(':')[1]);
             var compliteDate = command.StartDate!.GetCompliteDate(hour, minute);
 
             if (_faceToFaceRepository.Exists(m => m.StartDateTime == compliteDate && m.UserId == command.UserId && m.Id != command.Id))
-                return result.Failed(ApplicationMessage.DuplicatedMeetingTime);
+                return (result.Failed(ApplicationMessage.DuplicatedMeetingTime), default)!;
 
-            if (faceToFace.UserId != command.UserId) return result.Failed(ApplicationMessage.DoNotAccessToOtherAccount);
+            if (faceToFace.UserId != command.UserId) return (result.Failed(ApplicationMessage.DoNotAccessToOtherAccount), default)!;
 
             faceToFace.Edit(command.Title!, command.Type, compliteDate);
             await _faceToFaceRepository.SaveChangesAsync();
 
-            return result.Succeeded();
+            return (result.Succeeded(), await GetBy(faceToFace.Id));
         }
 
         public async Task<IEnumerable<FaceToFaceDto>> GetAll(Guid customerId) => await _faceToFaceRepository.GetAll(customerId);
