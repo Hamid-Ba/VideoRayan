@@ -41,7 +41,7 @@
                                 {
                                     <tr class="text-center">
                                         <td>@(count++)</td>
-                                        <td><img src="~/Pictures/@entity.ImageName" style="width: 85px; height: 85px; border-radius: 10px" /></td>
+                                        <td><img src="@entity.ImageName" style="width: 85px; height: 85px; border-radius: 10px" /></td>
                                         <td>@entity.Title</td>
                                         <td>@entity.PeriodPerDay</td>
                                         <td>@entity.Cost.ToMoney()</td>
