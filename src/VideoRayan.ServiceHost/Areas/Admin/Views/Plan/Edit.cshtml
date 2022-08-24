@@ -1,0 +1,73 @@
+﻿@using VideoRayan.Application.Contract.PlanAgg
+@model EditPlanVM
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 class="modal-title">ویرایش تعرفه</h4>
+</div>
+
+<form asp-controller="Plan" asp-action="Edit"
+      method="post"
+      data-ajax="true"
+      data-callback=""
+      data-action="Refresh"
+      enctype="multipart/form-data">
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label">عنوان</label>
+                    <input type="text" class="form-control" asp-for="Title">
+                    <span asp-validation-for="Title" class="error"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="PeriodPerDay" class="control-label">مدت بر حسب روز</label>
+                    <input type="number" min="1" class="form-control" asp-for="PeriodPerDay">
+                    <span asp-validation-for="PeriodPerDay" class="error"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Cost" class="control-label">قیمت</label>
+                    <input type="number" min="0" class="form-control" asp-for="Cost">
+                    <span asp-validation-for="Cost" class="error"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="ImageFile" class="control-label">تصویر</label>
+                    <input type="file" class="form-control" asp-for="ImageFile" accept="image/*">
+                    <span asp-validation-for="ImageFile" class="error"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label">توضیحات</label>
+                    <textarea class="form-control" asp-for="Description"></textarea>
+                    <span asp-validation-for="Description" class="error"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label asp-for="Ps" class="control-label">پی نوشت</label>
+                    <textarea class="form-control" asp-for="Ps"></textarea>
+                    <span asp-validation-for="Ps" class="error"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input asp-for="Id" type="hidden"/>
+        <input asp-for="ImageName" type="hidden" />
+        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">بستن</button>
+        <button type="submit" class="btn btn-info waves-effect waves-light">ویرایش</button>
+    </div>
+</form>

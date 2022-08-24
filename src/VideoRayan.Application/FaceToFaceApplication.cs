@@ -1,4 +1,5 @@
 ﻿using Framework.Application;
+using Framework.Application.Sms;
 using VideoRayan.Application.Contract.CustomerAgg;
 using VideoRayan.Application.Contract.MeetingAgg;
 using VideoRayan.Application.Contract.MeetingAgg.Contracts;
@@ -10,13 +11,15 @@ namespace VideoRayan.Application
 {
     public class FaceToFaceApplication : IFaceToFaceApplication
     {
-        private readonly IFaceToFaceRepository _faceToFaceRepository;
+        private readonly ISmsService _smsService;
         private readonly IAudienceRepository _audienceRepository;
+        private readonly IFaceToFaceRepository _faceToFaceRepository;
 
-        public FaceToFaceApplication(IFaceToFaceRepository faceToFaceRepository, IAudienceRepository audienceRepository)
+        public FaceToFaceApplication(ISmsService smsService, IAudienceRepository audienceRepository, IFaceToFaceRepository faceToFaceRepository)
         {
-            _faceToFaceRepository = faceToFaceRepository;
+            _smsService = smsService;
             _audienceRepository = audienceRepository;
+            _faceToFaceRepository = faceToFaceRepository;
         }
 
         public async Task<(OperationResult, FaceToFaceDto)> Create(CreateFaceToFaceDto command)
@@ -86,6 +89,20 @@ namespace VideoRayan.Application
         public async Task<FaceToFaceDto> GetBy(Guid id) => await _faceToFaceRepository.GetBy(id);
 
         public async Task<EditFaceToFaceDto> GetDetailForEditBy(Guid id) => await _faceToFaceRepository.GetDetailForEditBy(id);
+
+        public async Task<OperationResult> SendMeetingSms(Guid id, string template)
+        {
+            OperationResult result = new();
+
+            var meeting = await _audienceRepository.GetForSendingSms(id, isMeeting : false);
+            if (meeting is null) return result.Failed(ApplicationMessage.UserNotExist);
+
+            //ToDo : Send Confirm Meeting Code
+            foreach (var mobile in meeting.AudienceMobile!)
+                await _smsService.SendMeetingSms(mobile, template, new string[] { meeting.Title!, meeting.StartDate!, meeting.StartTime! });
+
+            return result.Succeeded();
+        }
 
         public async Task<OperationResult> SetHost(Guid id, Guid hostId)
         {

@@ -1,5 +1,6 @@
 ﻿using Framework.Api;
 using Microsoft.AspNetCore.Mvc;
+using VideoRayan.Application;
 using VideoRayan.Application.Contract.MeetingAgg;
 using VideoRayan.Application.Contract.MeetingAgg.Contracts;
 
@@ -122,6 +123,24 @@ namespace VideoRayan.ServiceHost.Controllers
             {
                 var result = await _faceToFaceApplication.Delete(customerId, id);
                 return result.Item1.IsSucceeded ? Ok(new { message = result.Item1.Message, value = result.Item2 }) : BadRequest(result.Item1.Message);
+            }
+            catch (Exception e) { return BadRequest(e.InnerException!.Message); }
+        }
+        
+        /// <summary>
+        /// سرویس مربوط به ارسال پیامک تایید یا لغو کنفرانس
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("sendSms/{id}/{isConfirm}")]
+        public async Task<IActionResult> SendSms(Guid id, bool isConfirm)
+        {
+            try
+            {
+                string template = "";
+                template = isConfirm ? "ConfirmMeeting" : "DisConfrimMeeting";
+
+                var result = await _faceToFaceApplication.SendMeetingSms(id, template);
+                return Ok(result.Message);
             }
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }

@@ -1,4 +1,5 @@
 ﻿using Framework.Api;
+using Framework.Application;
 using Microsoft.AspNetCore.Mvc;
 using VideoRayan.Application.Contract.MeetingAgg;
 using VideoRayan.Application.Contract.MeetingAgg.Contracts;
@@ -126,5 +127,22 @@ namespace VideoRayan.ServiceHost.Controllers
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }
 
+        /// <summary>
+        /// سرویس مربوط به ارسال پیامک تایید یا لغو کنفرانس
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("sendSms/{id}/{isConfirm}")]
+        public async Task<IActionResult> SendSms(Guid id, bool isConfirm)
+        {
+            try
+            {
+                string template = "";
+                template = isConfirm ? "ConfirmMeeting" : "DisConfrimMeeting";
+
+                var result = await _meetingApplication.SendMeetingSms(id, template);
+                return Ok(result.Message);
+            }
+            catch (Exception e) { return BadRequest(e.InnerException!.Message); }
+        }
     }
 }

@@ -2,6 +2,7 @@
 using Framework.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using VideoRayan.Application.Contract.CustomerAgg;
+using VideoRayan.Application.Contract.MeetingAgg;
 using VideoRayan.Domain.CustomerAgg;
 using VideoRayan.Domain.CustomerAgg.Contracts;
 
@@ -141,5 +142,35 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
             Mobile = c.Mobile,
             Position = c.Position
         }).AsNoTracking().FirstOrDefaultAsync(c => c.Id == id))!;
+
+        public async Task<SendStatusMeetingDto> GetForSendingSms(Guid id, bool isMeeting)
+        {
+            if (isMeeting)
+            {
+                var audiences = await _context.AudienceMeetings.Include(a => a.Audience).Where(a => a.MeetingId == id).Select(_ => _.Audience!.Mobile).ToArrayAsync();
+
+                return (await _context.Meetings.Select(m => new SendStatusMeetingDto
+                {
+                    Id = m.Id,
+                    Title = m.Title,
+                    StartTime = m.StartDateTime.GetTimeRightFormat(),
+                    StartDate = m.StartDateTime.ToFarsi(),
+                    AudienceMobile = audiences!,
+                }).AsNoTracking().FirstOrDefaultAsync(m => m.Id == id))!;
+            }
+            else
+            {
+                var audiences = await _context.AudienceFaceToFaces.Include(a => a.Audience).Where(a => a.FaceToFaceId == id).Select(_ => _.Audience!.Mobile).ToArrayAsync();
+
+                return (await _context.FaceToFaces.Select(m => new SendStatusMeetingDto
+                {
+                    Id = m.Id,
+                    Title = m.Title,
+                    StartTime = m.StartDateTime.GetTimeRightFormat(),
+                    StartDate = m.StartDateTime.ToFarsi(),
+                    AudienceMobile = audiences!,
+                }).AsNoTracking().FirstOrDefaultAsync(m => m.Id == id))!;
+            }
+        }
     }
 }

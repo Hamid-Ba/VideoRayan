@@ -1,4 +1,5 @@
 ﻿using Framework.Application;
+using Framework.Application.Sms;
 using VideoRayan.Application.Contract.CustomerAgg;
 using VideoRayan.Application.Contract.MeetingAgg;
 using VideoRayan.Application.Contract.MeetingAgg.Contracts;
@@ -10,11 +11,13 @@ namespace VideoRayan.Application
 {
     public class MeetingApplication : IMeetingApplication
     {
+        private readonly ISmsService _smsService;
         private readonly IMeetingRepository _meetingRepository;
         private readonly IAudienceRepository _audienceRepository;
 
-        public MeetingApplication(IMeetingRepository meetingRepository, IAudienceRepository audienceRepository)
+        public MeetingApplication(ISmsService smsService, IMeetingRepository meetingRepository, IAudienceRepository audienceRepository)
         {
+            _smsService = smsService;
             _meetingRepository = meetingRepository;
             _audienceRepository = audienceRepository;
         }
@@ -88,6 +91,20 @@ namespace VideoRayan.Application
         public async Task<MeetingDto> GetBy(Guid id) => await _meetingRepository.GetBy(id);
 
         public async Task<EditMeetingDto> GetDetailForEditBy(Guid id) => await _meetingRepository.GetDetailForEditBy(id);
+
+        public async Task<OperationResult> SendMeetingSms(Guid id,string template)
+        {
+            OperationResult result = new();
+
+            var meeting = await _audienceRepository.GetForSendingSms(id, isMeeting : true);
+            if (meeting is null) return result.Failed(ApplicationMessage.UserNotExist);
+
+            //ToDo : Send Confirm Meeting Code
+            foreach(var mobile in meeting.AudienceMobile!)
+                await _smsService.SendMeetingSms(mobile, template, new string[] { meeting.Title!, meeting.StartDate!, meeting.StartTime! });
+
+            return result.Succeeded();
+        }
 
         public async Task<OperationResult> SetHost(Guid id, Guid hostId)
         {

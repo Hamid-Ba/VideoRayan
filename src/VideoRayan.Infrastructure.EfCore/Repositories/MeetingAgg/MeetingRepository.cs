@@ -5,7 +5,6 @@ using VideoRayan.Application.Contract.MeetingAgg;
 using VideoRayan.Domain.MeetingAgg;
 using VideoRayan.Domain.MeetingAgg.Repositories;
 using Framework.Application.Enums;
-using VideoRayan.Domain.CustomerAgg;
 
 namespace VideoRayan.Infrastructure.EfCore.Repositories.MeetingAgg
 {

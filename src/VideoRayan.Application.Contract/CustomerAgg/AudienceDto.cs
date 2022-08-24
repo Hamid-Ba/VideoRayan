@@ -30,6 +30,15 @@ namespace VideoRayan.Application.Contract.CustomerAgg
         public Guid Id { get; set; }
     }
 
+    public class SendStatusMeetingDto
+    {
+        public Guid Id { get; set; }
+        public string? Title { get; set; }
+        public string? StartDate { get; set; }
+        public string? StartTime { get; set; }
+        public string[]? AudienceMobile { get; set; }
+    }
+
     public class SearchAudienceDto : BaseFilterParam
     {
         public Guid CustomerId { get; set; }
