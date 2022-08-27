@@ -79,6 +79,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.MeetingAgg
                 Title = m.Title,
                 Address = m.Address,
                 Type = m.Type,
+                Description = m.Description,
                 StartTime = m.StartDateTime.GetTimeRightFormat(),
                 StartDate = m.StartDateTime.ToFarsi()
             }).AsNoTracking().FirstOrDefaultAsync(m => m.Id == id)!;
@@ -95,6 +96,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.MeetingAgg
             Title = m.Title,
             Address = m.Address,
             Type = m.Type,
+            Description = m.Description,
             StartTime = m.StartDateTime.GetTime(),
             StartDate = m.StartDateTime.ToFarsi()
         }).AsNoTracking().FirstOrDefaultAsync(m => m.Id == id))!;

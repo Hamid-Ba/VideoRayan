@@ -91,6 +91,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.MeetingAgg
                 PersianStartDate = m.StartDateTime.ToFarsi() + m.StartDateTime.GetTime(),
                 Title = m.Title,
                 Type = m.Type,
+                Description = m.Description,
                 StartTime = m.StartDateTime.GetTimeRightFormat(),
                 StartDate = m.StartDateTime.ToFarsi()
             }).AsNoTracking().FirstOrDefaultAsync(m => m.Id == id)!;
@@ -110,6 +111,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.MeetingAgg
             IsMute = m.IsMute,
             IsRecord = m.IsRecord,
             Title = m.Title,
+            Description = m.Description,
             Type = m.Type,
             StartTime = m.StartDateTime.GetTime(),
             StartDate = m.StartDateTime.ToFarsi()

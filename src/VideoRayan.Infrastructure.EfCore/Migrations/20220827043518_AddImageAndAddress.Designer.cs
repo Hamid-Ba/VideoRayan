@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VideoRayan.Infrastructure.EfCore;
 
@@ -11,9 +12,10 @@ using VideoRayan.Infrastructure.EfCore;
 namespace VideoRayan.Infrastructure.EfCore.Migrations
 {
     [DbContext(typeof(VideoRayanContext))]
-    partial class VideoRayanContextModelSnapshot : ModelSnapshot
+    [Migration("20220827043518_AddImageAndAddress")]
+    partial class AddImageAndAddress
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -322,11 +324,6 @@ namespace VideoRayan.Infrastructure.EfCore.Migrations
                     b.Property<DateTime?>("DeletionDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
                     b.Property<Guid>("HostId")
                         .HasColumnType("uniqueidentifier");
 
@@ -371,11 +368,6 @@ namespace VideoRayan.Infrastructure.EfCore.Migrations
 
                     b.Property<DateTime?>("DeletionDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
 
                     b.Property<Guid>("HostId")
                         .HasColumnType("uniqueidentifier");

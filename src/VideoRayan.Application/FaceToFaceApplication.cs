@@ -33,7 +33,7 @@ namespace VideoRayan.Application
             if (_faceToFaceRepository.Exists(m => m.StartDateTime == compliteDate))
                 return (result.Failed(ApplicationMessage.DuplicatedMeetingTime), default)!;
 
-            var faceToFace = new FaceToFace(command.UserId, command.Title!, command.Address!, command.Type, compliteDate);
+            var faceToFace = new FaceToFace(command.UserId, command.Title!, command.Address!, command.Description!, command.Type, compliteDate);
 
             await _faceToFaceRepository.AddEntityAsync(faceToFace);
             await _faceToFaceRepository.SaveChangesAsync();
@@ -74,7 +74,7 @@ namespace VideoRayan.Application
 
             if (faceToFace.UserId != command.UserId) return (result.Failed(ApplicationMessage.DoNotAccessToOtherAccount), default)!;
 
-            faceToFace.Edit(command.Title!, command.Address!, command.Type, compliteDate);
+            faceToFace.Edit(command.Title!, command.Address!, command.Description!, command.Type, compliteDate);
             await _faceToFaceRepository.SaveChangesAsync();
 
             return (result.Succeeded(), await GetBy(faceToFace.Id));

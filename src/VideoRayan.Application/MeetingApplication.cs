@@ -34,7 +34,7 @@ namespace VideoRayan.Application
                 return (result.Failed(ApplicationMessage.DuplicatedMeetingTime), default)!;
 
             var meeting = new Meeting(command.UserId, command.Title!, command.IsLive, command.IsMute, command.IsRecord,
-                command.CanTalk, command.IsInteractiveBoard, command.Type, compliteDate);
+                command.CanTalk, command.IsInteractiveBoard,command.Description!, command.Type, compliteDate);
 
             await _meetingRepository.AddEntityAsync(meeting);
             await _meetingRepository.SaveChangesAsync();
@@ -75,7 +75,7 @@ namespace VideoRayan.Application
 
             if (meeting.UserId != command.UserId) return (result.Failed(ApplicationMessage.DoNotAccessToOtherAccount), default)!;
 
-            meeting.Edit(command.Title!, command.IsLive, command.IsMute, command.IsRecord, command.CanTalk, command.IsInteractiveBoard,
+            meeting.Edit(command.Title!, command.IsLive, command.IsMute, command.IsRecord, command.CanTalk, command.IsInteractiveBoard,command.Description!,
                 command.Type, compliteDate);
             await _meetingRepository.SaveChangesAsync();
 
