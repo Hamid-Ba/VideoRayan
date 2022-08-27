@@ -6,7 +6,8 @@ namespace VideoRayan.Application.Contract.MeetingAgg
     public class FaceToFaceDto : DtoBase
     {
         public Guid UserId { get; set; }
-        public string Title { get; set; }
+        public string? Title { get; set; }
+        public string? Address { get; set; }
         public MeetingType Type { get; set; }
         public MeetingStatus Status { get; set; }
         public DateTime StartDateTime { get; set; }
@@ -20,12 +21,13 @@ namespace VideoRayan.Application.Contract.MeetingAgg
     {
         public Guid UserId { get; set; }
         public string? Title { get; set; }
+        public string? Address { get; set; }
         public MeetingType Type { get; set; }
         public string? StartDate { get; set; }
         public string? StartTime { get; set; }
     }
 
-    public class EditFaceToFaceDto : CreateMeetingDto
+    public class EditFaceToFaceDto : CreateFaceToFaceDto
     {
         public Guid Id { get; set; }
     }

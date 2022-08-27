@@ -153,6 +153,8 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
                 {
                     Id = m.Id,
                     Title = m.Title,
+                    PinCode = "123456",
+                    URLOrAddress = "https://test.rayan.com",
                     StartTime = m.StartDateTime.GetTimeRightFormat(),
                     StartDate = m.StartDateTime.ToFarsi(),
                     AudienceMobile = audiences!,
@@ -166,6 +168,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
                 {
                     Id = m.Id,
                     Title = m.Title,
+                    URLOrAddress = m.Address,
                     StartTime = m.StartDateTime.GetTimeRightFormat(),
                     StartDate = m.StartDateTime.ToFarsi(),
                     AudienceMobile = audiences!,

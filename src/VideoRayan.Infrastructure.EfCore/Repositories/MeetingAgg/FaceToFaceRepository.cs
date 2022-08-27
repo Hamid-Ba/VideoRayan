@@ -3,7 +3,6 @@ using Framework.Application.Enums;
 using Framework.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using VideoRayan.Application.Contract.MeetingAgg;
-using VideoRayan.Domain.CustomerAgg;
 using VideoRayan.Domain.MeetingAgg;
 using VideoRayan.Domain.MeetingAgg.Repositories;
 
@@ -26,6 +25,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.MeetingAgg
                  StartDate = m.StartDateTime.ToFarsi(),
                  StartDateTime = m.StartDateTime,
                  Title = m.Title,
+                 Address = m.Address,
                  Type = m.Type,
                  AudienceCount = m.Audiences!.Count,
                  StartTime = m.StartDateTime.GetTimeRightFormat(),
@@ -48,6 +48,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.MeetingAgg
                  StartDate = m.StartDateTime.ToFarsi(),
                  StartDateTime = m.StartDateTime,
                  Title = m.Title,
+                 Address = m.Address,
                  Type = m.Type,
                  AudienceCount = m.Audiences!.Count,
                  StartTime = m.StartDateTime.GetTimeRightFormat(),
@@ -61,7 +62,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.MeetingAgg
                 FilterParams = filter,
                 Data = data.Skip((filter.PageId - 1) * filter.Take).Take(filter.Take).ToList()
             };
-            result.GeneratePaging(data.AsQueryable(),filter.Take,filter.PageId);
+            result.GeneratePaging(data.AsQueryable(), filter.Take, filter.PageId);
 
             return result;
         }
@@ -76,6 +77,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.MeetingAgg
                 StartDateTime = m.StartDateTime,
                 PersianStartDate = m.StartDateTime.ToFarsi() + m.StartDateTime.GetTime(),
                 Title = m.Title,
+                Address = m.Address,
                 Type = m.Type,
                 StartTime = m.StartDateTime.GetTimeRightFormat(),
                 StartDate = m.StartDateTime.ToFarsi()
@@ -91,6 +93,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.MeetingAgg
             Id = m.Id,
             UserId = m.UserId,
             Title = m.Title,
+            Address = m.Address,
             Type = m.Type,
             StartTime = m.StartDateTime.GetTime(),
             StartDate = m.StartDateTime.ToFarsi()
