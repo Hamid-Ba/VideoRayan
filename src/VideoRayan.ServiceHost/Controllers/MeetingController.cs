@@ -138,8 +138,7 @@ namespace VideoRayan.ServiceHost.Controllers
             {
                 string template = "";
                 template = isConfirm ? "ConfirmMeeting" : "DisConfrimMeeting";
-
-                var result = await _meetingApplication.SendMeetingSms(id, template);
+                var result = isConfirm ? await _meetingApplication.SendConfirmMeetingSms(id, template) : await _meetingApplication.SendDisConfirmMeetingSms(id, template);
                 return Ok(result.Message);
             }
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }

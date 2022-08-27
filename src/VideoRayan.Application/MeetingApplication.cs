@@ -92,16 +92,30 @@ namespace VideoRayan.Application
 
         public async Task<EditMeetingDto> GetDetailForEditBy(Guid id) => await _meetingRepository.GetDetailForEditBy(id);
 
-        public async Task<OperationResult> SendMeetingSms(Guid id,string template)
+        public async Task<OperationResult> SendConfirmMeetingSms(Guid id, string template)
         {
             OperationResult result = new();
 
-            var meeting = await _audienceRepository.GetForSendingSms(id, isMeeting : true);
+            var meeting = await _audienceRepository.GetForSendingSms(id, isMeeting: true);
             if (meeting is null) return result.Failed(ApplicationMessage.UserNotExist);
 
             //ToDo : Send Confirm Meeting Code
-            foreach(var mobile in meeting.AudienceMobile!)
-                await _smsService.SendMeetingSms(mobile, template, new string[] { meeting.Title!, meeting.StartDate!, meeting.StartTime! });
+            foreach (var mobile in meeting.AudienceMobile!)
+                await _smsService.SendConfrimMeetingSms(mobile, template, new string[] { meeting.Title!, meeting.StartDate!, meeting.StartTime! , meeting.URLOrAddress! , meeting.PinCode! });
+
+            return result.Succeeded();
+        }
+
+        public async Task<OperationResult> SendDisConfirmMeetingSms(Guid id, string template)
+        {
+            OperationResult result = new();
+
+            var meeting = await _audienceRepository.GetForSendingSms(id, isMeeting: true);
+            if (meeting is null) return result.Failed(ApplicationMessage.UserNotExist);
+
+            //ToDo : Send Confirm Meeting Code
+            foreach (var mobile in meeting.AudienceMobile!)
+                await _smsService.SendConfrimMeetingSms(mobile, template, new string[] { meeting.Title!, meeting.StartDate!, meeting.StartTime! });
 
             return result.Succeeded();
         }

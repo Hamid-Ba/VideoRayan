@@ -10,7 +10,8 @@ namespace VideoRayan.Application.Contract.MeetingAgg.Contracts
         Task<OperationResult> SetHost(Guid id, Guid hostId);
         Task<EditFaceToFaceDto> GetDetailForEditBy(Guid id);
         Task<IEnumerable<FaceToFaceDto>> GetAll(Guid customerId);
-        Task<OperationResult> SendMeetingSms(Guid id, string template);
+        Task<OperationResult> SendConfirmMeetingSms(Guid id, string template);
+        Task<OperationResult> SendDisConfirmMeetingSms(Guid id, string template);
         Task<(OperationResult,FaceToFaceDto)> Edit(EditFaceToFaceDto command);
         Task<(OperationResult, FaceToFaceDto)> Delete(Guid customerId, Guid id);
         Task<(OperationResult, FaceToFaceDto)> Create(CreateFaceToFaceDto command);

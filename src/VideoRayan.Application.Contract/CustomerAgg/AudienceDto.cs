@@ -36,6 +36,8 @@ namespace VideoRayan.Application.Contract.CustomerAgg
         public string? Title { get; set; }
         public string? StartDate { get; set; }
         public string? StartTime { get; set; }
+        public string? URLOrAddress { get; set; }
+        public string? PinCode { get; set; }
         public string[]? AudienceMobile { get; set; }
     }
 

@@ -90,16 +90,30 @@ namespace VideoRayan.Application
 
         public async Task<EditFaceToFaceDto> GetDetailForEditBy(Guid id) => await _faceToFaceRepository.GetDetailForEditBy(id);
 
-        public async Task<OperationResult> SendMeetingSms(Guid id, string template)
+        public async Task<OperationResult> SendConfirmMeetingSms(Guid id, string template)
         {
             OperationResult result = new();
 
-            var meeting = await _audienceRepository.GetForSendingSms(id, isMeeting : false);
+            var meeting = await _audienceRepository.GetForSendingSms(id, isMeeting: false);
             if (meeting is null) return result.Failed(ApplicationMessage.UserNotExist);
 
             //ToDo : Send Confirm Meeting Code
             foreach (var mobile in meeting.AudienceMobile!)
-                await _smsService.SendMeetingSms(mobile, template, new string[] { meeting.Title!, meeting.StartDate!, meeting.StartTime! });
+                await _smsService.SendConfrimMeetingSms(mobile, template, new string[] { meeting.Title!, meeting.StartDate!, meeting.StartTime! , meeting.URLOrAddress! });
+
+            return result.Succeeded();
+        }
+
+        public async Task<OperationResult> SendDisConfirmMeetingSms(Guid id, string template)
+        {
+            OperationResult result = new();
+
+            var meeting = await _audienceRepository.GetForSendingSms(id, isMeeting: false);
+            if (meeting is null) return result.Failed(ApplicationMessage.UserNotExist);
+
+            //ToDo : Send Confirm Meeting Code
+            foreach (var mobile in meeting.AudienceMobile!)
+                await _smsService.SendDisConfrimMeetingSms(mobile, template, new string[] { meeting.Title!, meeting.StartDate!, meeting.StartTime! });
 
             return result.Succeeded();
         }

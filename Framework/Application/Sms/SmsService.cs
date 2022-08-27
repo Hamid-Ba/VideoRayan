@@ -8,11 +8,23 @@ namespace Framework.Application.Sms
 
         public SmsService(IConfiguration configuration) => _configuration = configuration;
 
-        public async Task SendMeetingSms(string mobile, string template, string[] param)
+        public async Task SendConfirmMeetingSms(string mobile, string template, string[] param)
         {
             var smsConfig = _configuration.GetSection("SmsService");
             var sms = new Ghasedak.Core.Api(smsConfig.GetSection("ApiKey").Value);
-            await sms.VerifyAsync(1, template, new string[] { mobile }, param[1], param[2], param[3]);
+            await sms.VerifyAsync(1, template, new string[] { mobile }, param[0], param[1], param[2], param[3]);
+        }
+
+        public async Task SendConfrimMeetingSms(string mobile, string template, string[] param)
+        {
+            var smsConfig = _configuration.GetSection("SmsService");
+            var sms = new Ghasedak.Core.Api(smsConfig.GetSection("ApiKey").Value);
+            await sms.VerifyAsync(1, template, new string[] { mobile }, param[0], param[1], param[2]);
+        }
+
+        public Task SendDisConfrimMeetingSms(string mobile, string template, string[] param)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task SendSms(string mobile, string message)

@@ -1,6 +1,5 @@
 ﻿using Framework.Api;
 using Microsoft.AspNetCore.Mvc;
-using VideoRayan.Application;
 using VideoRayan.Application.Contract.MeetingAgg;
 using VideoRayan.Application.Contract.MeetingAgg.Contracts;
 
@@ -138,8 +137,7 @@ namespace VideoRayan.ServiceHost.Controllers
             {
                 string template = "";
                 template = isConfirm ? "ConfirmMeeting" : "DisConfrimMeeting";
-
-                var result = await _faceToFaceApplication.SendMeetingSms(id, template);
+                var result = isConfirm ? await _faceToFaceApplication.SendConfirmMeetingSms(id, template) : await _faceToFaceApplication.SendDisConfirmMeetingSms(id, template);
                 return Ok(result.Message);
             }
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
