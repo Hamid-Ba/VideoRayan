@@ -5,24 +5,25 @@ using VideoRayan.Domain.MeetingAgg;
 namespace VideoRayan.Domain.CustomerAgg
 {
     public class Customer : EntityBase
-	{
-        public string? Title { get;private set; }
+    {
+        public string? Title { get; private set; }
         public string? FirstName { get; private set; }
         public string? LastName { get; private set; }
         public string? Mobile { get; private set; }
         public string? PhoneCode { get; private set; }
-        public string? Logo { get;private set; }
+        public string? Logo { get; private set; }
+        public string? Image { get; private set; }
         public string? Email { get; private set; }
-        public bool IsActive { get;private set; }
-        public CustomerType Type { get;private set; }
+        public bool IsActive { get; private set; }
+        public CustomerType Type { get; private set; }
         public DateTime LoginExpireDate { get; private set; }
 
         public List<Meeting>? Meetings { get; set; }
-        public List<Category>? Categories { get;private set; }
+        public List<Category>? Categories { get; private set; }
         public List<Audience>? Audiences { get; private set; }
-        public List<FaceToFace>? FaceToFaces { get;private set; }
+        public List<FaceToFace>? FaceToFaces { get; private set; }
 
-        public Customer(string title,string mobile, string phoneCode,string logo, string firstName,string lastName, string email,CustomerType type = 0)
+        public Customer(string title, string mobile, string phoneCode, string logo, string image, string firstName, string lastName, string email, CustomerType type = 0)
         {
             Guard(mobile);
 
@@ -34,6 +35,9 @@ namespace VideoRayan.Domain.CustomerAgg
             if (!string.IsNullOrWhiteSpace(logo))
                 Logo = logo;
 
+            if (!string.IsNullOrWhiteSpace(image))
+                Image = image;
+
             FirstName = firstName;
             LastName = lastName;
             Email = email;
@@ -42,7 +46,7 @@ namespace VideoRayan.Domain.CustomerAgg
             LoginExpireDate = DateTime.Now.AddMinutes(5);
         }
 
-        public void Edit(string title, string phone,string logo, string firstName, string lastName, string email, CustomerType type = 0)
+        public void Edit(string title, string phone, string logo, string image, string firstName, string lastName, string email, CustomerType type = 0)
         {
             Guard(phone);
 
@@ -52,6 +56,9 @@ namespace VideoRayan.Domain.CustomerAgg
             if (!string.IsNullOrWhiteSpace(logo))
                 Logo = logo;
 
+            if (!string.IsNullOrWhiteSpace(image))
+                Image = image;
+
             FirstName = firstName;
             LastName = lastName;
             Email = email;
@@ -59,10 +66,16 @@ namespace VideoRayan.Domain.CustomerAgg
             Type = type;
         }
 
-        public void EditLogo(string logo) 
+        public void EditLogo(string logo)
         {
             if (!string.IsNullOrWhiteSpace(logo))
                 Logo = logo;
+        }
+
+        public void EditImage(string image)
+        {
+            if (!string.IsNullOrWhiteSpace(image))
+                Image = image;
         }
 
         public void Edit(string phone, string firstName, string lastName, string email)
@@ -73,7 +86,7 @@ namespace VideoRayan.Domain.CustomerAgg
             Email = email;
         }
 
-        public static Customer Register(string phone, string phoneCode) => new("",phone, phoneCode,"","", "", "");
+        public static Customer Register(string phone, string phoneCode) => new("", phone, phoneCode, "", "", "", "", "");
 
         public void ControlActivation(bool isActive)
         {

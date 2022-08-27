@@ -26,6 +26,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
             FirstName = c.FirstName,
             LastName = c.LastName,
             Logo = c.Logo,
+            Image = c.Image,
             Mobile = c.Mobile,
             Type = c.Type,
             PersianCreationDate = c.CreationDate.ToFarsi(),
@@ -47,10 +48,12 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
                 Type = c.Type,
                 PhoneCode = c.PhoneCode,
                 PersianCreationDate = c.CreationDate.ToFarsi(),
-                Logo = c.Logo
+                Logo = c.Logo,
+                Image = c.Image
             }).AsNoTracking().FirstOrDefaultAsync(c => c.Id == id))!;
 
             if (!string.IsNullOrWhiteSpace(result.Logo)) result.Logo = $"{_current.Request.Scheme}://{_current.Request.Host}{_current.Request.PathBase}/Pictures//{result.Logo}";
+            if (!string.IsNullOrWhiteSpace(result.Image)) result.Image = $"{_current.Request.Scheme}://{_current.Request.Host}{_current.Request.PathBase}/Pictures//{result.Image}";
 
             return result;
         }
@@ -72,6 +75,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
             Email = c.Email,
             Mobile = c.Mobile,
             Logo = c.Logo,
+            ImageName = c.Image,
             Title = c.Title,
             Type = c.Type
         }).AsNoTracking().FirstOrDefaultAsync(c => c.Id == id))!;

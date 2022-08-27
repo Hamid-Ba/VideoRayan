@@ -33,7 +33,7 @@
         </div>
 
         <div class="row">
-             <div class="col-md-6">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label asp-for="FirstName" class="control-label">نام</label>
                     <input type="text" class="form-control" asp-for="FirstName">
@@ -50,7 +50,7 @@
         </div>
 
         <div class="row">
-             <div class="col-md-6">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label asp-for="Email" class="control-label">ایمیل</label>
                     <input type="text" class="form-control" asp-for="Email">
@@ -67,7 +67,14 @@
         </div>
 
         <div class="row">
-             <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="ImageFile" class="control-label">تصویر</label>
+                    <input type="file" class="form-control" asp-for="ImageFile" accept="image/*">
+                    <span asp-validation-for="ImageFile" class="error"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
                 <div class="form-group">
                     <label asp-for="Type" class="control-label">نوع</label>
                     <select asp-for="Type" class="form-control">
@@ -81,8 +88,9 @@
         </div>
     </div>
     <div class="modal-footer">
-        <input type="hidden" asp-for="Id"/>
-        <input type="hidden" asp-for="Logo"/>
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="Logo" />
+        <input type="hidden" asp-for="ImageName" />
         <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">بستن</button>
         <button type="submit" class="btn btn-info waves-effect waves-light">ویرایش</button>
     </div>

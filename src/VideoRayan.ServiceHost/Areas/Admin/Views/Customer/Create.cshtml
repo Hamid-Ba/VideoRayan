@@ -67,7 +67,14 @@
         </div>
 
         <div class="row">
-             <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Image" class="control-label">تصویر</label>
+                    <input type="file" class="form-control" asp-for="Image" accept="image/*">
+                    <span asp-validation-for="Image" class="error"></span>
+                </div>
+            </div>
+             <div class="col-md-6">
                 <div class="form-group">
                     <label asp-for="Type" class="control-label">نوع</label>
                     <select asp-for="Type" class="form-control">

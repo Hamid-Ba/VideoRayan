@@ -29,9 +29,10 @@ namespace VideoRayan.Application
             if (_userRepository.Exists(u => u.Mobile == command.Mobile || u.Email == command.Email))
                 return result.Failed(ApplicationMessage.DuplicatedModel);
 
+            var logoName = Uploader.ImageUploader(command.Logo!, "Logo", null!);
             var imageName = Uploader.ImageUploader(command.Logo!, "Customer", null!);
 
-            var customer = new Customer(command.Title!, command.Mobile!, "", imageName, command.FirstName!, command.LastName!, command.Email!, command.Type);
+            var customer = new Customer(command.Title!, command.Mobile!, "", logoName, imageName, command.FirstName!, command.LastName!, command.Email!, command.Type);
             await _userRepository.AddEntityAsync(customer);
             await _userRepository.SaveChangesAsync();
 
@@ -64,9 +65,10 @@ namespace VideoRayan.Application
             if (_userRepository.Exists(u => u.Mobile == command.Mobile && u.Id != command.Id))
                 return result.Failed(ApplicationMessage.DuplicatedModel);
 
-            var logo = Uploader.ImageUploader(command.LogoFile!, "Customer", command.Logo!);
+            var logoName = Uploader.ImageUploader(command.LogoFile!, "Logo", command.Logo!);
+            var imageName = Uploader.ImageUploader(command.ImageFile!, "Customer", command.ImageName!);
 
-            user.Edit(command.Title!, command.Mobile!, logo, command.FirstName!, command.LastName!, command.Email!, command.Type);
+            user.Edit(command.Title!, command.Mobile!, logoName, imageName, command.FirstName!, command.LastName!, command.Email!, command.Type);
             await _userRepository.SaveChangesAsync();
 
             return result.Succeeded();

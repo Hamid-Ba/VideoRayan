@@ -13,6 +13,7 @@ namespace VideoRayan.Application.Contract.CustomerAgg
         public string? Mobile { get; set; }
         public string? PhoneCode { get; set; }
         public string? Logo { get; set; }
+        public string? Image { get; set; }
         public string? Email { get; set; }
         public string? Password { get; set; }
         public bool IsActive { get; set; }
@@ -34,6 +35,7 @@ namespace VideoRayan.Application.Contract.CustomerAgg
         [RegularExpression("(0|\\+98)?([ ]|-|[()]){0,2}9[1|2|3|4|5|6|7|8|9|0]([ ]|-|[()]){0,2}(?:[0-9]([ ]|-|[()]){0,2}){8}", ErrorMessage = "لطفا شماره خود را به فرم صحیح وارد نمایید")]
         public string? Mobile { get; set; }
         public IFormFile? Logo { get; set; }
+        public IFormFile? Image { get; set; }
         public string? Email { get; set; }
         public bool IsActive { get; set; }
 
@@ -80,6 +82,8 @@ namespace VideoRayan.Application.Contract.CustomerAgg
         public string? Mobile { get; set; }
         public string? Logo { get; set; }
         public IFormFile? LogoFile { get; set; }
+        public string? ImageName { get; set; }
+        public IFormFile? ImageFile { get; set; }
         public string? Email { get; set; }
         public CustomerType Type { get; set; }
     }
