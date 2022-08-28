@@ -31,6 +31,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.MeetingAgg
                  StartDateTime = m.StartDateTime,
                  Title = m.Title,
                  Type = m.Type,
+                 Duration = m.Duration,
                  AudienceCount = m.Audiences!.Count,
                  StartTime = m.StartDateTime.GetTimeRightFormat(),
              }).AsNoTracking().ToListAsync();
@@ -58,6 +59,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.MeetingAgg
                  StartDateTime = m.StartDateTime,
                  Title = m.Title,
                  Type = m.Type,
+                 Duration = m.Duration,
                  AudienceCount = m.Audiences!.Count,
                  StartTime = m.StartDateTime.GetTimeRightFormat(),
              }).AsNoTracking().ToListAsync();
@@ -91,6 +93,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.MeetingAgg
                 PersianStartDate = m.StartDateTime.ToFarsi() + m.StartDateTime.GetTime(),
                 Title = m.Title,
                 Type = m.Type,
+                Duration = m.Duration,
                 Description = m.Description,
                 StartTime = m.StartDateTime.GetTimeRightFormat(),
                 StartDate = m.StartDateTime.ToFarsi()
@@ -113,6 +116,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.MeetingAgg
             Title = m.Title,
             Description = m.Description,
             Type = m.Type,
+            Duration = m.Duration,
             StartTime = m.StartDateTime.GetTime(),
             StartDate = m.StartDateTime.ToFarsi()
         }).AsNoTracking().FirstOrDefaultAsync(m => m.Id == id))!;

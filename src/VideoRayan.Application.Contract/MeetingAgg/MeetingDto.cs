@@ -13,6 +13,9 @@ namespace VideoRayan.Application.Contract.MeetingAgg
         public bool IsMute { get; set; }
         public bool IsRecord { get; set; }
         public bool CanTalk { get; set; }
+        public int Duration { get; set; }
+        public string? UserPinCode { get; set; }
+        public string? MasterPinCode { get; set; }
         public bool IsInteractiveBoard { get; set; }
         public int AudienceCount { get; set; }
         public string? Description { get; set; }
@@ -33,6 +36,7 @@ namespace VideoRayan.Application.Contract.MeetingAgg
         public bool IsMute { get; set; }
         public bool IsRecord { get; set; }
         public bool CanTalk { get; set; }
+        public int Duration { get; set; }
         public bool IsInteractiveBoard { get; set; }
         public string? Description { get; set; }
         public MeetingType Type { get; set; }
@@ -45,9 +49,15 @@ namespace VideoRayan.Application.Contract.MeetingAgg
         public Guid Id { get; set; }
     }
 
-    public class FilterMeeting : BaseFilterParam 
+    public class FilterMeeting : BaseFilterParam
     {
         public Guid CustomerId { get; set; }
+    }
+
+    public class CheckMeetingPinCodeDto
+    {
+        public Guid Id { get; set; }
+        public string? PinCode { get; set; }
     }
 
     public class GetAllMeetingDto : BaseFilter<MeetingDto, FilterMeeting> { }

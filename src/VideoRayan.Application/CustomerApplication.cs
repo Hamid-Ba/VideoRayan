@@ -201,9 +201,25 @@ namespace VideoRayan.Application
 
             if (user is null) return (result.Failed(ApplicationMessage.UserNotExist), default)!;
 
-            var logo = Uploader.ImageUploader(command.LogoFile!, "Customer", user.Logo!);
+            var logo = Uploader.ImageUploader(command.LogoFile!, "Logo", user.Logo!);
 
             user.EditLogo(logo);
+            await _userRepository.SaveChangesAsync();
+
+            return (result.Succeeded(), await GetBy(user.Id));
+        }
+
+        public async Task<(OperationResult, CustomerDto)> EditImage(EditLogoCustomerDto command)
+        {
+            OperationResult result = new();
+
+            var user = await _userRepository.GetEntityByIdAsync(command.Id);
+
+            if (user is null) return (result.Failed(ApplicationMessage.UserNotExist), default)!;
+
+            var logo = Uploader.ImageUploader(command.LogoFile!, "Customer", user.Logo!);
+
+            user.EditImage(logo);
             await _userRepository.SaveChangesAsync();
 
             return (result.Succeeded(), await GetBy(user.Id));

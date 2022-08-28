@@ -12,6 +12,8 @@ namespace VideoRayan.Infrastructure.EfCore.Mapping.MeetingAgg
 
             builder.Property(p => p.Title).HasMaxLength(125).IsRequired();
             builder.Property(p => p.Description).HasMaxLength(500).IsRequired();
+            builder.Property(p => p.UserPinCode).HasMaxLength(7).IsRequired();
+            builder.Property(p => p.MasterPinCode).HasMaxLength(7).IsRequired();
 
             builder.HasOne(c => c.User).WithMany(m => m.Meetings).HasForeignKey(f => f.UserId);
         }

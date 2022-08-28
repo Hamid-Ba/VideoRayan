@@ -3,6 +3,7 @@ using Framework.Application;
 using Microsoft.AspNetCore.Mvc;
 using VideoRayan.Application.Contract.MeetingAgg;
 using VideoRayan.Application.Contract.MeetingAgg.Contracts;
+using VideoRayan.Domain.CustomerAgg;
 
 namespace VideoRayan.ServiceHost.Controllers
 {
@@ -140,6 +141,21 @@ namespace VideoRayan.ServiceHost.Controllers
                 template = isConfirm ? "ConfirmMeeting" : "DisConfrimMeeting";
                 var result = isConfirm ? await _meetingApplication.SendConfirmMeetingSms(id, template) : await _meetingApplication.SendDisConfirmMeetingSms(id, template);
                 return Ok(result.Message);
+            }
+            catch (Exception e) { return BadRequest(e.InnerException!.Message); }
+        }
+
+        /// <summary>
+        /// آیا با این پینکد میتونم وارد جلسه بشم؟
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("goToMeeting")]
+        public IActionResult GoToMeeting(CheckMeetingPinCodeDto command)
+        {
+            try
+            {
+                var result = _meetingApplication.IsAudienceBelongToMeeting(command);
+                return Ok(new { message = result.Message, value = result.IsSucceeded });
             }
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }

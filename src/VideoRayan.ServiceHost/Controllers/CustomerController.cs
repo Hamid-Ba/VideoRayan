@@ -68,5 +68,26 @@ namespace VideoRayan.ServiceHost.Controllers
             }
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }
+
+        /// <summary>
+        /// برای ویرایش تصویر مشتری استفاده می شود
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpPost("editImage")]
+        public async Task<IActionResult> EditImage([FromForm] EditLogoCustomerDto command)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var result = await _customerApplication.EditImage(command);
+                    return result.Item1.IsSucceeded ? Ok(new { message = result.Item1.Message, value = result.Item2 }) : BadRequest(result.Item1.Message);
+                }
+
+                return BadRequest(ApiResultMessages.ModelStateNotValid);
+            }
+            catch (Exception e) { return BadRequest(e.InnerException!.Message); }
+        }
     }
 }

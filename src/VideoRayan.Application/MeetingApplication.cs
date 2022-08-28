@@ -33,8 +33,12 @@ namespace VideoRayan.Application
             if (_meetingRepository.Exists(m => m.StartDateTime == compliteDate))
                 return (result.Failed(ApplicationMessage.DuplicatedMeetingTime), default)!;
 
+            var userPinCode = Guid.NewGuid().ToString().Substring(0, 6);
+            var masterPinCode = Guid.NewGuid().ToString().Substring(0, 6);
+
             var meeting = new Meeting(command.UserId, command.Title!, command.IsLive, command.IsMute, command.IsRecord,
-                command.CanTalk, command.IsInteractiveBoard,command.Description!, command.Type, compliteDate);
+                command.CanTalk, command.Duration, userPinCode, masterPinCode, command.IsInteractiveBoard,
+                command.Description!, command.Type, compliteDate);
 
             await _meetingRepository.AddEntityAsync(meeting);
             await _meetingRepository.SaveChangesAsync();
@@ -75,7 +79,7 @@ namespace VideoRayan.Application
 
             if (meeting.UserId != command.UserId) return (result.Failed(ApplicationMessage.DoNotAccessToOtherAccount), default)!;
 
-            meeting.Edit(command.Title!, command.IsLive, command.IsMute, command.IsRecord, command.CanTalk, command.IsInteractiveBoard,command.Description!,
+            meeting.Edit(command.Title!, command.IsLive, command.IsMute, command.IsRecord, command.CanTalk, command.Duration, command.IsInteractiveBoard, command.Description!,
                 command.Type, compliteDate);
             await _meetingRepository.SaveChangesAsync();
 
@@ -92,6 +96,17 @@ namespace VideoRayan.Application
 
         public async Task<EditMeetingDto> GetDetailForEditBy(Guid id) => await _meetingRepository.GetDetailForEditBy(id);
 
+        public OperationResult IsAudienceBelongToMeeting(CheckMeetingPinCodeDto command)
+        {
+            OperationResult result = new();
+
+            if (_meetingRepository.Exists(m => m.Id == command.Id && (m.MasterPinCode == command.PinCode || m.UserPinCode == command.PinCode)))
+                return result.Succeeded();
+            //else if (_meetingRepository.Exists(m => m.Id == command.Id && m.UserPinCode == command.PinCode)) return result.Succeeded();
+
+            return result.Failed("کد جلسه اشتباه هست");
+        }
+
         public async Task<OperationResult> SendConfirmMeetingSms(Guid id, string template)
         {
             OperationResult result = new();
@@ -101,7 +116,7 @@ namespace VideoRayan.Application
 
             //ToDo : Send Confirm Meeting Code
             foreach (var mobile in meeting.AudienceMobile!)
-                await _smsService.SendConfrimMeetingSms(mobile, template, new string[] { meeting.Title!, meeting.StartDate!, meeting.StartTime! , meeting.URLOrAddress! , meeting.PinCode! });
+                await _smsService.SendConfrimMeetingSms(mobile, template, new string[] { meeting.Title!, meeting.StartDate!, meeting.StartTime!, meeting.URLOrAddress!, meeting.PinCode! });
 
             return result.Succeeded();
         }
