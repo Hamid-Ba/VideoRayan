@@ -1,6 +1,5 @@
 ﻿using Framework.Application;
 using Framework.Application.Sms;
-using System.Reflection;
 using VideoRayan.Application.Contract.CustomerAgg;
 using VideoRayan.Application.Contract.MeetingAgg;
 using VideoRayan.Application.Contract.MeetingAgg.Contracts;
@@ -100,9 +99,11 @@ namespace VideoRayan.Application
         public OperationResult IsAudienceBelongToMeeting(CheckMeetingPinCodeDto command)
         {
             OperationResult result = new();
+            var today = DateTime.Now;
+            if (_meetingRepository.Exists(m => m.Id == command.Id && (m.MasterPinCode == command.PinCode || m.UserPinCode == command.PinCode) && 
+            m.StartDateTime.Date == DateTime.Now.Date && m.StartDateTime.TimeOfDay.Hours <= DateTime.Now.TimeOfDay.Hours + m.Duration
+            )) return result.Succeeded();
 
-            if (_meetingRepository.Exists(m => m.Id == command.Id && (m.MasterPinCode == command.PinCode || m.UserPinCode == command.PinCode)))
-                return result.Succeeded();
             //else if (_meetingRepository.Exists(m => m.Id == command.Id && m.UserPinCode == command.PinCode)) return result.Succeeded();
 
             return result.Failed("کد جلسه اشتباه هست");

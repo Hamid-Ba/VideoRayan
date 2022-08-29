@@ -1,9 +1,7 @@
 ﻿using Framework.Api;
-using Framework.Application;
 using Microsoft.AspNetCore.Mvc;
 using VideoRayan.Application.Contract.MeetingAgg;
 using VideoRayan.Application.Contract.MeetingAgg.Contracts;
-using VideoRayan.Domain.CustomerAgg;
 
 namespace VideoRayan.ServiceHost.Controllers
 {
