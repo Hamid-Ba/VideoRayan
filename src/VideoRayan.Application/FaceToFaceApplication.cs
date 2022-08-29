@@ -99,7 +99,7 @@ namespace VideoRayan.Application
 
             //ToDo : Send Confirm Meeting Code
             foreach (var mobile in meeting.AudienceMobile!)
-                await _smsService.SendConfrimMeetingSms(mobile, template, new string[] { meeting.Title!, meeting.StartDate!, meeting.StartTime!, meeting.URLOrAddress! });
+                await _smsService.SendConfrimFaceToFaceSms(mobile, template, new string[] { meeting.Title!, meeting.StartDate!, meeting.StartTime!, meeting.URLOrAddress! });
 
             return result.Succeeded();
         }

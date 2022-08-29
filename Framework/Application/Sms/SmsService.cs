@@ -8,6 +8,13 @@ namespace Framework.Application.Sms
 
         public SmsService(IConfiguration configuration) => _configuration = configuration;
 
+        public async Task SendConfrimFaceToFaceSms(string mobile, string template, string[] param)
+        {
+            var smsConfig = _configuration.GetSection("SmsService");
+            var sms = new Ghasedak.Core.Api(smsConfig.GetSection("ApiKey").Value);
+            await sms.VerifyAsync(1, "ConfirmMeeting", new string[] { mobile }, param[0], param[1], param[2], param[3]);
+        }
+
         public async Task SendConfrimMeetingSms(string mobile, string template, string[] param)
         {
             var smsConfig = _configuration.GetSection("SmsService");
