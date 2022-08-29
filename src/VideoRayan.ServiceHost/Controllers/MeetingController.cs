@@ -140,7 +140,7 @@ namespace VideoRayan.ServiceHost.Controllers
                 string template = "";
                 template = isConfirm == 1 ? "ConfirmMeeting" : "DisConfrimMeeting";
                 var result = isConfirm == 1? await _meetingApplication.SendConfirmMeetingSms(id, template) : await _meetingApplication.SendDisConfirmMeetingSms(id, template);
-                return Ok(result.Message);
+                return result.IsSucceeded ? Ok(result.Message) : BadRequest(result.Message);
             }
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }
@@ -155,7 +155,7 @@ namespace VideoRayan.ServiceHost.Controllers
             try
             {
                 var result = _meetingApplication.IsAudienceBelongToMeeting(command);
-                return Ok(new { message = result.Message, value = result.IsSucceeded });
+                return result.IsSucceeded ? Ok(result.Message) : BadRequest(result.Message);
             }
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }
