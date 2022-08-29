@@ -133,13 +133,13 @@ namespace VideoRayan.ServiceHost.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost("sendSms/{id}/{isConfirm}")]
-        public async Task<IActionResult> SendSms(Guid id, bool isConfirm)
+        public async Task<IActionResult> SendSms(Guid id, int isConfirm)
         {
             try
             {
                 string template = "";
-                template = isConfirm ? "ConfirmMeeting" : "DisConfrimMeeting";
-                var result = isConfirm ? await _meetingApplication.SendConfirmMeetingSms(id, template) : await _meetingApplication.SendDisConfirmMeetingSms(id, template);
+                template = isConfirm == 1 ? "ConfirmMeeting" : "DisConfrimMeeting";
+                var result = isConfirm == 1? await _meetingApplication.SendConfirmMeetingSms(id, template) : await _meetingApplication.SendDisConfirmMeetingSms(id, template);
                 return Ok(result.Message);
             }
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }

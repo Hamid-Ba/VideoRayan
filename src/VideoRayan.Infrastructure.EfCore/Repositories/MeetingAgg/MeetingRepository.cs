@@ -22,6 +22,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.MeetingAgg
                  Id = m.Id,
                  CanTalk = m.CanTalk,
                  UserId = m.UserId,
+                 HostId = m.HostId,
                  IsInteractiveBoard = m.IsInteractiveBoard,
                  IsLive = m.IsLive,
                  IsMute = m.IsMute,
@@ -49,6 +50,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.MeetingAgg
              {
                  Id = m.Id,
                  CanTalk = m.CanTalk,
+                 HostId = m.HostId,
                  UserId = m.UserId,
                  IsInteractiveBoard = m.IsInteractiveBoard,
                  IsLive = m.IsLive,
@@ -83,6 +85,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.MeetingAgg
             {
                 Id = m.Id,
                 CanTalk = m.CanTalk,
+                HostId = m.HostId,
                 UserId = m.UserId,
                 IsInteractiveBoard = m.IsInteractiveBoard,
                 IsLive = m.IsLive,

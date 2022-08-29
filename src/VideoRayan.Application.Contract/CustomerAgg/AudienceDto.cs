@@ -33,11 +33,14 @@ namespace VideoRayan.Application.Contract.CustomerAgg
     public class SendStatusMeetingDto
     {
         public Guid Id { get; set; }
+        public Guid HostId { get; set; }
+        public string? HostMobile { get; set; }
         public string? Title { get; set; }
         public string? StartDate { get; set; }
         public string? StartTime { get; set; }
         public string? URLOrAddress { get; set; }
         public string? PinCode { get; set; }
+        public string? MasterPinCode { get; set; }
         public string[]? AudienceMobile { get; set; }
     }
 
@@ -50,5 +53,5 @@ namespace VideoRayan.Application.Contract.CustomerAgg
     public class GetAllAudienceDto : BaseFilter<AudienceDto, SearchAudienceDto>
     {
 
-    } 
+    }
 }

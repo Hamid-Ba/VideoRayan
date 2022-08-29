@@ -1,5 +1,6 @@
 ﻿using Framework.Application;
 using Framework.Application.Sms;
+using System.Reflection;
 using VideoRayan.Application.Contract.CustomerAgg;
 using VideoRayan.Application.Contract.MeetingAgg;
 using VideoRayan.Application.Contract.MeetingAgg.Contracts;
@@ -118,6 +119,8 @@ namespace VideoRayan.Application
             foreach (var mobile in meeting.AudienceMobile!)
                 await _smsService.SendConfrimMeetingSms(mobile, template, new string[] { meeting.Title!, meeting.StartDate!, meeting.StartTime!, meeting.URLOrAddress!, meeting.PinCode! });
 
+            await _smsService.SendConfrimMeetingSms(meeting.HostMobile!, template, new string[] { meeting.Title!, meeting.StartDate!, meeting.StartTime!, meeting.URLOrAddress!, meeting.MasterPinCode! });
+
             return result.Succeeded();
         }
 
@@ -130,7 +133,9 @@ namespace VideoRayan.Application
 
             //ToDo : Send Confirm Meeting Code
             foreach (var mobile in meeting.AudienceMobile!)
-                await _smsService.SendConfrimMeetingSms(mobile, template, new string[] { meeting.Title!, meeting.StartDate!, meeting.StartTime! });
+                await _smsService.SendDisConfrimMeetingSms(mobile, template, new string[] { meeting.Title!, meeting.StartDate!, meeting.StartTime! });
+
+            await _smsService.SendDisConfrimMeetingSms(meeting.HostMobile!, template, new string[] { meeting.Title!, meeting.StartDate!, meeting.StartTime! });
 
             return result.Succeeded();
         }

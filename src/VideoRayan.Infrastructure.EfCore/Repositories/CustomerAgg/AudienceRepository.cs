@@ -148,12 +148,17 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
             if (isMeeting)
             {
                 var audiences = await _context.AudienceMeetings.Include(a => a.Audience).Where(a => a.MeetingId == id).Select(_ => _.Audience!.Mobile).ToArrayAsync();
+                var hostInfo = (await _context.Meetings.Where(a => a.Id == id).Select(_ => new { HostId = _.HostId, MasterPinCode = _.MasterPinCode }).FirstOrDefaultAsync())!;
+                var host = await _context.Audiences.FirstOrDefaultAsync(a => a.Id == hostInfo.HostId); 
 
                 return (await _context.Meetings.Select(m => new SendStatusMeetingDto
                 {
                     Id = m.Id,
+                    HostId = m.HostId,
+                    HostMobile = host!.Mobile,
                     Title = m.Title,
-                    PinCode = "123456",
+                    PinCode = m.UserPinCode,
+                    MasterPinCode = m.MasterPinCode,
                     URLOrAddress = "https://test.rayan.com",
                     StartTime = m.StartDateTime.GetTimeRightFormat(),
                     StartDate = m.StartDateTime.ToFarsi(),
