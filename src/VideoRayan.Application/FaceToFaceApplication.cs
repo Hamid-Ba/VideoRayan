@@ -97,9 +97,12 @@ namespace VideoRayan.Application
             var meeting = await _audienceRepository.GetForSendingSms(id, isMeeting: false);
             if (meeting is null) return result.Failed(ApplicationMessage.UserNotExist);
 
+            if (meeting.AudienceMobile!.Length == 0) return result.Failed("جلسه بدون مخاطب هست");
+            if (string.IsNullOrWhiteSpace(meeting.HostMobile)) return result.Failed("جلسه بدون مخاطب هست");
+
             //ToDo : Send Confirm Meeting Code
             foreach (var mobile in meeting.AudienceMobile!)
-                await _smsService.SendConfrimFaceToFaceSms(mobile, template, new string[] { meeting.Title!, meeting.StartDate!, meeting.StartTime!, meeting.URLOrAddress! });
+                    await _smsService.SendConfrimFaceToFaceSms(mobile, template, new string[] { meeting.Title!, meeting.StartDate!, meeting.StartTime!, meeting.URLOrAddress! });
 
             return result.Succeeded();
         }
@@ -110,6 +113,9 @@ namespace VideoRayan.Application
 
             var meeting = await _audienceRepository.GetForSendingSms(id, isMeeting: false);
             if (meeting is null) return result.Failed(ApplicationMessage.UserNotExist);
+
+            if (meeting.AudienceMobile!.Length == 0) return result.Failed("جلسه بدون مخاطب هست");
+            if (string.IsNullOrWhiteSpace(meeting.HostMobile)) return result.Failed("جلسه بدون مخاطب هست");
 
             //ToDo : Send Confirm Meeting Code
             foreach (var mobile in meeting.AudienceMobile!)
