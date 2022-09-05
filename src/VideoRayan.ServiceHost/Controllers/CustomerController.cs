@@ -89,5 +89,21 @@ namespace VideoRayan.ServiceHost.Controllers
             }
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
         }
+
+        /// <summary>
+        /// دریافت جلسات
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("invitedMeetings/{id}")]
+        public async Task<IActionResult> GetInvitedMeetings(Guid id)
+        {
+            try
+            {
+                var result = await _customerApplication.CustomerMeetingList(id);
+                return Ok(result);
+            }
+            catch (Exception e) { return BadRequest(e.InnerException!.Message); }
+        }
     }
 }

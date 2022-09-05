@@ -225,6 +225,8 @@ namespace VideoRayan.Application
             return (result.Succeeded(), await GetBy(user.Id));
         }
 
+        public async Task<IEnumerable<CustomerMeetsListDto>> CustomerMeetingList(Guid id) => await _userRepository.GetMeetingList(id);
+
         //public async Task<(OperationResult, string)> VerifyRegister(AccessTokenDto command)
         //{
         //    OperationResult result = new();

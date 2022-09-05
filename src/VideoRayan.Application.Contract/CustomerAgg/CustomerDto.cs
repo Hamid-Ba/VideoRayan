@@ -116,4 +116,14 @@ namespace VideoRayan.Application.Contract.CustomerAgg
         [MaxLength(500, ErrorMessage = "حداکثر تعداد کاراکتر مجاز {1} می باشد")]
         public string? Message { get; set; }
     }
+
+    public class CustomerMeetsListDto
+    {
+        public Guid CustomerId { get; set; }
+        public Guid MeetId { get; set; }
+        public string? Title { get; set; }
+        public string? Phone { get; set; }
+        public string? Password { get; set; }
+        public string? MeetingType { get; set; }
+    }
 }
