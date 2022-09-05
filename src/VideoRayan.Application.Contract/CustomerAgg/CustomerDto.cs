@@ -126,4 +126,14 @@ namespace VideoRayan.Application.Contract.CustomerAgg
         public string? Password { get; set; }
         public string? MeetingType { get; set; }
     }
+
+    public class SearchCustomerListDto : BaseFilterParam
+    {
+        public Guid CustomerId { get; set; }
+    }
+
+    public class GetCustomerListPaginateDto : BaseFilter<CustomerMeetsListDto, SearchCustomerListDto>
+    {
+
+    }
 }

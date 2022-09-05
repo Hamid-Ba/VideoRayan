@@ -86,11 +86,11 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
             Id = c.Id,
         }).AsNoTracking().FirstOrDefaultAsync(c => c.Id == id))!;
 
-        public async Task<IEnumerable<CustomerMeetsListDto>> GetMeetingList(Guid id)
+        public async Task<GetCustomerListPaginateDto> GetMeetingList(SearchCustomerListDto filter)
         {
             try
             {
-                var customer = await _context.Customers.FindAsync(id);
+                var customer = await _context.Customers.FindAsync(filter.CustomerId);
                 
                 var audiencesWhoThisCustomerIs = await _context.Audiences.Where(a => a.Mobile == customer!.Mobile)
                     .Include(m => m.Meetings!)
@@ -107,7 +107,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
                         _.FaceToFaces,
                     }).ToListAsync();
 
-                var result = new List<CustomerMeetsListDto>();
+                var lists = new List<CustomerMeetsListDto>();
 
                 foreach(var audience in audiencesWhoThisCustomerIs)
                 {
@@ -125,7 +125,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
                         if (meeting.Meeting.HostId == item.CustomerId) item.Password = meeting.Meeting.MasterPinCode;
                         else item.Password = meeting.Meeting.UserPinCode;
 
-                        result.Add(item);
+                        lists.Add(item);
                     }
 
                     foreach(var faceToFace in audience.FaceToFaces!)
@@ -139,13 +139,19 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
                             Title = faceToFace.FaceToFace!.Title,
                         };
 
-                        result.Add(item);
+                        lists.Add(item);
                     }
                 }
+                var result = new GetCustomerListPaginateDto()
+                {
+                    FilterParams = filter,
+                    Data = lists.Skip((filter.PageId - 1) * filter.Take).Take(filter.Take).ToList()
+                };
+                result.GeneratePaging(lists.AsQueryable(), filter.Take, filter.PageId);
 
                 return result;
             }
-            catch { return Enumerable.Empty<CustomerMeetsListDto>(); }
+            catch { return new GetCustomerListPaginateDto(); }
         }
 
         public async Task<string> GetPhone(Guid id) => (await _context.Customers.FindAsync(id))!.Mobile!;

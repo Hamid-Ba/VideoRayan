@@ -19,10 +19,10 @@ namespace VideoRayan.Application.Contract.CustomerAgg.Contracts
         Task<EditByAdminCustomerDto> GetDetailForEditByAdmin(Guid id);
         Task<OperationResult> LoginFirstStep(LoginCustomerDto command);
         Task<(OperationResult,CustomerDto)> Edit(EditCustomerDto command);
-        Task<IEnumerable<CustomerMeetsListDto>> CustomerMeetingList(Guid id);
         Task<(OperationResult,CustomerDto)> EditLogo(EditLogoCustomerDto command);
         Task<(OperationResult,CustomerDto)> EditImage(EditLogoCustomerDto command);
         //Task<(OperationResult, string)> VerifyRegister(AccessTokenDto command);
+        Task<GetCustomerListPaginateDto> CustomerMeetingList(SearchCustomerListDto filter);
         Task<(OperationResult,string, string)> VerifyLoginRegister(AccessTokenDto command);
     }
 }

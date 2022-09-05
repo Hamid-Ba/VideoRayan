@@ -14,6 +14,6 @@ namespace VideoRayan.Domain.CustomerAgg.Contracts
         Task<IEnumerable<CustomerDto>> GetAll(CustomerType type);
         Task<EditLogoCustomerDto> GetDetailForEditLogoBy(Guid id);
         Task<EditByAdminCustomerDto> GetDetailForEditByAdmin(Guid id);
-        Task<IEnumerable<CustomerMeetsListDto>> GetMeetingList(Guid id);
+        Task<GetCustomerListPaginateDto> GetMeetingList(SearchCustomerListDto filter);
     }
 }

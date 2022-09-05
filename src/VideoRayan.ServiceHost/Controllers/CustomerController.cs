@@ -93,14 +93,14 @@ namespace VideoRayan.ServiceHost.Controllers
         /// <summary>
         /// دریافت جلسات
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="filter"></param>
         /// <returns></returns>
-        [HttpGet("invitedMeetings/{id}")]
-        public async Task<IActionResult> GetInvitedMeetings(Guid id)
+        [HttpGet("invitedMeetings")]
+        public async Task<IActionResult> GetInvitedMeetings([FromQuery]SearchCustomerListDto filter)
         {
             try
             {
-                var result = await _customerApplication.CustomerMeetingList(id);
+                var result = await _customerApplication.CustomerMeetingList(filter);
                 return Ok(result);
             }
             catch (Exception e) { return BadRequest(e.InnerException!.Message); }
