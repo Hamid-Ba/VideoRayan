@@ -111,7 +111,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
 
                 foreach(var audience in audiencesWhoThisCustomerIs)
                 {
-                    foreach(var meeting in audience.Meetings!)
+                    foreach(var meeting in audience.Meetings!.Where(m => m.Meeting!.StartDateTime.AddDays(1) >= DateTime.Now))
                     {
                         var item = new CustomerMeetsListDto()
                         {
@@ -128,7 +128,7 @@ namespace VideoRayan.Infrastructure.EfCore.Repositories.CustomerAgg
                         lists.Add(item);
                     }
 
-                    foreach(var faceToFace in audience.FaceToFaces!)
+                    foreach(var faceToFace in audience.FaceToFaces!.Where(m => m.FaceToFace!.StartDateTime.AddDays(1) >= DateTime.Now))
                     {
                         var item = new CustomerMeetsListDto()
                         {
